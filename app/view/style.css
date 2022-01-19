@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    background-color: #F2F2F2;
+    margin: 0;
+}
+/*-----------------------INICIO-----------------------*/
+
+.menu_inicio{
+    width: 100%;
+    height: 3em;
+    background-color: #1B74E4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+}
+
+.menu_inicio > img{
+    margin-left: 2em;
+}
+
+.menu_inicio > a{
+    margin-right: 2em;
+}
+
+.menu_ini_butt{
+    border-style: none;
+    background-color: #1B74E4;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mySlides {
+    display: none;
+}
+
+.slide{
+    width: 100%;
+    height: 20em;
+    background-color: #1be43c;
+}
+
+/*-----------------------LOGIN-----------------------*/
+
+.login{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log{
+    background-color: #fff;
+    border-radius: 10px;
+    width: 35em;
+    padding-top: 35px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 2em;
+}
+
+.inpt_log{
+    border: .5px solid rgb(199, 197, 197);
+    width: 80%;
+    border-radius: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.forget_passwd{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forget_passwd a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #1B74E4;
+}
+
+.butt_login{
+    border-style: none;
+    color: #fff;
+    background-color:#1B74E4;
+    padding: 10px 40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.butt_login:disabled{
+    color: #fff;
+    background-color:#B1B1B1;
+    cursor: default;
+}
+
+.other_log{
+    background-color: #F2F2F2;
+    width: 80%;
+    padding-top: 8px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+}
+
+.other_butt{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.butt_fbk{
+    width: 80%;
+    background-color: #1B74E4;
+    color: #fff;
+    border-style: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.butt_goo{
+    width: 80%;
+    background-color: #fff;
+    border: .5px solid rgb(199, 197, 197);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.register_butt{
+    border-style: none;
+    color: #1B74E4;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/*-----------------------REGISTER-----------------------*/
+
+.register{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.reg_prov{
+    width: 46em;
+    border: 6px solid #fff;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.reg_prov > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.txt_reg_prov{
+    width: 23em;
+    height: 2em;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+}
+
+.notes{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+}
+
+.notes > div{
+    display: flex;
+}
+
+.dates{
+    display: flex;
+    gap: .5em;
+}
+
+hr{
+    width: 95%;
+}
+
+.terminos{
+    font-size: 10px;
+}
+
+.butt_reg_p_div{
+    display: flex;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.butt_reg_prov{
+    border-style: none;
+    width: 12em;
+    color: #fff;
+    background-color:#1B74E4;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.butt_reg_prov:disabled{
+    color: #fff;
+    background-color:#B1B1B1;
+    cursor: default;
+}
+
+.pwd_reg_prov{
+    display: flex;
+}
+
+.show_pwd{
+    border-style: none;
+    background-color:#1B74E4;
+    color: #fff;
+    width: 7em;
+    height: 3em;
+    font-size: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
