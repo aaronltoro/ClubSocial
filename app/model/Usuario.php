@@ -13,7 +13,7 @@ class Usuario extends EntidadBase
 
   public function __construct($adapter)
   {
-    $table = "usuarios";
+    $table = "usuario";
     parent::__construct($table, $adapter);
   }
 
@@ -111,7 +111,7 @@ class Usuario extends EntidadBase
 
   public function save()
   {
-    $query = "INSERT INTO usuarios (id,nombre,apellidos,contrasena,dni,nfamiliares,cuota,presidente,autorizado,admin)
+    $query = "INSERT INTO usuario (id,nombre,apellidos,contrasena,dni,nfamiliares,cuota,presidente,autorizado,admin)
                 VALUES(NULL,
                        '" . $this->nombre . "',
                        '" . $this->apellidos . "',

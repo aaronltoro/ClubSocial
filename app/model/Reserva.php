@@ -18,7 +18,7 @@ class Reserva extends EntidadBase{
     private $c_barbacoa;
     
     public function __construct($adapter) {
-        $table="usuarios";
+        $table="reserva";
         parent::__construct($table, $adapter);
     }
     
@@ -153,7 +153,6 @@ class Reserva extends EntidadBase{
     public function save(){
         $query="INSERT INTO reserva (id,id_usuario,r_padel1,c_padel1,r_padel2,c_padel2,r_tenis1,c_tenis1,r_tenis2,c_tenis2,r_futbol,c_futbol,r_baloncesto,c_baloncesto,r_barbacoa,c_barbacoa)
                 VALUES(NULL,
-                       '".$this->nombre."',
                        '".$this->id_usuario."',
                        '".$this->r_padel1."',
                        '".$this->c_padel1."',
