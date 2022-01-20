@@ -1,5 +1,5 @@
 <?php
-class Instalacion extends EntidadBase
+class Noticia extends EntidadBase
 {
   private $id;
   private $titulo;
@@ -8,7 +8,7 @@ class Instalacion extends EntidadBase
 
   public function __construct($adapter)
   {
-    $table = "instalacion";
+    $table = "noticia";
     parent::__construct($table, $adapter);
   }
 
@@ -54,7 +54,7 @@ class Instalacion extends EntidadBase
 
   public function save()
   {
-    $query = "INSERT INTO instalacion (id,titulo,foto,descripcion)
+    $query = "INSERT INTO noticia (id,titulo,foto,descripcion)
                 VALUES(NULL,
                        '" . $this->titulo . "',
                        '" . $this->foto . "',

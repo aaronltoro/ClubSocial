@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2022 a las 17:11:57
+-- Tiempo de generación: 20-01-2022 a las 19:38:35
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -42,20 +42,20 @@ CREATE TABLE `fechareserva` (
 CREATE TABLE `horareserva` (
   `id` int(11) NOT NULL,
   `id_fecha` int(11) NOT NULL,
-  `9` tinyint(4) NOT NULL,
-  `10` tinyint(4) NOT NULL,
-  `11` tinyint(4) NOT NULL,
-  `12` tinyint(4) NOT NULL,
-  `13` tinyint(4) NOT NULL,
-  `14` tinyint(4) NOT NULL,
-  `15` tinyint(4) NOT NULL,
-  `16` tinyint(4) NOT NULL,
-  `17` tinyint(4) NOT NULL,
-  `18` tinyint(4) NOT NULL,
-  `19` tinyint(4) NOT NULL,
-  `20` tinyint(4) NOT NULL,
-  `21` tinyint(4) NOT NULL,
-  `22` tinyint(4) NOT NULL
+  `h9` tinyint(4) NOT NULL,
+  `h10` tinyint(4) NOT NULL,
+  `h11` tinyint(4) NOT NULL,
+  `h12` tinyint(4) NOT NULL,
+  `h13` tinyint(4) NOT NULL,
+  `h14` tinyint(4) NOT NULL,
+  `h15` tinyint(4) NOT NULL,
+  `h16` tinyint(4) NOT NULL,
+  `h17` tinyint(4) NOT NULL,
+  `h18` tinyint(4) NOT NULL,
+  `h19` tinyint(4) NOT NULL,
+  `h20` tinyint(4) NOT NULL,
+  `h21` tinyint(4) NOT NULL,
+  `h22` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
