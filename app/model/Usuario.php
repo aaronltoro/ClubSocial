@@ -39,12 +39,12 @@ class Usuario extends EntidadBase
 
   public function getApellidos()
   {
-    return $this->apellido;
+    return $this->apellidos;
   }
 
-  public function setApellidos($apellido)
+  public function setApellidos($apellidos)
   {
-    $this->apellido = $apellido;
+    $this->apellidos = $apellidos;
   }
 
   public function getContrasena()

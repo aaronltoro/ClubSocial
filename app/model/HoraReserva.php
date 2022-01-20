@@ -1,5 +1,5 @@
 <?php
-class Reserva extends EntidadBase{
+class HoraReserva extends EntidadBase{
     private $id;
     private $id_fecha;
     private $h9;
@@ -18,7 +18,7 @@ class Reserva extends EntidadBase{
     private $h22;
     
     public function __construct($adapter) {
-        $table="reserva";
+        $table="horareserva";
         parent::__construct($table, $adapter);
     }
     
