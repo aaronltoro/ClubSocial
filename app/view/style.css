@@ -25,17 +25,27 @@ body{
     margin-right: 2em;
 }
 
+.titulo_menu{
+    color: #fff;
+    cursor: default;
+}
+
 .menu_ini_butt{
     border-style: none;
     background-color: #1B74E4;
     color: #fff;
+    transition: letter-spacing 1s;
     cursor: pointer;
+}
+
+.menu_ini_butt:hover{
+    letter-spacing: 0.2em;
 }
 
 .slide{
     width: 100%;
     height: 20em;
-    background-color: #1be43c;
+    background-color: #a2f7b0;
 }
 
 /*-----------------------LOGIN-----------------------*/
@@ -45,6 +55,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 4em;
 }
 
 .log{
@@ -147,6 +158,7 @@ body{
     display: flex;
     flex-direction: column;
     display: none;
+    padding-top: 4em;
 }
 
 .reg_prov{

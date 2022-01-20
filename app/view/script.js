@@ -191,10 +191,10 @@ $('document').ready(function() {
 
     //Habilitar buttons
 
-    document.getElementById('log_mail').addEventListener('keyup',enable);
-    document.getElementById('log_pwd').addEventListener('keyup',enable);
+    document.getElementById('log_mail').addEventListener('keyup',enableb);
+    document.getElementById('log_pwd').addEventListener('keyup',enableb);
 
-    function enable(){
+    function enableb(){
         correo_login = document.getElementById('log_mail').value;
         passwd_login = document.getElementById('log_pwd').value;
 
