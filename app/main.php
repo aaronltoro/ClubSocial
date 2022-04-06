@@ -1,1 +1,0 @@
-session_register_shutdown
