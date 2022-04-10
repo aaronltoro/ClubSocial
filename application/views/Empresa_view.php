@@ -18,8 +18,8 @@
 	<div class="container" id="principal">
 		<form id="filtros_empresa" method="post">
 			<div class="row filtering">
-				<div class="col-sm-1 mt-3">
-					<img src="public/img/CEU.jpg" alt="Logo CEU" width="300px" height="150px">
+				<div class="col-sm-1 mt-2">
+					<img src="public/img/CEU.png" alt="Logo CEU" width="300px" height="160px">
 				</div>
 				<div class="col-sm-2 offset-9 mt-3 align-self-end d-flex">
 					<button class="btn btn-success ml-auto" type="button" onclick="carga_insert_empresa()"><i class="fa-solid fa-plus"></i> Añadir</button>
