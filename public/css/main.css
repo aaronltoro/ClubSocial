@@ -1,0 +1,20 @@
+#principal{
+    background-color: aliceblue;
+}
+
+.error_message{
+    color: red;
+}
+
+.filtering{
+    display: flex;
+    align-items: center;
+}
+
+.btn_add{
+    padding: 5px 40px;
+}
+
+.tools_res{
+    gap: 10px;
+}
