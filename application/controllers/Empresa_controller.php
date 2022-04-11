@@ -38,7 +38,7 @@ class Empresa_controller extends CI_Controller
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo nombre que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
 					foreach ($compare as $comp) {
-						if ($comp['nombre'] == $res['filtro']) {
+						if (str_contains($comp['nombre'],$res['filtro'])) {
 							$is_err = false;
 						}
 					}
@@ -66,7 +66,7 @@ class Empresa_controller extends CI_Controller
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo cif que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
 					foreach ($compare as $comp) {
-						if ($comp['cif'] == $res['filtro']) {
+						if (str_contains($comp['cif'],$res['filtro'])) {
 							$is_err = false;
 						}
 					}
