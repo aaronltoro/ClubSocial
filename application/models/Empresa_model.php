@@ -34,13 +34,8 @@ class Empresa_Model extends CI_Model
 
     public function get_nombre($nombre)
     {
-        //Si nombre contiene un % significa que el usuario quiere buscar por ejemplo los nombres que empiecen por Slo%
-        if (strpos($nombre, "%")) {
-            $this->db->like('nombre', $nombre);
-        } else {
-            //Si no contiene un % el usuario busca un nombre completo
-            $this->db->where('nombre', $nombre);
-        }
+        //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
+        $this->db->like('nombre', $nombre, 'both'); 
 
         //Retorna la empresa de la base de datos que tenga ese nombre
         $query = $this->db->get('empresa');
@@ -50,13 +45,8 @@ class Empresa_Model extends CI_Model
 
     public function get_cif($cif)
     {
-        //Si $cif contiene un % significa que el usuario quiere buscar por ejemplo los cifs que empiecen por 668%
-        if (strpos($cif, "%")) {
-            $this->db->like('cif', $cif);
-        } else {
-            //Si no contiene un % el usuario busca un cif completo
-            $this->db->where('cif', $cif);
-        }
+        //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
+        $this->db->like('cif', $cif, 'both'); 
 
         //Retorna la empresa de la base de datos que tenga ese cif
         $query = $this->db->get('empresa');
