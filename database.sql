@@ -85,7 +85,7 @@ CREATE TABLE `empresa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` text NOT NULL,
   `cif` text NOT NULL,
-  `direccion` text NOT NULL,
+  `direcciones` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -110,6 +110,7 @@ CREATE TABLE `practicas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_alumno` int(11) NOT NULL,
   `id_empresa` int(11) NOT NULL,
+  `sede` text NOT NULL,
   `id_empleado` int(11) NOT NULL,
   `id_tutor_centro` int(11) NOT NULL,
   `seneca` text NOT NULL,
@@ -133,32 +134,6 @@ CREATE TABLE `practicas` (
 LOCK TABLES `practicas` WRITE;
 /*!40000 ALTER TABLE `practicas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `practicas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sede`
---
-
-DROP TABLE IF EXISTS `sede`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sede` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_empresa` int(11) NOT NULL,
-  `direccion` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_id_empresa` (`id_empresa`),
-  CONSTRAINT `FK_id_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sede`
---
-
-LOCK TABLES `sede` WRITE;
-/*!40000 ALTER TABLE `sede` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sede` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -219,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-06 20:59:07
+-- Dump completed on 2022-04-11 19:24:46

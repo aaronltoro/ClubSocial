@@ -41,6 +41,33 @@ function add_empresa() {
     // Traigo todos los datos seleccionados en cada input
     datas = $('#insert_empresa').serialize();
 
+    //Compruebo cuantos inputs de direcciones contiene la variable datas
+    nsedes = 0;
+    if(datas.includes('direccion1')){
+        nsedes = 1;
+    }
+    if(datas.includes('direccion2')){
+        nsedes = 2;
+    }
+    if(datas.includes('direccion3')){
+        nsedes = 3;
+    }
+    if(datas.includes('direccion4')){
+        nsedes = 4;
+    }
+    if(datas.includes('direccion5')){
+        nsedes = 5;
+    }
+    if(datas.includes('direccion6')){
+        nsedes = 6;
+    }
+    if(datas.includes('direccion7')){
+        nsedes = 7;
+    }
+
+    //Añado el nsedes al string datas para poder recogerlo luego en el controller
+    datas += '&nsedes=' + nsedes;
+
     //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
     $.ajax({
         type: "POST",
@@ -67,6 +94,33 @@ function carga_modify_empresa(id) {
 function modify_empresa(id) {
     // Traigo todos los datos seleccionados en cada input
     datas = $('#modify_empresa').serialize();
+
+    //Compruebo cuantos inputs de direcciones contiene la variable datas
+    nsedes = 0;
+    if(datas.includes('direccion1')){
+        nsedes = 1;
+    }
+    if(datas.includes('direccion2')){
+        nsedes = 2;
+    }
+    if(datas.includes('direccion3')){
+        nsedes = 3;
+    }
+    if(datas.includes('direccion4')){
+        nsedes = 4;
+    }
+    if(datas.includes('direccion5')){
+        nsedes = 5;
+    }
+    if(datas.includes('direccion6')){
+        nsedes = 6;
+    }
+    if(datas.includes('direccion7')){
+        nsedes = 7;
+    }
+
+    //Añado el nsedes al string datas para poder recogerlo luego en el controller
+    datas += '&nsedes=' + nsedes;
 
     //Añado el id de la fila al string datas para poder recogerlo luego en el controller
     datas += '&id=' + id;

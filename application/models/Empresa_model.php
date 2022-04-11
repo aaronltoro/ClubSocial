@@ -13,6 +13,7 @@ class Empresa_Model extends CI_Model
     {
         //Retorna todas las empresas de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('empresa');
+
         if ($ret_type) {
             return $query->result();
         } else {
@@ -74,7 +75,7 @@ class Empresa_Model extends CI_Model
 
         $this->db->set('nombre', $data['nombre']);
         $this->db->set('cif', $data['cif']);
-        $this->db->set('direccion', $data['direccion']);
+        $this->db->set('direcciones', $data['direcciones']);
 
         return $this->db->update('empresa');
     }

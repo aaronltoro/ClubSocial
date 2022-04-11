@@ -97,9 +97,19 @@ class Empresa_controller extends CI_Controller
 		//Recojo los parametros enviados por ajax y los meto en un array
 		$res = array(
 			'nombre' => $this->input->post('nombre'),
-			'cif' => $this->input->post('cif'),
-			'direccion' => $this->input->post('direccion')
+			'cif' => $this->input->post('cif')
 		);
+
+		//Introduzco todas las direcciones que haya puesto el usuario en la variable $direcciones
+		$nsedes = $this->input->post('nsedes');
+		$direcciones = '';
+		for($i=0;$i<$nsedes;$i++){
+			$index = strval($i+1);
+			$direcciones .= '&direccion'.$index.'='.$this->input->post('direccion'.$index);
+		}
+
+		//Introduzco la variable direcciones (un string con todos los valores de cada direccion que ha puesto el usuario)
+		$res['direcciones'] = $direcciones;
 
 		//Llamo al modelo y añado la nueva empresa, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empresa_model', 'Empresa_model', true);
@@ -111,9 +121,20 @@ class Empresa_controller extends CI_Controller
 		//Recojo los parametros enviados por ajax y los meto en un array
 		$res = array(
 			'nombre' => $this->input->post('nombre'),
-			'cif' => $this->input->post('cif'),
-			'direccion' => $this->input->post('direccion')
+			'cif' => $this->input->post('cif')
 		);
+
+		//Introduzco todas las direcciones que haya puesto el usuario en la variable $direcciones
+		$nsedes = $this->input->post('nsedes');
+		$direcciones = '';
+		for($i=0;$i<$nsedes;$i++){
+			$index = strval($i+1);
+			$direcciones .= '&direccion'.$index.'='.$this->input->post('direccion'.$index);
+		}
+
+		//Introduzco la variable direcciones (un string con todos los valores de cada direccion que ha puesto el usuario)
+		$res['direcciones'] = $direcciones;
+
 
 		//Llamo al modelo y modifico la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empresa_model', 'Empresa_model', true);
