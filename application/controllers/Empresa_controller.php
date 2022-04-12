@@ -142,6 +142,35 @@ class Empresa_controller extends CI_Controller
 		$this->tabla_ini();
 	}
 
+	public function modify_sede(){
+		//Recojo los parametros enviados por ajax y los meto en un array
+		$res = array(
+			'nombre' => $this->input->post('nombre'),
+			'cif' => $this->input->post('cif')
+		);
+
+		//Introduzco todas las direcciones que haya puesto el usuario en la variable $direcciones
+		$nsedes = $this->input->post('nsedes');
+		$direcciones = '';
+		for($i=0;$i<$nsedes;$i++){
+			$index = strval($i+1);
+			$direcciones .= '&direccion'.$index.'='.$this->input->post('direccion'.$index);
+		}
+
+		//Introduzco la variable direcciones (un string con todos los valores de cada direccion que ha puesto el usuario)
+		$res['direcciones'] = $direcciones;
+
+
+		//Llamo al modelo y modifico la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
+		$this->load->model('Empresa_model', 'Empresa_model', true);
+		$this->Empresa_model->updatear($this->input->post('id'),$res);
+		
+		//Función que carga la empresa con el id que tiene la fila que ha pulsado el usuario
+		$this->load->model('Empresa_model', 'Empresa_model', true);
+		$this->emp = $this->Empresa_model->get_id($this->input->post('id'));
+		$this->load->view('Update_empresa');
+	}
+
 	public function delete_empresa(){
 		//Llamo al modelo y borro la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empresa_model', 'Empresa_model', true);

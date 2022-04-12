@@ -18,3 +18,8 @@
 .tools_res{
     gap: 10px;
 }
+
+.borrar_sede{
+    display: flex;
+    gap: 5px;
+}
