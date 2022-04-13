@@ -15,7 +15,7 @@
 </head>
 
 <body id="res_principal">
-    <div class="container" id="principal" style="display: flex;">
+    <div class="container" id="principal">
         <button class="btn btn-info" onclick="ir_empresa_view()">Empresa</button>
         <button class="btn btn-info" onclick="ir_alumno_view()">Alumno</button>
         <button class="btn btn-info" onclick="ir_tutor_centro_view()">Tutor Centro</button>

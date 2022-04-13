@@ -11,7 +11,7 @@
 
 		<div class="row filtering">
 			<div class="col-sm-5 mt-3">
-				<h1>Tutor centro</h1>
+				<h1>Tutor Centro</h1>
 			</div>
 			<div class="col-sm-2 mt-3 d-flex">
 				<button class="btn btn-success ml-auto" type="button" onclick="carga_insert_tutor_centro()"><i class="fa-solid fa-plus"></i> Añadir</button>

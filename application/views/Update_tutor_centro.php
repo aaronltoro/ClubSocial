@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="number" name="telefono" placeholder="Telefono" value="<?php echo $tutor_centro[0]['telefono'] ?>">
+                <input class="form-control" type="text" name="telefono" placeholder="Telefono" value="<?php echo $tutor_centro[0]['telefono'] ?>">
             </div>
         </div>
         <div class="row">

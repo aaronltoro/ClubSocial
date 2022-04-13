@@ -28,7 +28,7 @@ CREATE TABLE `alumno` (
   `telefono` text NOT NULL,
   `correo` text NOT NULL,
   `ciclo` text NOT NULL,
-  `curso_escolar` int(11) NOT NULL,
+  `curso_escolar` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,9 +169,9 @@ DROP TABLE IF EXISTS `tutor_centro`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tutor_centro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `correo` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `telefono` text NOT NULL,
+  `correo` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -194,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-11 19:24:46
+-- Dump completed on 2022-04-13 21:36:22
