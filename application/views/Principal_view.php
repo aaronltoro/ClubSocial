@@ -13,8 +13,9 @@
     <title>CEU</title>
 </head>
 <body id="res_principal">
-    <div class="container" id="principal">
+    <div class="container" id="principal" style="display: flex;">
         <button class="btn btn-info" onclick="ir_empresa_view()">Empresa</button>
+        <button class="btn btn-info" onclick="ir_alumno_view()">Alumno</button>
     </div>
 </body>
 <script>
