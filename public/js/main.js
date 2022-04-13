@@ -1,3 +1,23 @@
+function ir_principal_view(){
+    //Vuelve a la página principal
+    window.history.back();
+}
+
+function ir_empresa_view(){
+    //Envío una función ajax para ir al archivo Empresa_view.php
+    $.ajax({
+        type: "POST",
+        url: BASE_URL + 'Principal_controller/ir_empresa_view',
+        data: null,
+        success: function (data) {
+            $('#res_principal').html(data);
+        }
+    });
+
+    //Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
+    carga_empresa();
+}
+
 function carga_empresa() {
     //Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
     $.ajax({
@@ -150,4 +170,51 @@ function delete_empresa(id) {
             }
         });
     }
+}
+
+function eliminar_sede(id,id_empresa){
+    // Traigo todos los datos seleccionados en cada input
+    datas = $('#modify_empresa').serializeArray();
+
+    //Guardo en la variable elim el valor del input que se ha pulsado para borrar
+    elim = 0;
+    for(i in datas){
+        if(datas[i].name.includes(id)){
+            elim = i;
+        }
+    }
+
+    //Borro el campo del array seleccionado
+    datas.splice(elim,1);
+
+    //Cambio el nombre a los siguientes campos, restando 1
+    cont = -1;
+    for(i in datas){
+        if(i >= elim){
+            datas[i].name = "direccion"+cont;
+        }
+        cont++;
+    }
+
+    //Elimino el div del botón pulsado
+    $('#div_direccion'+id).hide();
+
+    //Compruebo cuantos inputs de direcciones contiene la variable datas
+    nsedes = cont-1;
+
+    //Añado el nsedes al string datas para poder recogerlo luego en el controller
+    datas.push({name: 'nsedes', value: nsedes});
+
+    //Inserto el id de la empresa que vamos a updatear
+    datas.push({name: 'id', value: id_empresa});
+
+    //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+    $.ajax({
+        type: "POST",
+        url: BASE_URL + 'Empresa_controller/modify_sede',
+        data: datas,
+        success: function (data) {
+            $('#resultado').html(data);
+        }
+    });
 }
