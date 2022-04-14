@@ -34,8 +34,8 @@ class Alumno_Model extends CI_Model
 
     public function get_nombre($nombre)
     {
-        //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('nombre', $nombre, 'after'); 
+        //Si $nombre coincide con un registro de la base de datos, los trae ($nombre%)
+        $this->db->like('nombre', $nombre, 'both'); 
 
         //Retorna la alumno de la base de datos que tenga ese nombre
         $query = $this->db->get('alumno');
@@ -46,7 +46,7 @@ class Alumno_Model extends CI_Model
     public function get_ciclo($ciclo)
     {
         //Si $ciclo coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('ciclo', $ciclo, 'after'); 
+        $this->db->like('ciclo', $ciclo, 'both'); 
 
         //Retorna la alumno de la base de datos que tenga ese cif
         $query = $this->db->get('alumno');
@@ -57,7 +57,7 @@ class Alumno_Model extends CI_Model
     public function get_curso($curso)
     {
         //Si $ciclo coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('curso_escolar', $curso, 'after'); 
+        $this->db->like('curso_escolar', $curso, 'both'); 
 
         //Retorna la alumno de la base de datos que tenga ese cif
         $query = $this->db->get('alumno');
