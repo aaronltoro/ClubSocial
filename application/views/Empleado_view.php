@@ -1,6 +1,6 @@
 <div class="container" id="principal">
-<form id="filtros_empleado" method="post">
-<div class="row filtering d-flex justify-content-between align-items-start">
+	<form id="filtros_empleado" method="post">
+		<div class="row filtering d-flex justify-content-between align-items-start">
 			<div class="col-sm-1 mt-2">
 				<img src="public/img/CEU.png" alt="Logo CEU" width="300px" height="160px">
 			</div>
@@ -8,7 +8,7 @@
 				<button class="btn btn-info" onclick="ir_principal_view()">Volver</button>
 			</div>
 		</div>
-	<div class="row filtering">
+		<div class="row filtering">
 			<div class="col-sm-5 mt-3">
 				<h1>Empleados</h1>
 			</div>
@@ -20,7 +20,6 @@
 					<option value="-1">- Filtrar por -</option>
 					<option value="n">Nombre</option>
 					<option value="d">DNI</option>
-                    
 				</select>
 			</div>
 			<div class="col-sm-3 mt-3">
@@ -32,7 +31,8 @@
 				</div>
 			</div>
 		</div>
-	<div id="resultado">
 
-	</div>
-    </div>
+		<div id="resultado">
+
+		</div>
+</div>

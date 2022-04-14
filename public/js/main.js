@@ -279,7 +279,7 @@ function add_empleado() {
 	// Traigo todos los datos seleccionados en cada input
 
 	datas = $("#insert_empleado").serialize();
-	
+
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
