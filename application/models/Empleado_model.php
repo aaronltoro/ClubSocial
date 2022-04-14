@@ -35,7 +35,7 @@ class Empleado_Model extends CI_Model
     public function get_nombre($nombre)
     {
         //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('nombre', $nombre, 'both'); 
+        $this->db->like('nombre', $nombre, 'both');
 
         //Retorna la empleado de la base de datos que tenga ese nombre
         $query = $this->db->get('empleado');
@@ -46,7 +46,7 @@ class Empleado_Model extends CI_Model
     public function get_dni($dni)
     {
         //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('dni', $dni, 'both'); 
+        $this->db->like('dni', $dni, 'both');
 
         //Retorna la empleado de la base de datos que tenga ese cif
         $query = $this->db->get('empleado');
@@ -68,7 +68,7 @@ class Empleado_Model extends CI_Model
         $this->db->set('dni', $data['dni']);
         $this->db->set('correo', $data['correo']);
         $this->db->set('telefono', $data['telefono']);
-        
+
         return $this->db->update('empleado');
     }
 }

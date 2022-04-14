@@ -3,8 +3,6 @@
 class Tipo_empleado_Model extends CI_Model
 {
 
-    
-
     public function get_todos($ret_type = false)
     {
         //Retorna todas las tipo_empleados de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
@@ -17,23 +15,12 @@ class Tipo_empleado_Model extends CI_Model
         }
     }
 
-    public function get_nombre($nombre)
+    public function get_id($id)
     {
-        //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('nombre', $nombre, 'both'); 
+        //Filtro
+        $this->db->where('id', $id);
 
-        //Retorna la tipo_empleado de la base de datos que tenga ese nombre
-        $query = $this->db->get('tipo_empleado');
-
-        return $query->result_array();
-    }
-
-    public function get_cif($cif)
-    {
-        //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('cif', $cif, 'both'); 
-
-        //Retorna la tipo_empleado de la base de datos que tenga ese cif
+        //Retorna el empleado de la base de datos que tenga ese id
         $query = $this->db->get('tipo_empleado');
 
         return $query->result_array();

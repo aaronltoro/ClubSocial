@@ -32,12 +32,11 @@
 				</div>
 			</div>
 		</div>
-	
-		</form>
+	</form>
+
 	<hr>
 
 	<div id="resultado">
 
 	</div>
-
 </div>

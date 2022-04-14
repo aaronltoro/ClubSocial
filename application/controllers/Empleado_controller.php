@@ -6,8 +6,8 @@ class Empleado_controller extends CI_Controller
 
 	var $err;
 	var $filt = array();
-	var $empresa= array();
-	var $tipo_empleado= array();
+	var $empresa = array();
+	var $tipo_empleado = array();
 
 	public function search_filters()
 	{
@@ -35,7 +35,7 @@ class Empleado_controller extends CI_Controller
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo nombre que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
 					foreach ($compare as $comp) {
-						if (str_contains($comp['nombre'],$res['filtro'])) {
+						if (str_contains($comp['nombre'], $res['filtro'])) {
 							$is_err = false;
 						}
 					}
@@ -63,7 +63,7 @@ class Empleado_controller extends CI_Controller
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo cif que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
 					foreach ($compare as $comp) {
-						if (str_contains($comp['dni'],$res['filtro'])) {
+						if (str_contains($comp['dni'], $res['filtro'])) {
 							$is_err = false;
 						}
 					}
@@ -90,16 +90,17 @@ class Empleado_controller extends CI_Controller
 		}
 	}
 
-	public function add_empleado(){
+	public function add_empleado()
+	{
 		//Recojo los parametros enviados por ajax y los meto en un array
 		$res = array(
-			'id_empresa' => $this ->input->post('idEmpresa'),
-			'id_tipo' => $this ->input->post('idTipo'),
+			'id_empresa' => $this->input->post('idEmpresa'),
+			'id_tipo' => $this->input->post('idTipo'),
 			'nombre' => $this->input->post('nombre'),
 			'dni' => $this->input->post('dni'),
-			'correo' => $this ->input->post('correo'),
+			'correo' => $this->input->post('correo'),
 			'telefono' => $this->input->post('telefono'),
-		
+
 		);
 
 		//Llamo al modelo y añado la nueva Empleado, después vuelvo a cargar la tabla con todos los campos
@@ -108,7 +109,8 @@ class Empleado_controller extends CI_Controller
 		$this->tabla_ini();
 	}
 
-	public function modify_empleado(){
+	public function modify_empleado()
+	{
 		//Recojo los parametros enviados por ajax y los meto en un array
 		$res = array(
 			'nombre' => $this->input->post('nombre'),
@@ -122,12 +124,13 @@ class Empleado_controller extends CI_Controller
 
 		//Llamo al modelo y modifico la Empleado seleccionado, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empleado_model', 'Empleado_model', true);
-		$this->Empleado_model->updatear($this->input->post('id'),$res);
+		$this->Empleado_model->updatear($this->input->post('id'), $res);
 		$this->tabla_ini();
 	}
 
 
-	public function delete_empleado(){
+	public function delete_empleado()
+	{
 		//Llamo al modelo y borro la Empleado seleccionada, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empleado_model', 'Empleado_model', true);
 		$this->Empleado_model->deletear($this->input->post('id'));
@@ -139,6 +142,20 @@ class Empleado_controller extends CI_Controller
 		//Función que carga la tabla completa al iniciar la página
 		$this->load->model('Empleado_model', 'Empleado_model', true);
 		$this->emp = $this->Empleado_model->get_todos();
+
+		//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+		if (sizeof($this->emp) > 0) {
+			//Función que intercambia el id_empresa por su nombre
+			$this->load->model('Empresa_model', 'Empresa_model', true);
+			$n_empresa = $this->Empresa_model->get_id($this->emp[0]['id_empresa']);
+			$this->emp[0]['id_empresa'] = $n_empresa[0]['nombre'];
+
+			//Función que intercambia el id_tipo por su nombre
+			$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
+			$n_tipo = $this->Tipo_empleado_model->get_id($this->emp[0]['id_tipo']);
+			$this->emp[0]['id_tipo'] = $n_tipo[0]['nombre'];
+		}
+
 		$this->load->view('Resultado_empleado');
 	}
 
@@ -149,23 +166,27 @@ class Empleado_controller extends CI_Controller
 		return $this->Empleado_model->get_todos();
 	}
 
-	public function load_insert(){
+	public function load_insert()
+	{
 		//Función que devuelve todos los datos de la tabla Empresa
 		$this->load->model('Empresa_model', 'Empresa_model', true);
 		$this->empresa = $this->Empresa_model->get_todos();
 		//Función que devuelve todos los datos de la tabla Tipo_empleado
 		$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
 		$this->tipo_empleado = $this->Tipo_empleado_model->get_todos();
+
 		$this->load->view('Insert_empleado');
 	}
 
-	public function load_modify(){
+	public function load_modify()
+	{
 		//Función que devuelve todos los datos de la tabla Empresa
 		$this->load->model('Empresa_model', 'Empresa_model', true);
 		$this->empresa = $this->Empresa_model->get_todos();
 		//Función que devuelve todos los datos de la tabla Tipo_empleado
 		$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
 		$this->tipo_empleado = $this->Tipo_empleado_model->get_todos();
+
 		//Función que carga la Empleado con el id que tiene la fila que ha pulsado el usuario
 		$this->load->model('Empleado_model', 'Empleado_model', true);
 		$this->emp = $this->Empleado_model->get_id($this->input->post('id'));
