@@ -14,6 +14,11 @@ class Principal_controller extends CI_Controller
         $this->load->view('Empresa_view.php');
     }
 
+    public function ir_empleado_view()
+    {
+        $this->load->view('Empleado_view.php');
+    }
+
     public function ir_alumno_view()
     {
         $this->load->view('Alumno_view.php');

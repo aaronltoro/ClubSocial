@@ -19,6 +19,7 @@
         <button class="btn btn-info" onclick="ir_empresa_view()">Empresa</button>
         <button class="btn btn-info" onclick="ir_alumno_view()">Alumno</button>
         <button class="btn btn-info" onclick="ir_tutor_centro_view()">Tutor Centro</button>
+        <button class="btn btn-info" onclick="ir_empleado_view()">Empleados</button>
     </div>
 </body>
 <script>

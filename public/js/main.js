@@ -33,6 +33,21 @@ function ir_empresa_view() {
 	carga_empresa();
 }
 
+function ir_empleado_view() {
+	//Envío una función ajax para ir al archivo Empresa_view.php
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Principal_controller/ir_empleado_view",
+		data: null,
+		success: function (data) {
+			$("#res_principal").html(data);
+		},
+	});
+
+	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
+	carga_empleados();
+}
+
 function ir_alumno_view() {
 	//Envío una función ajax para ir al archivo Empresa_view.php
 	$.ajax({
@@ -71,6 +86,18 @@ function carga_alumnos() {
 		},
 	});
 }
+
+function carga_empleados() {
+	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/tabla_ini",
+		data: null,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
 function carga_tutor_centro() {
 	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
 	$.ajax({
@@ -91,6 +118,21 @@ function carga_filtros_empresa() {
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Empresa_controller/search_filters",
+		data: filters,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function carga_filtros_empleado() {
+	// Traigo todos los filtros seleccionados en cada input
+	filters = $("#filtros_empleado").serialize();
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/search_filters",
 		data: filters,
 		success: function (data) {
 			$("#resultado").html(data);
@@ -133,6 +175,18 @@ function carga_insert_empresa() {
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Empresa_controller/load_insert",
+		data: null,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function carga_insert_empleado() {
+	//Envío una función ajax al controlador para pintar el formulario de insert
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/load_insert",
 		data: null,
 		success: function (data) {
 			$("#resultado").html(data);
@@ -220,6 +274,25 @@ function add_alumno() {
 		},
 	});
 }
+
+function add_empleado() {
+	// Traigo todos los datos seleccionados en cada input
+
+	datas = $("#insert_empleado").serialize();
+	
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/add_empleado",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+
 function add_tutor_centro() {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#insert_tutor_centro").serialize();
@@ -240,6 +313,18 @@ function carga_modify_empresa(id) {
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Empresa_controller/load_modify",
+		data: { id: id },
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function carga_modify_empleado(id) {
+	//Envío una función ajax al controlador para pintar el formulario de modify además del id de la fila
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/load_modify",
 		data: { id: id },
 		success: function (data) {
 			$("#resultado").html(data);
@@ -288,6 +373,25 @@ function modify_alumno(id) {
 		},
 	});
 }
+
+function modify_empleado(id) {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#modify_empleado").serialize();
+
+	//Añado el id de la fila al string datas para poder recogerlo luego en el controller
+	datas += "&id=" + id;
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empleado_controller/modify_empleado",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
 function modify_tutor_centro(id) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_tutor_centro").serialize();
@@ -379,6 +483,24 @@ function delete_alumno(id) {
 		$.ajax({
 			type: "POST",
 			url: BASE_URL + "Alumno_controller/delete_alumno",
+			data: { id: id },
+			success: function (data) {
+				$("#resultado").html(data);
+			},
+		});
+	}
+}
+
+function delete_empleado(id) {
+	$borra = confirm(
+		"¿Estás seguro de que deseas borrar el campo seleccionado? [" + id + "]"
+	);
+	//Si el usuario pulsa en aceptar...
+	if ($borra) {
+		//Envío una función ajax al controlador con el id de la fila seleccionada
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "Empleado_controller/delete_empleado",
 			data: { id: id },
 			success: function (data) {
 				$("#resultado").html(data);
