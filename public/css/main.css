@@ -1,25 +1,320 @@
-#principal{
+#principal {
     background-color: aliceblue;
 }
 
-.error_message{
+.error_message {
     color: red;
 }
 
-.filtering{
+.filtering {
     display: flex;
     align-items: center;
 }
 
-.btn_add{
+.btn_add {
     padding: 5px 40px;
 }
 
-.tools_res{
+.tools_res {
     gap: 10px;
 }
 
-.borrar_sede{
+.borrar_sede {
     display: flex;
     gap: 5px;
+}
+
+.main_cont{
+    min-height: 550px;
+}
+
+/* CSS botones Inicio */
+.main_cont button {
+    width: 250px;
+    height: 60px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: aliceblue;
+    border-style: none;
+}
+
+.main_cont .btn_inicio3 {
+    width: 250px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn_inicio1 {
+    --color: #4285F4;
+    position: relative;
+    z-index: 1;
+}
+
+.btn_inicio1::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    top: -7px;
+    left: -7px;
+    z-index: -5;
+    border-top: 3px solid var(--color);
+    border-left: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio1::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    bottom: -7px;
+    right: -7px;
+    z-index: -5;
+    border-right: 3px solid var(--color);
+    border-bottom: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio1:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio1:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio2 {
+    --color: #EA4335;
+    position: relative;
+    z-index: 1;
+}
+
+.btn_inicio2::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    top: -7px;
+    left: -7px;
+    z-index: -5;
+    border-top: 3px solid var(--color);
+    border-left: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio2::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    bottom: -7px;
+    right: -7px;
+    z-index: -5;
+    border-right: 3px solid var(--color);
+    border-bottom: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio2:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio2:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio3 {
+    --color: #FBBC05;
+    position: relative;
+    z-index: 1;
+}
+
+.btn_inicio3::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    top: -7px;
+    left: -7px;
+    z-index: -5;
+    border-top: 3px solid var(--color);
+    border-left: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio3::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    bottom: -7px;
+    right: -7px;
+    z-index: -5;
+    border-right: 3px solid var(--color);
+    border-bottom: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio3:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio3:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio4 {
+    --color: #34A853;
+    position: relative;
+    z-index: 1;
+}
+
+.btn_inicio4::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    top: -7px;
+    left: -7px;
+    z-index: -5;
+    border-top: 3px solid var(--color);
+    border-left: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio4::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    bottom: -7px;
+    right: -7px;
+    z-index: -5;
+    border-right: 3px solid var(--color);
+    border-bottom: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio4:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio4:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio5 {
+    --color: #1E1E1E;
+    position: relative;
+    z-index: 1;
+}
+
+.btn_inicio5::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    top: -7px;
+    left: -7px;
+    z-index: -5;
+    border-top: 3px solid var(--color);
+    border-left: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio5::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    bottom: -7px;
+    right: -7px;
+    z-index: -5;
+    border-right: 3px solid var(--color);
+    border-bottom: 3px solid var(--color);
+    transition: 0.5s;
+}
+
+.btn_inicio5:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn_inicio5:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para labels de insert y modify*/
+.wrapper {
+    display: block;
+    position: relative;
+}
+
+.wrapper input {
+    transition: .1s all linear;
+}
+
+.wrapper label {
+    position: absolute;
+    font-size: 14px;
+    color: black;
+    transition: 300ms all linear;
+    cursor: text;
+    top: 8px;
+    left: 30px;
+}
+
+.item_ins .wrapper.active input {
+    padding-left: 80px;
+}
+
+.item_ins .wrapper.active label {
+    color: #fff;
+    width: 70px;
+    font-weight: bold;
+    background: #28A745;
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    top: 0;
+    left: 15px;
+    text-align: center;
+}
+
+.item_mod .wrapper.active input {
+    padding-left: 80px;
+}
+
+.item_mod .wrapper.active label {
+    color: #000;
+    width: 70px;
+    font-weight: bold;
+    background: #FFC107;
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    top: 0;
+    left: 15px;
+    text-align: center;
 }

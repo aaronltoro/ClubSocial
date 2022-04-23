@@ -5,24 +5,28 @@
     <?php $tipo_empleado = $this->tipo_empleado; ?>
 
     <form id="modify_empleado">
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="nombre" placeholder="Nombre" value="<?php echo $emp[0]['nombre'] ?>">
+        <div class="row item item_mod">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="nombre">Nombre</label>
+                <input class="form-control" type="text" name="nombre" value="<?php echo $emp[0]['nombre'] ?>">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="dni" placeholder="DNI" value="<?php echo $emp[0]['dni'] ?>">
+        <div class="row item item_mod">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="dni">DNI</label>
+                <input class="form-control" type="text" name="dni" value="<?php echo $emp[0]['dni'] ?>">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="correo" placeholder="Correo" value="<?php echo $emp[0]['correo'] ?>">
+        <div class="row item item_mod">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="correo">E-Mail</label>
+                <input class="form-control" type="text" name="correo" value="<?php echo $emp[0]['correo'] ?>">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="telefono" placeholder="Telefono" value="<?php echo $emp[0]['telefono'] ?>">
+        <div class="row item item_mod">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="telefono">Tlf</label>
+                <input class="form-control" type="text" name="telefono" value="<?php echo $emp[0]['telefono'] ?>">
             </div>
         </div>
         <div class="row">
@@ -33,7 +37,9 @@
                 <!-- Recorreremos todas las empresas para poneras en el select, y la empresa que coincida con la del empleado estara seleccionada-->
                 <select class="form-control" name="idEmpresa" id="idEmpresa">
                     <?php foreach ($empresa as $empl) { ?>
-                        <option value="<?php echo $empl['id'] ?>" <?php if ($emp[0]['id_empresa'] == $empl['id']) { echo 'selected';} ?>><?php echo $empl['nombre'] ?></option>
+                        <option value="<?php echo $empl['id'] ?>" <?php if ($emp[0]['id_empresa'] == $empl['id']) {
+                                                                        echo 'selected';
+                                                                    } ?>><?php echo $empl['nombre'] ?></option>
                         <!--Cierre foreach-->
                     <?php } ?>
                 </select>
@@ -47,7 +53,9 @@
                 <!-- Recorreremos todas los tipos de empleados para poneras en el select, y el tipo que coincida con la del empleado estara seleccionada-->
                 <select class="form-control" name="idTipo" id="idTipo">
                     <?php foreach ($tipo_empleado as $t_e) { ?>
-                        <option value="<?php echo $t_e['id'] ?>" <?php if ($emp[0]['id_tipo'] == $t_e['id']) { echo 'selected';} ?>><?php echo $t_e['nombre'] ?></option>
+                        <option value="<?php echo $t_e['id'] ?>" <?php if ($emp[0]['id_tipo'] == $t_e['id']) {
+                                                                        echo 'selected';
+                                                                    } ?>><?php echo $t_e['nombre'] ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -63,4 +71,21 @@
 <!--Este script es necesario, sino peta mucho UwU-->
 <script>
     // console.log($("#modify_empleado").serialize());
+</script>
+
+<script>
+    //Script para los label de los inputs
+    $(document).ready(function() {
+        $('input').each(function() {
+            $(this).on('focus', function() {
+                $(this).parent('.wrapper').addClass('active');
+            });
+            $(this).on('blur', function() {
+                if ($(this).val().length === 0) {
+                    $(this).parent('.wrapper').removeClass('active');
+                }
+            });
+            if ($(this).val() !== '') $(this).parent('.wrapper').addClass('active');
+        });
+    });
 </script>

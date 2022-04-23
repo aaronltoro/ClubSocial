@@ -15,11 +15,34 @@
 </head>
 
 <body id="res_principal">
-    <div class="container" id="principal">
-        <button class="btn btn-info" onclick="ir_empresa_view()">Empresa</button>
-        <button class="btn btn-info" onclick="ir_alumno_view()">Alumno</button>
-        <button class="btn btn-info" onclick="ir_tutor_centro_view()">Tutor Centro</button>
-        <button class="btn btn-info" onclick="ir_empleado_view()">Empleados</button>
+    <div class="container main_cont" id="principal">
+        <div class="row">
+            <div class="col-sm-1 mt-2 offset-4">
+                <img src="public/img/CEU.png" alt="Logo CEU" width="300px" height="160px">
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-around mt-5 mb-3">
+            <div class="col-sm-2 d-flex justify-content-center">
+                <button class="btn_inicio1" onclick="ir_empresa_view()">Empresas</button>
+            </div>
+            <div class="col-sm-2 d-flex justify-content-center">
+                <button class="btn_inicio2" onclick="ir_alumno_view()">Alumnos</button>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-5 mb-3">
+            <div class="col-sm-2 d-flex justify-content-center">
+                <button class="btn_inicio5" onclick="">Prácticas</button>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-around mt-5 mb-3">
+            <div class="col-sm-2 d-flex justify-content-center">
+                <button class="btn_inicio3" onclick="ir_tutor_centro_view()">Tutores Centro</button>
+            </div>
+            <div class="col-sm-2 d-flex justify-content-center">
+                <button class="btn_inicio4" onclick="ir_empleado_view()">Empleados</button>
+            </div>
+        </div>
     </div>
 </body>
 <script>

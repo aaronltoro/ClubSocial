@@ -1,18 +1,21 @@
 <div>
     <form id="insert_tutor_centro">
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+        <div class="row item item_ins">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="nombre">Nombre</label>
+                <input class="form-control" type="text" name="nombre">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="telefono" placeholder="Telefono">
+        <div class="row item item_ins">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="telefono">Tlf</label>
+                <input class="form-control" type="text" name="telefono">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="email" name="correo" placeholder="Correo">
+        <div class="row item item_ins">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="correo">E-Mail</label>
+                <input class="form-control" type="email" name="correo">
             </div>
         </div>
         <div class="row">
@@ -22,3 +25,20 @@
         </div>
     </form>
 </div>
+
+<script>
+    //Script para los label de los inputs
+    $(document).ready(function() {
+        $('input').each(function() {
+            $(this).on('focus', function() {
+                $(this).parent('.wrapper').addClass('active');
+            });
+            $(this).on('blur', function() {
+                if ($(this).val().length === 0) {
+                    $(this).parent('.wrapper').removeClass('active');
+                }
+            });
+            if ($(this).val() !== '') $(this).parent('.wrapper').addClass('active');
+        });
+    });
+</script>
