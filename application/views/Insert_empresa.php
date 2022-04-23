@@ -1,17 +1,24 @@
 <div>
+    <div class="row d-flex align-content-center justify-content-end">
+        <div class="col-sm-1">
+            <button class="btn btn-danger btn_exit" type="button" onclick="ir_empresa_view()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
     <form id="insert_empresa">
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+        <div class="row item item_ins">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="nombre">Nombre</label>
+                <input class="form-control" type="text" name="nombre">
+            </div>
+        </div>
+        <div class="row item item_ins">
+            <div class="col-sm-8 offset-2 mt-3 wrapper">
+                <label for="cif">CIF</label>
+                <input class="form-control" type="text" name="cif">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
-                <input class="form-control" type="text" name="cif" placeholder="CIF">
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-2 offset-2 mt-3">
+            <div class="col-sm-2 offset-2 mt-3">
                 <select class="form-control" name="nsedes" id="nsedes">
                     <option value="0">NºSedes</option>
                     <option value="1">1</option>
@@ -25,14 +32,14 @@
             </div>
             <!--Script que pinta tantos input de dirección como numero haya puesto el usuario en el select-->
             <script>
-                document.getElementById("nsedes").addEventListener('change',pinta_inputs);
+                document.getElementById("nsedes").addEventListener('change', pinta_inputs);
 
-                function pinta_inputs(){
+                function pinta_inputs() {
                     nsedes = document.getElementById("nsedes").value;
-                    res= "";
+                    res = "";
 
-                    for(i=0;i<nsedes;i++){
-                        res += '<div class="col-sm-12 mb-2 p-0"><input class="form-control" type="text" name="direccion'+(i+1)+'" placeholder="Dirección '+(i+1)+'"></div>';
+                    for (i = 0; i < nsedes; i++) {
+                        res += '<div class="col-sm-12 mb-2 p-0"><input class="form-control" type="text" name="direccion' + (i + 1) + '" placeholder="Dirección ' + (i + 1) + '"></div>';
                     }
 
                     document.getElementById("res").innerHTML = res;
@@ -49,3 +56,20 @@
         </div>
     </form>
 </div>
+
+<script>
+    //Script para los label de los inputs
+    $(document).ready(function() {
+        $('input').each(function() {
+            $(this).on('focus', function() {
+                $(this).parent('.wrapper').addClass('active');
+            });
+            $(this).on('blur', function() {
+                if ($(this).val().length === 0) {
+                    $(this).parent('.wrapper').removeClass('active');
+                }
+            });
+            if ($(this).val() !== '') $(this).parent('.wrapper').addClass('active');
+        });
+    });
+</script>

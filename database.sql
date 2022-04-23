@@ -29,6 +29,7 @@ CREATE TABLE `alumno` (
   `correo` text NOT NULL,
   `ciclo` text NOT NULL,
   `curso_escolar` text NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,6 +58,7 @@ CREATE TABLE `empleado` (
   `dni` text NOT NULL,
   `correo` text NOT NULL,
   `telefono` text NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_id_empresa_emp` (`id_empresa`),
   KEY `FK_id_tipo_emp` (`id_tipo`),
@@ -86,6 +88,7 @@ CREATE TABLE `empresa` (
   `nombre` text NOT NULL,
   `cif` text NOT NULL,
   `direcciones` text NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -115,6 +118,7 @@ CREATE TABLE `practicas` (
   `id_tutor_centro` int(11) NOT NULL,
   `seneca` text NOT NULL,
   `fecha_incorporacion` date NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_id_alumno_prac` (`id_alumno`),
   KEY `FK_id_empresa_prac` (`id_empresa`),
@@ -172,6 +176,8 @@ CREATE TABLE `tutor_centro` (
   `nombre` text NOT NULL,
   `telefono` text NOT NULL,
   `correo` text NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -194,4 +200,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-13 21:36:22
+-- Dump completed on 2022-04-23 13:10:00

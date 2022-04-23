@@ -2,8 +2,9 @@
     <thead class="thead-dark">
         <th>Id</th>
         <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>E-Mail</th>
+        <th>Activo</th>
         <th></th>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
                 <td><?php echo $tutor_centro['nombre'] ?></td>
                 <td><?php echo $tutor_centro['telefono'] ?></td>
                 <td><?php echo $tutor_centro['correo'] ?></td>
+                <td><?php echo ($tutor_centro['activo']==1) ? 'Sí' : 'No' ?></td>
                 <td class="d-flex justify-content-end tools_res">
                     <button class="btn btn-warning" title="Modificar" onclick="carga_modify_tutor_centro(<?php echo $tutor_centro['id'] ?>)"><i class="fa-solid fa-note-sticky"></i></button>
                     <button class="btn btn-danger" title="Eliminar" onclick="delete_tutor_centro(<?php echo $tutor_centro['id'] ?>)"><i class="fa-solid fa-eraser"></i></button>

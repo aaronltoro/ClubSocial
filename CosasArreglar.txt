@@ -1,0 +1,9 @@
+sede/s principal
+
+empleado - add empresa actual
+
+alumno - botón nuevo ciclo (Nombre corto/largo)
+
+practicas - primero escoger a que curso escolar pertenece
+
+Error Empresa (modificar) al borrar una sede recien creada

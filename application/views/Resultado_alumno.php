@@ -2,8 +2,8 @@
     <thead class="thead-dark">
         <th>Id</th>
         <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>E-Mail</th>
         <th>Ciclo</th>
         <th>Curso Escolar</th>
         <th></th>

@@ -297,6 +297,13 @@ function add_tutor_centro() {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#insert_tutor_centro").serialize();
 
+	//Si el checkbox está marcado activo vale 1 y si no vale 0
+	if(document.getElementById("check_activo").checked){
+		datas += '&activo=1';
+	} else {
+		datas += '&activo=0';
+	}
+
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
 		type: "POST",
@@ -398,6 +405,13 @@ function modify_tutor_centro(id) {
 
 	//Añado el id de la fila al string datas para poder recogerlo luego en el controller
 	datas += "&id=" + id;
+
+	//Si el checkbox está marcado activo vale 1 y si no vale 0
+	if(document.getElementById("check_activo").checked){
+		datas += '&activo=1';
+	} else {
+		datas += '&activo=0';
+	}
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({

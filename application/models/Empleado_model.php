@@ -11,6 +11,9 @@ class Empleado_Model extends CI_Model
 
     public function get_todos($ret_type = false)
     {
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
         //Retorna todas las empleados de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('empleado');
 
@@ -26,6 +29,9 @@ class Empleado_Model extends CI_Model
         //Filtro
         $this->db->where('id', $id);
 
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
         //Retorna la empleado de la base de datos que tenga ese id
         $query = $this->db->get('empleado');
 
@@ -36,6 +42,9 @@ class Empleado_Model extends CI_Model
     {
         //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
         $this->db->like('nombre', $nombre, 'both');
+
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
 
         //Retorna la empleado de la base de datos que tenga ese nombre
         $query = $this->db->get('empleado');
@@ -48,6 +57,9 @@ class Empleado_Model extends CI_Model
         //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
         $this->db->like('dni', $dni, 'both');
 
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
         //Retorna la empleado de la base de datos que tenga ese cif
         $query = $this->db->get('empleado');
 
@@ -56,7 +68,13 @@ class Empleado_Model extends CI_Model
 
     public function deletear($id)
     {
-        $this->db->delete('empleado', array('id' => $id));
+        // $this->db->delete('empleado', array('id' => $id));
+
+        $this->db->where('id', $id);
+
+        $this->db->set('eliminado', 1);
+
+        return $this->db->update('empleado');
     }
 
     function updatear($id, $data)

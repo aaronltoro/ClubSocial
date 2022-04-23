@@ -145,15 +145,17 @@ class Empleado_controller extends CI_Controller
 
 		//Solo intercambia los id por nombre cuando exista al menos 1 empleado
 		if (sizeof($this->emp) > 0) {
-			//Función que intercambia el id_empresa por su nombre
-			$this->load->model('Empresa_model', 'Empresa_model', true);
-			$n_empresa = $this->Empresa_model->get_id($this->emp[0]['id_empresa']);
-			$this->emp[0]['id_empresa'] = $n_empresa[0]['nombre'];
+			foreach ($this->emp as $key => $emp) {
+				//Función que intercambia el id_empresa por su nombre
+				$this->load->model('Empresa_model', 'Empresa_model', true);
+				$n_empresa = $this->Empresa_model->get_id($emp['id_empresa']);
+				$this->emp[$key]['id_empresa'] = $n_empresa[0]['nombre'];
 
-			//Función que intercambia el id_tipo por su nombre
-			$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
-			$n_tipo = $this->Tipo_empleado_model->get_id($this->emp[0]['id_tipo']);
-			$this->emp[0]['id_tipo'] = $n_tipo[0]['nombre'];
+				//Función que intercambia el id_tipo por su nombre
+				$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
+				$n_tipo = $this->Tipo_empleado_model->get_id($emp['id_tipo']);
+				$this->emp[$key]['id_tipo'] = $n_tipo[0]['nombre'];
+			}
 		}
 
 		$this->load->view('Resultado_empleado');

@@ -3,10 +3,10 @@
         <th>Id</th>
         <th>Nombre</th>
         <th>DNI</th>
+        <th>Teléfono</th>
+        <th>E-Mail</th>
         <th>Empresa</th>
         <th>Tipo</th>
-        <th>Correo</th>
-        <th>Telefono</th>
         <th></th>
     </thead>
     <tbody>
@@ -16,10 +16,10 @@
                 <td><?php echo $emp['id'] ?></td>
                 <td><?php echo $emp['nombre'] ?></td>
                 <td><?php echo $emp['dni'] ?></td>
+                <td><?php echo $emp['telefono'] ?></td>
+                <td><?php echo $emp['correo'] ?></td>
                 <td><?php echo $emp['id_empresa'] ?></td>
                 <td><?php echo $emp['id_tipo'] ?></td>
-                <td><?php echo $emp['correo'] ?></td>
-                <td><?php echo $emp['telefono'] ?></td>
 
                 <td class="d-flex justify-content-end tools_res">
                     <button class="btn btn-warning" type="button" title="Modificar" onclick="carga_modify_empleado(<?php echo $emp['id'] ?>)"><i class="fa-solid fa-note-sticky"></i></button>
