@@ -87,4 +87,13 @@ class Empresa_Model extends CI_Model
 
         return $this->db->update('empresa');
     }
+
+    function update_principal($id, $data)
+    {
+        $this->db->where('id', $id);
+
+        $this->db->set('principal', $data);
+
+        return $this->db->update('empresa');
+    }
 }

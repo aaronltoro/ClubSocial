@@ -88,6 +88,7 @@ CREATE TABLE `empresa` (
   `nombre` text NOT NULL,
   `cif` text NOT NULL,
   `direcciones` text NOT NULL,
+  `principal` tinyint(1) NOT NULL DEFAULT 1,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -200,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23 13:10:00
+-- Dump completed on 2022-04-23 19:02:11
