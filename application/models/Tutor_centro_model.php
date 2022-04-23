@@ -70,6 +70,7 @@ class Tutor_centro_model extends CI_Model
     $this->db->set('nombre', $data['nombre']);
     $this->db->set('telefono', $data['telefono']);
     $this->db->set('correo', $data['correo']);
+    $this->db->set('activo', $data['activo']);
 
     return $this->db->update('tutor_centro');
   }

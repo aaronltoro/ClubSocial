@@ -21,6 +21,12 @@
                 <input class="form-control" type="email" name="correo" value="<?php echo $tutor_centro[0]['correo'] ?>">
             </div>
         </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-sm-2 d-flex align-items-center offset-2 mt-3 check_label">
+                <input class="check_tutor" type="checkbox" id="check_activo" <?php echo ($tutor_centro[0]['activo']==1) ? 'checked' : '' ?>>
+                <label for="activo" style="margin:0">¿Activo?</label>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-2 offset-5 mt-3 mb-3 d-flex justify-content-center">
                 <button class="btn btn-warning btn_add" type="button" onclick="modify_tutor_centro(<?php echo $tutor_centro[0]['id'] ?>)">Modificar</button>

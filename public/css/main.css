@@ -28,6 +28,17 @@
     min-height: 550px;
 }
 
+.check_label{
+    font-size: 17px;
+    gap: 10px;
+}
+
+.check_tutor{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
 /* CSS botones Inicio */
 .main_cont button {
     width: 250px;

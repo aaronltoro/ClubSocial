@@ -2,8 +2,8 @@
     <thead class="thead-dark">
         <th>Id</th>
         <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>E-Mail</th>
     </thead>
 </table>
 <div class="d-flex justify-content-center">

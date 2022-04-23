@@ -71,8 +71,10 @@ class Tutor_centro_controller extends CI_Controller
     $res = array(
       'nombre' => $this->input->post('nombre'),
       'telefono' => $this->input->post('telefono'),
-      'correo' => $this->input->post('correo')
+      'correo' => $this->input->post('correo'),
+      'activo' => $this->input->post('activo')
     );
+
     //Llamo al modelo y añado la nueva tutor_centro, después vuelvo a cargar la tabla con todos los campos
     $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
     $this->Tutor_centro_model->insertar($res);
@@ -86,6 +88,7 @@ class Tutor_centro_controller extends CI_Controller
       'nombre' => $this->input->post('nombre'),
       'telefono' => $this->input->post('telefono'),
       'correo' => $this->input->post('correo'),
+      'activo' => $this->input->post('activo')
     );
 
     //Llamo al modelo y modifico al tutor_centro seleccionada, después vuelvo a cargar la tabla con todos los campos

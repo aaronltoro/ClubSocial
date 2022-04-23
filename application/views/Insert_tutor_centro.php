@@ -18,6 +18,12 @@
                 <input class="form-control" type="email" name="correo">
             </div>
         </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-sm-2 d-flex align-items-center offset-2 mt-3 check_label">
+                <input class="check_tutor" id="check_activo" type="checkbox" checked>
+                <label for="activo" style="margin:0">¿Activo?</label>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-2 offset-5 mt-3 mb-3 d-flex justify-content-center">
                 <button class="btn btn-success btn_add" type="button" onclick="add_tutor_centro()">Añadir</button>

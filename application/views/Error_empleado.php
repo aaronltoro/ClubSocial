@@ -1,12 +1,12 @@
 <table class="table table-striped">
     <thead class="thead-dark">
         <th>Id</th>
-        <th>Empresa</th>
-        <th>Tipo</th>
         <th>Nombre</th>
         <th>DNI</th>
-        <th>Correo</th>
-        <th>Telefono</th>
+        <th>Teléfono</th>
+        <th>E-Mail</th>
+        <th>Empresa</th>
+        <th>Tipo</th>
         <th></th>
     </thead>
 </table>
