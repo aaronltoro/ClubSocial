@@ -39,6 +39,10 @@
     cursor: pointer;
 }
 
+.btn_exit{
+    padding: 2px 10px;
+}
+
 /* CSS botones Inicio */
 .main_cont button {
     width: 250px;

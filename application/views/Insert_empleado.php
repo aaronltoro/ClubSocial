@@ -2,6 +2,11 @@
     <!-- Nos traemos los datos de tipo de empleado y empresa-->
     <?php $empresa = $this->empresa; ?>
     <?php $tipo_empleado = $this->tipo_empleado; ?>
+    <div class="row d-flex align-content-center justify-content-end">
+        <div class="col-sm-1">
+            <button class="btn btn-danger btn_exit" type="button" onclick="ir_empleado_view()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
     <form id="insert_empleado">
         <div class="row item item_ins">
             <div class="col-sm-8 offset-2 mt-3 wrapper">

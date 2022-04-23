@@ -1,7 +1,10 @@
 <div>
-
     <?php $alumno = $this->alumno; ?>
-
+    <div class="row d-flex align-content-center justify-content-end">
+        <div class="col-sm-1">
+            <button class="btn btn-danger btn_exit" type="button" onclick="ir_alumno_view()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
     <form id="modify_alumno">
         <div class="row item item_mod">
             <div class="col-sm-8 offset-2 mt-3 wrapper">
