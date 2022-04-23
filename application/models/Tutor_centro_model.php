@@ -11,6 +11,9 @@ class Tutor_centro_model extends CI_Model
 
   public function get_todos($ret_type = false)
   {
+    //Filtro para traer solo los campos que tengan eliminado a 0
+    $this->db->where('eliminado', 0);
+
     //Retorna todas las tutores de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
     $query = $this->db->get('tutor_centro');
 
@@ -26,6 +29,9 @@ class Tutor_centro_model extends CI_Model
     //Filtro
     $this->db->where('id', $id);
 
+    //Filtro para traer solo los campos que tengan eliminado a 0
+    $this->db->where('eliminado', 0);
+
     //Retorna el tutor de la base de datos que tenga ese id
     $query = $this->db->get('tutor_centro');
 
@@ -37,28 +43,10 @@ class Tutor_centro_model extends CI_Model
     //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
     $this->db->like('nombre', $nombre, 'both');
 
+    //Filtro para traer solo los campos que tengan eliminado a 0
+    $this->db->where('eliminado', 0);
+
     //Retorna el tutor de la base de datos que tenga ese nombre
-    $query = $this->db->get('tutor_centro');
-
-    return $query->result_array();
-  }
-
-  public function get_telefono($telefono)
-  {
-    //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
-    $this->db->like('telefono', $telefono, 'both');
-
-    //Retorna el tutor de la base de datos que tenga ese telefono
-    $query = $this->db->get('tutor_centro');
-
-    return $query->result_array();
-  }
-  public function get_correo($correo)
-  {
-    //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
-    $this->db->like('correo', $correo, 'both');
-
-    //Retorna el tutor de la base de datos que tenga ese correo
     $query = $this->db->get('tutor_centro');
 
     return $query->result_array();
@@ -66,7 +54,13 @@ class Tutor_centro_model extends CI_Model
 
   public function deletear($id)
   {
-    $this->db->delete('tutor_centro', array('id' => $id));
+    // $this->db->delete('tutor_centro', array('id' => $id));
+
+    $this->db->where('id', $id);
+
+    $this->db->set('eliminado', 1);
+
+    return $this->db->update('tutor_centro');
   }
 
   function updatear($id, $data)

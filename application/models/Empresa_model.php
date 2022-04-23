@@ -11,6 +11,9 @@ class Empresa_Model extends CI_Model
 
     public function get_todos($ret_type = false)
     {
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
         //Retorna todas las empresas de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('empresa');
 
@@ -26,6 +29,9 @@ class Empresa_Model extends CI_Model
         //Filtro
         $this->db->where('id', $id);
 
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
         //Retorna la empresa de la base de datos que tenga ese id
         $query = $this->db->get('empresa');
 
@@ -35,7 +41,10 @@ class Empresa_Model extends CI_Model
     public function get_nombre($nombre)
     {
         //Si $nombre coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('nombre', $nombre, 'both'); 
+        $this->db->like('nombre', $nombre, 'both');
+
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
 
         //Retorna la empresa de la base de datos que tenga ese nombre
         $query = $this->db->get('empresa');
@@ -46,7 +55,10 @@ class Empresa_Model extends CI_Model
     public function get_cif($cif)
     {
         //Si $cif coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('cif', $cif, 'both'); 
+        $this->db->like('cif', $cif, 'both');
+
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
 
         //Retorna la empresa de la base de datos que tenga ese cif
         $query = $this->db->get('empresa');
@@ -56,7 +68,13 @@ class Empresa_Model extends CI_Model
 
     public function deletear($id)
     {
-        $this->db->delete('empresa', array('id' => $id));
+        // $this->db->delete('empresa', array('id' => $id));
+
+        $this->db->where('id', $id);
+
+        $this->db->set('eliminado', 1);
+
+        return $this->db->update('empresa');
     }
 
     function updatear($id, $data)
