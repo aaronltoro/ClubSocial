@@ -93,12 +93,13 @@ class Alumno_Model extends CI_Model
 
     function updatear($id, $data)
     {
+
         $this->db->where('id', $id);
 
         $this->db->set('nombre', $data['nombre']);
         $this->db->set('telefono', $data['telefono']);
         $this->db->set('correo', $data['correo']);
-        $this->db->set('ciclo', $data['ciclo']);
+        $this->db->set('id_ciclo', $data['id_ciclo']);
         $this->db->set('curso_escolar', $data['curso_escolar']);
 
         return $this->db->update('alumno');

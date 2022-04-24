@@ -275,6 +275,38 @@ function add_alumno() {
 	});
 }
 
+
+function add_ciclo() {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#insert_alumno").serialize();
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Alumno_controller/add_ciclo",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function add_ciclo_modify(id) {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#modify_alumno").serialize();
+	datas+="&id="+id;
+	
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Alumno_controller/add_ciclo_modify",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
 function add_empleado() {
 	// Traigo todos los datos seleccionados en cada input
 
@@ -366,9 +398,11 @@ function carga_modify_tutor_centro(id) {
 function modify_alumno(id) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_alumno").serialize();
+	
 
 	//Añado el id de la fila al string datas para poder recogerlo luego en el controller
 	datas += "&id=" + id;
+
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({

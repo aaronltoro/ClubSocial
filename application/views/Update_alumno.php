@@ -1,10 +1,13 @@
 <div>
     <?php $alumno = $this->alumno; ?>
+    <?php $ciclos = $this->ciclo; ?>
+
     <div class="row d-flex align-content-center justify-content-end">
         <div class="col-sm-1">
             <button class="btn btn-danger btn_exit" type="button" onclick="ir_alumno_view()"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
+
     <form id="modify_alumno">
         <div class="row item item_mod">
             <div class="col-sm-8 offset-2 mt-3 wrapper">
@@ -24,30 +27,17 @@
                 <input class="form-control" type="email" name="correo" value="<?php echo $alumno[0]['correo'] ?>">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 offset-2 mt-3">
+        <div class="col-sm-4 offset-2 mt-3">
                 <select class="form-control" name="ciclo" id="ciclo">
-                    <?php if ($alumno[0]['ciclo'] == 'DAM') : ?>
-
-                        <option value="DAM" selected>DAM</option>
-                        <option value="DAW">DAW</option>
-                        <option value="ASIR">ASIR</option>
-                    <?php endif; ?>
-
-                    <?php if ($alumno[0]['ciclo'] == 'DAW') : ?>
-                        <option value="DAM">DAM</option>
-                        <option value="DAW" selected>DAW</option>
-                        <option value="ASIR">ASIR</option>
-                    <?php endif; ?>
-
-                    <?php if ($alumno[0]['ciclo'] == 'ASIR') : ?>
-                        <option value="DAM">DAM</option>
-                        <option value="DAW">DAW</option>
-                        <option value="ASIR" selected>ASIR</option>
-                    <?php endif; ?>
-
+                  <?php foreach($ciclos as $c): ?>
+                    <option value="<?php echo $c['id'] ?>"  title="<?php echo $c['nombre_largo'] ?>" <?php echo ($alumno[0]['id_ciclo']==$c["id"])? 'selected' : '' ?>  ><?php echo $c['nombre_corto'] ?></option>
+                 <?php endforeach; ?>
                 </select>
+            <div class="col-sm-3 mt-3">
+                <button id="añadirCiclo" class="btn btn-warning" type="button">Nuevo Ciclo</button>
             </div>
+            <div class="col-sm-12 mt-3" id='res'></div>
+
         </div>
         <div class="row item item_mod">
             <div class="col-sm-8 offset-2 mt-3 wrapper">
@@ -66,6 +56,31 @@
 </div>
 
 <script>
+    
+    //Script para añadir un nuevo ciclo
+    document.getElementById("añadirCiclo").addEventListener('click', pinta_inputs);
+
+function pinta_inputs() {
+
+  
+    res = '<div class="col-sm-4 offset-2 mb-2 p-0">';
+    res +='<input class="form-control" type="text" name="nombreCorto" placeholder="Nombre Corto ">';
+    res +='</div>';
+    res += '<div class="row d-flex" style="gap:10px;" >';
+    res += '<div class="col-sm-4 offset-2 mb-2 p-0">';
+    res +='<input class="form-control" type="text" name="nombreLargo" placeholder="Nombre Largo ">';
+    res +='</div>';
+    res += '<div class="col-sm-1 mb-2 p-0" >';
+    res +='<button class="btn btn-warning btn_add" onclick="add_ciclo_modify(<?php echo $alumno[0]['id'] ?>)" type="button">Confirmar</button>'
+    res +='</div>';
+    res +='</div>';
+
+   
+    
+
+    document.getElementById("res").innerHTML = res;
+}
+
     //Script para los label de los inputs
     $(document).ready(function() {
         $('input').each(function() {
