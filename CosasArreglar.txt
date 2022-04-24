@@ -1,5 +1,3 @@
 empleado - add empresa actual
 
-alumno - botón nuevo ciclo (Nombre corto/largo)
-
 practicas - primero escoger a que curso escolar pertenece

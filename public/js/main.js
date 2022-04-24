@@ -294,8 +294,10 @@ function add_ciclo() {
 function add_ciclo_modify(id) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_alumno").serialize();
-	datas+="&id="+id;
-	
+
+	//Paso el id del alumno que se está modificando para después volver a cargarlo
+	datas += "&id=" + id;
+
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
 		type: "POST",
@@ -309,9 +311,7 @@ function add_ciclo_modify(id) {
 
 function add_empleado() {
 	// Traigo todos los datos seleccionados en cada input
-
 	datas = $("#insert_empleado").serialize();
-
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
@@ -398,11 +398,9 @@ function carga_modify_tutor_centro(id) {
 function modify_alumno(id) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_alumno").serialize();
-	
 
 	//Añado el id de la fila al string datas para poder recogerlo luego en el controller
 	datas += "&id=" + id;
-
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
