@@ -298,7 +298,7 @@ function add_tutor_centro() {
 	datas = $("#insert_tutor_centro").serialize();
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
-	if(document.getElementById("check_activo").checked){
+	if (document.getElementById("check_activo").checked) {
 		datas += '&activo=1';
 	} else {
 		datas += '&activo=0';
@@ -407,7 +407,7 @@ function modify_tutor_centro(id) {
 	datas += "&id=" + id;
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
-	if(document.getElementById("check_activo").checked){
+	if (document.getElementById("check_activo").checked) {
 		datas += '&activo=1';
 	} else {
 		datas += '&activo=0';
@@ -541,7 +541,7 @@ function delete_tutor_centro(id) {
 	}
 }
 
-function eliminar_sede(id, id_empresa) {
+function eliminar_sede(id, id_empresa, id_principal) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_empresa").serializeArray();
 
@@ -577,10 +577,43 @@ function eliminar_sede(id, id_empresa) {
 	//Inserto el id de la empresa que vamos a updatear
 	datas.push({ name: "id", value: id_empresa });
 
+	//Actualizo el id de la sede principal si se ha borrado una sede menor o igual a ella
+	if (id_principal > id) {
+		id_principal--;
+	} else {
+		if (id_principal == id) {
+			id_principal = 1;
+		}
+	}
+
+	//Inserto el id principal que vamos a updatear
+	datas.push({ name: "principal", value: id_principal });
+
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Empresa_controller/modify_sede",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function add_principal(id, id_empresa) {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#modify_empresa").serialize();
+
+	//Inserto el id de la empresa que vamos a updatear
+	datas += "&id=" + id_empresa;
+
+	//Añado la variable que contiene el numero de la sede principal
+	datas += '&principal=' + id;
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Empresa_controller/modify_principal",
 		data: datas,
 		success: function (data) {
 			$("#resultado").html(data);

@@ -135,7 +135,6 @@ class Empresa_controller extends CI_Controller
 		//Introduzco la variable direcciones (un string con todos los valores de cada direccion que ha puesto el usuario)
 		$res['direcciones'] = $direcciones;
 
-
 		//Llamo al modelo y modifico la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empresa_model', 'Empresa_model', true);
 		$this->Empresa_model->updatear($this->input->post('id'),$res);
@@ -160,10 +159,30 @@ class Empresa_controller extends CI_Controller
 		//Introduzco la variable direcciones (un string con todos los valores de cada direccion que ha puesto el usuario)
 		$res['direcciones'] = $direcciones;
 
+		//Recojo la variable principal
+		$principal = $this->input->post('principal');
+
+		//Llamo al modelo y modifico la variable principal antes de borrar la sede
+		$this->load->model('Empresa_model', 'Empresa_model', true);
+		$this->Empresa_model->update_principal($this->input->post('id'),$principal);
 
 		//Llamo al modelo y modifico la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
 		$this->load->model('Empresa_model', 'Empresa_model', true);
 		$this->Empresa_model->updatear($this->input->post('id'),$res);
+		
+		//Función que carga la empresa con el id que tiene la fila que ha pulsado el usuario
+		$this->load->model('Empresa_model', 'Empresa_model', true);
+		$this->emp = $this->Empresa_model->get_id($this->input->post('id'));
+		$this->load->view('Update_empresa');
+	}
+
+	public function modify_principal(){
+		//Recojo los parametros enviados por ajax y los meto en un array
+		$principal = $this->input->post('principal');
+
+		//Llamo al modelo y modifico la empresa seleccionada, después vuelvo a cargar la tabla con todos los campos
+		$this->load->model('Empresa_model', 'Empresa_model', true);
+		$this->Empresa_model->update_principal($this->input->post('id'),$principal);
 		
 		//Función que carga la empresa con el id que tiene la fila que ha pulsado el usuario
 		$this->load->model('Empresa_model', 'Empresa_model', true);

@@ -46,7 +46,12 @@
                 $count = 1;
                 foreach ($array_direcciones as $dir) { ?>
                     <div class="col-sm-12 mb-2 p-0 borrar_sede" id="div_direccion<?php echo $count; ?>">
-                        <button class="btn btn-danger" type="button" onclick="eliminar_sede(<?php echo $count; ?>,<?php echo $emp[0]['id'] ?>)" title="Eliminar"><i class="fa-solid fa-eraser"></i></button>
+                        <button class="btn btn-warning" type="button" onclick="add_principal(<?php echo $count ?>,<?php echo $emp[0]['id'] ?>)" title="Principal"><?php if ($count == $emp[0]['principal']) {
+                                                                                                        echo '<i class="fa-solid fa-star"></i>';
+                                                                                                    } else {
+                                                                                                        echo '<i class="fa-regular fa-star"></i>';
+                                                                                                    } ?></button>
+                        <button class="btn btn-danger" type="button" onclick="eliminar_sede(<?php echo $count; ?>,<?php echo $emp[0]['id'] ?>,<?php echo $emp[0]['principal'] ?>)" title="Eliminar"><i class="fa-solid fa-eraser"></i></button>
                         <input class="form-control" type="text" name="direccion<?php echo $count ?>" placeholder="Dirección <?php echo $count ?>" value="<?php echo $dir ?>">
                     </div>
                 <?php $count++;
@@ -57,7 +62,7 @@
                     function add_inpt_direccion() {
                         count = <?php echo $count; ?>;
                         if (count <= 7) {
-                            document.getElementById("res").innerHTML += '<div class="col-sm-12 mb-2 p-0 borrar_sede" id="div_direccion<?php echo $count; ?>"><button class="btn btn-danger" type="button" onclick="eliminar_sede(<?php echo $count; ?>)" title="Eliminar"><i class="fa-solid fa-eraser"></i></button><input class="form-control" type="text" name="direccion<?php echo $count; ?>" placeholder="Dirección <?php echo $count; ?>"></div>';
+                            document.getElementById("res").innerHTML += '<div class="col-sm-12 mb-2 p-0 borrar_sede" id="div_direccion<?php echo $count; ?>"><button class="btn btn-danger" type="button" onclick="eliminar_sede(<?php echo $count; ?>,<?php echo $emp[0]['id'] ?>,<?php echo $emp[0]['principal'] ?>)" title="Eliminar"><i class="fa-solid fa-eraser"></i></button><input class="form-control" type="text" name="direccion<?php echo $count; ?>" placeholder="Dirección <?php echo $count; ?>"></div>';
                             document.getElementById('btn_modify_empresa').disabled = true;
                         }
                     }
