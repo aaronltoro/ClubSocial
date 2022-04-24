@@ -127,7 +127,7 @@ class Alumno_controller extends CI_Controller
 			'nombre' => $this->input->post('nombre'),
 			'telefono' => $this->input->post('telefono'),
 			'correo' => $this->input->post('correo'),
-			'ciclo' => $this->input->post('ciclo'),
+			'id_ciclo' => $this->input->post('ciclo'),
 			'curso_escolar' => $this->input->post('curso')
 		);
 
@@ -137,13 +137,42 @@ class Alumno_controller extends CI_Controller
 		$this->tabla_ini();
 	}
 
+	public function add_ciclo(){
+		//Recojo los parametros enviados por ajax y los meto en un array
+		$res = array(
+			'nombre_corto' => $this->input->post('nombreCorto'),
+			'nombre_largo' => $this->input->post('nombreLargo')
+		);
+
+
+		//Llamo al modelo y añado la nueva alumno, después vuelvo a cargar la tabla con todos los campos
+		$this->load->model('Ciclo_model', 'Ciclo_model', true);
+		$this->Ciclo_model->insertar($res);
+		$this->load_insert();
+	}
+	public function add_ciclo_modify(){
+		//Recojo los parametros enviados por ajax y los meto en un array
+		$res = array(
+			'nombre_corto' => $this->input->post('nombreCorto'),
+			'nombre_largo' => $this->input->post('nombreLargo')
+		);
+
+		$id = $this->input->post('id');
+
+		//Llamo al modelo y añado la nueva alumno, después vuelvo a cargar la tabla con todos los campos
+		$this->load->model('Ciclo_model', 'Ciclo_model', true);
+		$this->Ciclo_model->insertar($res);
+		$this->load_modify();
+	}
+
 	public function modify_alumno(){
+
 		//Recojo los parametros enviados por ajax y los meto en un array
 		$res = array(
 			'nombre' => $this->input->post('nombre'),
 			'telefono' => $this->input->post('telefono'),
 			'correo' => $this->input->post('correo'),
-			'ciclo' => $this->input->post('ciclo'),
+			'id_ciclo' => $this->input->post('ciclo'),
 			'curso_escolar' => $this->input->post('curso')
 		);
 
@@ -162,9 +191,21 @@ class Alumno_controller extends CI_Controller
 
 	public function tabla_ini()
 	{
+
 		//Función que carga la tabla completa al iniciar la página
 		$this->load->model('Alumno_model', 'Alumno_model', true);
 		$this->alumno = $this->Alumno_model->get_todos();
+		
+		//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+		if (sizeof($this->alumno) > 0) {
+			foreach ($this->alumno as $key => $alumno) {
+				//Función que intercambia el id_ciclo por su nombre
+				$this->load->model('Ciclo_model', 'Ciclo_model', true);
+				$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+				$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+			}
+		}
+
 		$this->load->view('Resultado_alumno');
 	}
 
@@ -176,14 +217,27 @@ class Alumno_controller extends CI_Controller
 	}
 
 	public function load_insert(){
+		$this->load->model('Ciclo_model', 'Ciclo_model', true);
+		$this->ciclo = $this->Ciclo_model->get_todos();
 		$this->load->view('Insert_alumno');
 	}
 
-	public function load_modify(){
+	public function load_modify($id_alumno_ciclo=""){
+		//Llamamos a los ciclos para pintarlos en el select que hay en el formulario de modificar 
+		$this->load->model('Ciclo_model', 'Ciclo_model', true);
+		$this->ciclo = $this->Ciclo_model->get_todos();
 		//Función que carga la alumno con el id que tiene la fila que ha pulsado el usuario
 		$this->load->model('Alumno_model', 'Alumno_model', true);
+
+		//Si la id que se trae esta vacia recogeremos por el post, sino por el valor de la variable id_alumno_ciclo
+		if($id_alumno_ciclo==""){
 		$this->alumno = $this->Alumno_model->get_id($this->input->post('id'));
+		}else{
+			$this->alumno = $this->Alumno_model->get_id($id_alumno_ciclo);	
+		}
 
 		$this->load->view('Update_alumno');
 	}
+
+
 }

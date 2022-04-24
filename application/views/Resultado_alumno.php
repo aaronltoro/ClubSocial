@@ -16,7 +16,7 @@
                 <td><?php echo $alumno['nombre'] ?></td>
                 <td><?php echo $alumno['telefono'] ?></td>
                 <td><?php echo $alumno['correo'] ?></td>
-                <td><?php echo $alumno['ciclo'] ?></td>
+                <td><?php echo $alumno['id_ciclo'] ?></td>
                 <td><?php echo $alumno['curso_escolar'] ?></td>
                 <td class="d-flex justify-content-end tools_res">
                     <button class="btn btn-warning" title="Modificar" onclick="carga_modify_alumno(<?php echo $alumno['id'] ?>)"><i class="fa-solid fa-note-sticky"></i></button>

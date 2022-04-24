@@ -27,10 +27,12 @@ CREATE TABLE `alumno` (
   `nombre` text NOT NULL,
   `telefono` text NOT NULL,
   `correo` text NOT NULL,
-  `ciclo` text NOT NULL,
+  `id_ciclo` int(11) NOT NULL,
   `curso_escolar` text NOT NULL,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_ciclo` (`id_ciclo`),
+  CONSTRAINT `fk_ciclo` FOREIGN KEY (`id_ciclo`) REFERENCES `ciclos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,6 +43,30 @@ CREATE TABLE `alumno` (
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ciclos`
+--
+
+DROP TABLE IF EXISTS `ciclos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ciclos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_corto` text NOT NULL,
+  `nombre_largo` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ciclos`
+--
+
+LOCK TABLES `ciclos` WRITE;
+/*!40000 ALTER TABLE `ciclos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ciclos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -201,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23 19:02:11
+-- Dump completed on 2022-04-24 14:15:47
