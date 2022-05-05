@@ -24,7 +24,7 @@
 			</div>
 			<div class="col-sm-3 mt-3">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="- Filtro -" name="filter">
+					<input type="text" class="form-control" id="srch_tut" placeholder="- Filtro -" name="filter">
 					<div class="input-group-append">
 						<button class="btn btn-outline-primary" type="button" onclick="carga_filtros_tutor_centro()"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</div>
@@ -39,3 +39,12 @@
 
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		//Evento que filtra cada vez que se cambie el input
+		$('#srch_tut').keyup(function() {
+			carga_filtros_tutor_centro();
+		});
+	});
+</script>

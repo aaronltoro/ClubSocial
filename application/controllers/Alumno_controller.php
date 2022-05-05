@@ -32,6 +32,17 @@ class Alumno_controller extends CI_Controller
 				//Llamo al modelo y lo que me devuelve lo seteo en la variable $this->alumno que se enviará a la view resultado
 				$this->load->model('Alumno_model', 'Alumno_model', true);
 				$this->alumno = $this->Alumno_model->get_todos();
+
+				//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+				if (sizeof($this->alumno) > 0) {
+					foreach ($this->alumno as $key => $alumno) {
+						//Función que intercambia el id_ciclo por su nombre
+						$this->load->model('Ciclo_model', 'Ciclo_model', true);
+						$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+						$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+					}
+				}
+
 				$this->load->view('Resultado_alumno');
 				break;
 			case 'n':
@@ -47,6 +58,17 @@ class Alumno_controller extends CI_Controller
 					$is_err = false;
 					$this->load->model('Alumno_model', 'Alumno_model', true);
 					$this->alumno = $this->Alumno_model->get_todos();
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 					break;
 				}
@@ -55,6 +77,17 @@ class Alumno_controller extends CI_Controller
 				if (!$is_err) {
 					$this->load->model('Alumno_model', 'Alumno_model', true);
 					$this->alumno = $this->Alumno_model->get_nombre($res['filtro']);
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 				} else {
 					//Importante! Doy valor a la variable $this->err que se va a pasar a la view en caso de error
@@ -65,8 +98,19 @@ class Alumno_controller extends CI_Controller
 			case 'ci':
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo cif que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 alumno
+					if (sizeof($compare) > 0) {
+						foreach ($compare as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$compare[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					foreach ($compare as $comp) {
-						if (str_contains($comp['ciclo'], $res['filtro'])) {
+						if (str_contains($comp['id_ciclo'], $res['filtro'])) {
 							$is_err = false;
 						}
 					}
@@ -75,6 +119,17 @@ class Alumno_controller extends CI_Controller
 					$is_err = false;
 					$this->load->model('Alumno_model', 'Alumno_model', true);
 					$this->alumno = $this->Alumno_model->get_todos();
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 					break;
 				}
@@ -82,7 +137,23 @@ class Alumno_controller extends CI_Controller
 				//Si la variable de errores es false significa que no hay errores y por lo tanto llamo al modelo y lo que me devuelve lo seteo en la variable $this->alumno que se enviará a la view resultado
 				if (!$is_err) {
 					$this->load->model('Alumno_model', 'Alumno_model', true);
-					$this->alumno = $this->Alumno_model->get_ciclo($res['filtro']);
+					$ciclo = $this->Alumno_model->get_ciclo($res['filtro']);
+
+					//Devuelve todos los alumnos que tengan los id del array anterior de $ciclo
+					foreach($ciclo as $cl){
+						$this->alumno = $this->Alumno_model->get_ciclo_alu($cl['id']);
+					}
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 				} else {
 					//Importante! Doy valor a la variable $this->err que se va a pasar a la view en caso de error
@@ -103,6 +174,17 @@ class Alumno_controller extends CI_Controller
 					$is_err = false;
 					$this->load->model('Alumno_model', 'Alumno_model', true);
 					$this->alumno = $this->Alumno_model->get_todos();
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 					break;
 				}
@@ -111,6 +193,17 @@ class Alumno_controller extends CI_Controller
 				if (!$is_err) {
 					$this->load->model('Alumno_model', 'Alumno_model', true);
 					$this->alumno = $this->Alumno_model->get_curso($res['filtro']);
+
+					//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+					if (sizeof($this->alumno) > 0) {
+						foreach ($this->alumno as $key => $alumno) {
+							//Función que intercambia el id_ciclo por su nombre
+							$this->load->model('Ciclo_model', 'Ciclo_model', true);
+							$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+							$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+						}
+					}
+
 					$this->load->view('Resultado_alumno');
 				} else {
 					//Importante! Doy valor a la variable $this->err que se va a pasar a la view en caso de error

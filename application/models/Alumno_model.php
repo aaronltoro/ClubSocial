@@ -55,7 +55,18 @@ class Alumno_Model extends CI_Model
     public function get_ciclo($ciclo)
     {
         //Si $ciclo coincide con un registro de la base de datos, los trae (%$nombre%)
-        $this->db->like('ciclo', $ciclo, 'both');
+        $this->db->like('nombre_corto', $ciclo, 'both');
+
+        //Retorna la alumno de la base de datos que tenga ese cif
+        $query = $this->db->get('ciclos');
+
+        return $query->result_array();
+    }
+
+    public function get_ciclo_alu($ciclo)
+    {
+        //Si $ciclo coincide con un registro de la base de datos, los trae (%$nombre%)
+        $this->db->where('id_ciclo', $ciclo);
 
         //Filtro para traer solo los campos que tengan eliminado a 0
         $this->db->where('eliminado', 0);
