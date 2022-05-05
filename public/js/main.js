@@ -503,7 +503,7 @@ function modify_empresa(id) {
 
 function delete_empresa(id) {
 	$borra = confirm(
-		"¿Estás seguro de que deseas borrar el campo seleccionado? [" + id + "]"
+		"¿Estás seguro? El nombre de la empresa seguirá apareciendo en los empleados que estén enlazados a ella hasta que se modifique manualmente  - " + id + " -"
 	);
 	//Si el usuario pulsa en aceptar...
 	if ($borra) {
@@ -521,7 +521,7 @@ function delete_empresa(id) {
 
 function delete_alumno(id) {
 	$borra = confirm(
-		"¿Estás seguro de que deseas borrar el campo seleccionado? [" + id + "]"
+		"¿Estás seguro de que deseas borrar el campo seleccionado?  - " + id + " -"
 	);
 	//Si el usuario pulsa en aceptar...
 	if ($borra) {
@@ -539,7 +539,7 @@ function delete_alumno(id) {
 
 function delete_empleado(id) {
 	$borra = confirm(
-		"¿Estás seguro de que deseas borrar el campo seleccionado? [" + id + "]"
+		"¿Estás seguro de que deseas borrar el campo seleccionado?  - " + id + " -"
 	);
 	//Si el usuario pulsa en aceptar...
 	if ($borra) {
@@ -557,7 +557,7 @@ function delete_empleado(id) {
 
 function delete_tutor_centro(id) {
 	$borra = confirm(
-		"¿Estás seguro de que deseas borrar el campo seleccionado? [" + id + "]"
+		"¿Estás seguro de que deseas borrar el campo seleccionado?  - " + id + " -"
 	);
 	//Si el usuario pulsa en aceptar...
 	if ($borra) {

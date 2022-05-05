@@ -1,3 +1,5 @@
-empleado - add empresa actual
+nueva tabla 'practicas' - primero escoger a que curso escolar pertenece
 
-practicas - primero escoger a que curso escolar pertenece
+dar utilidad al botón de exportar a excel
+
+(Solo si somos masoquistas) -> Hacer que los filtros se busquen cuando el input esté onChange

@@ -30,7 +30,7 @@ class Empresa_Model extends CI_Model
         $this->db->where('id', $id);
 
         //Filtro para traer solo los campos que tengan eliminado a 0
-        $this->db->where('eliminado', 0);
+        // $this->db->where('eliminado', 0);
 
         //Retorna la empresa de la base de datos que tenga ese id
         $query = $this->db->get('empresa');

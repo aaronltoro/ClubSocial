@@ -5,7 +5,7 @@
         <th>CIF</th>
         <th>Sedes</th>
         <th>Sede Principal</th>
-        <th></th>
+        <th><div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div></th>
     </thead>
     <tbody>
         <?php

@@ -43,6 +43,10 @@
     padding: 2px 10px;
 }
 
+.btn_export{
+    padding: 2px 8px;
+}
+
 /* CSS botones Inicio */
 .main_cont button {
     width: 250px;
