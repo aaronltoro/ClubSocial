@@ -1,3 +1,11 @@
 nueva tabla 'practicas' - primero escoger a que curso escolar pertenece
 
-dar utilidad al botón de exportar a excel
+dar utilidad al botón de exportar a excel - Alumnos
+
+CREAR BOTÓN IMPORTAR EXCEL PARA ALUMNOS
+
+----------- Secundario ------------
+
+Tutores Centro -> Filtrar por activos
+
+Empleados -> Al crear un empleado que tambien se pueda añadir una nueva empresa desde el insert
