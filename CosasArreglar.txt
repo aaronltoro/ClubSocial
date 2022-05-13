@@ -4,6 +4,8 @@ dar utilidad al botón de exportar a excel - Alumnos
 
 CREAR BOTÓN IMPORTAR EXCEL PARA ALUMNOS
 
+ocultar id's de todas las tablas
+
 ----------- Secundario ------------
 
 Tutores Centro -> Filtrar por activos

@@ -63,6 +63,23 @@ function ir_alumno_view() {
 	carga_alumnos();
 }
 
+function ir_practicas_view() {
+	//Envío una función ajax para ir al archivo Empresa_view.php
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Principal_controller/ir_practicas_view",
+		data: null,
+		success: function (data) {
+			$("#res_principal").html(data);
+		},
+	});
+
+	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
+	carga_practicas();
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 function carga_empresa() {
 	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
 	$.ajax({
@@ -109,6 +126,20 @@ function carga_tutor_centro() {
 		},
 	});
 }
+
+function carga_practicas() {
+	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/tabla_ini",
+		data: null,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function carga_filtros_empresa() {
 	// Traigo todos los filtros seleccionados en cada input
@@ -170,6 +201,23 @@ function carga_filtros_tutor_centro() {
 	});
 }
 
+function carga_filtros_practicas() {
+	// Traigo todos los filtros seleccionados en cada input
+	filters = $("#filtros_practicas").serialize();
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/search_filters",
+		data: filters,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 function carga_insert_empresa() {
 	//Envío una función ajax al controlador para pintar el formulario de insert
 	$.ajax({
@@ -217,6 +265,20 @@ function carga_insert_tutor_centro() {
 		},
 	});
 }
+
+function carga_insert_practicas() {
+	//Envío una función ajax al controlador para pintar el formulario de insert
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/load_insert",
+		data: null,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function add_empresa() {
 	// Traigo todos los datos seleccionados en cada input
@@ -347,6 +409,30 @@ function add_tutor_centro() {
 	});
 }
 
+function add_practica() {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#insert_practica").serialize();
+
+	//Si el checkbox está marcado activo vale 1 y si no vale 0
+	if (document.getElementById("check_activo").checked) {
+		datas += '&activo=1';
+	} else {
+		datas += '&activo=0';
+	}
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/add_practicas",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 function carga_modify_empresa(id) {
 	//Envío una función ajax al controlador para pintar el formulario de modify además del id de la fila
 	$.ajax({
@@ -394,6 +480,20 @@ function carga_modify_tutor_centro(id) {
 		},
 	});
 }
+
+function carga_modify_practicas(id) {
+	//Envío una función ajax al controlador para pintar el formulario de modify además del id de la fila
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/load_modify",
+		data: { id: id },
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function modify_alumno(id) {
 	// Traigo todos los datos seleccionados en cada input
@@ -456,6 +556,31 @@ function modify_tutor_centro(id) {
 	});
 }
 
+function modify_practica(id) {
+	// Traigo todos los datos seleccionados en cada input
+	datas = $("#modify_practica").serialize();
+
+	//Añado el id de la fila al string datas para poder recogerlo luego en el controller
+	datas += "&id=" + id;
+
+	//Si el checkbox está marcado activo vale 1 y si no vale 0
+	if (document.getElementById("check_activo").checked) {
+		datas += '&activo=1';
+	} else {
+		datas += '&activo=0';
+	}
+
+	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/modify_practicas",
+		data: datas,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
 function modify_empresa(id) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_empresa").serialize();
@@ -500,6 +625,8 @@ function modify_empresa(id) {
 		},
 	});
 }
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function delete_empresa(id) {
 	$borra = confirm(
@@ -573,6 +700,24 @@ function delete_tutor_centro(id) {
 	}
 }
 
+function delete_practica(id) {
+	$borra = confirm(
+		"¿Estás seguro de que deseas borrar el campo seleccionado?  - " + id + " -"
+	);
+	//Si el usuario pulsa en aceptar...
+	if ($borra) {
+		//Envío una función ajax al controlador con el id de la fila seleccionada
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "Practicas_controller/delete_practicas",
+			data: { id: id },
+			success: function (data) {
+				$("#resultado").html(data);
+			},
+		});
+	}
+}
+
 function eliminar_sede(id, id_empresa, id_principal) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_empresa").serializeArray();
@@ -632,6 +777,7 @@ function eliminar_sede(id, id_empresa, id_principal) {
 	});
 }
 
+//Función que añade una sede principal
 function add_principal(id, id_empresa) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_empresa").serialize();

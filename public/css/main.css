@@ -33,7 +33,7 @@
     gap: 10px;
 }
 
-.check_tutor{
+.check_tutor, .check_practica{
     width: 20px;
     height: 20px;
     cursor: pointer;

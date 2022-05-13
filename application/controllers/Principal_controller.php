@@ -28,4 +28,9 @@ class Principal_controller extends CI_Controller
     {
         $this->load->view('Tutor_centro_view.php');
     }
+
+    public function ir_practicas_view()
+    {
+        $this->load->view('Practicas_view.php');
+    }
 }
