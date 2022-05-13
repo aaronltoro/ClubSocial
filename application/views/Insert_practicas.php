@@ -52,18 +52,26 @@
             <div class="col-sm-7 mt-3">
                 <select class="form-control" name="sede" id="sede">
                     <?php
-                    //Separo el string direcciones en cada & y lo añado a un array de strings
-                    $res_direcciones = explode('&', $emp['direcciones']);
+                    foreach ($empresa as $key => $emp) {
+                        //Separo el string direcciones en cada & y lo añado a un array de strings
+                        $res_direcciones[$key] = explode('&', $emp['direcciones']);
+                    }
 
                     //Vuelvo a separar cada valor del array por cada = y así obtener su valor original y meto cada uno en el array $array_direcciones (quito los vacíos)
                     $count = 1;
                     $array_direcciones = array();
-                    foreach ($res_direcciones as $rd) {
+                    foreach ($res_direcciones as $key => $rd) {
                         if ($rd != '') {
-                            $index = strval($count);
-                            $valor = explode('=', $rd);
-                            $array_direcciones['d' . $index] = $valor[1];
-                            $count++;
+                            foreach ($rd as $key => $sede) {
+                                if ($key != 0) {
+                                    $index = strval($count);
+                                    $valor = explode('=', $sede);
+                                    $count++;
+                                }
+                                foreach ($valor as $val) {
+                                    $array_direcciones['d' . $index] = $valor[1];
+                                }
+                            }
                         }
                     }
 
