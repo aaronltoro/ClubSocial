@@ -1,4 +1,4 @@
-nueva tabla 'practicas' - primero escoger a que curso escolar pertenece
+Practicas ->  Hacer los filtros | El select de sedes no actualiza las sedes según la empresa seleccionada al hacer insert/update | primero escoger a que curso escolar pertenece
 
 dar utilidad al botón de exportar a excel - Alumnos
 
