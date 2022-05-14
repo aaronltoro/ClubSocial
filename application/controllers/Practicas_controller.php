@@ -223,6 +223,23 @@ class Practicas_controller extends CI_Controller
 
     public function load_insert()
     {
+        //Si idEmpresa existe es que lo hemos llamado desde el ajaz para updatear las sedes
+        if ($this->input->post('idEmpresa') != null) {
+            //Si idEmpresa no vale 'Sin Sedes' es que hay sedes
+            if ($this->input->post('idEmpresa') != 'Sin Sedes') {
+                $this->load->model('Empresa_model', 'Empresa_model', true);
+                $this->sedesEmp = $this->Empresa_model->get_id($this->input->post('idEmpresa'));
+            }
+        } else {
+            //Función que devuelve todos los datos de la tabla Empresa y luego solo se queda con la primera empresa no eliminada
+            $this->load->model('Empresa_model', 'Empresa_model', true);
+            $this->sedesEmp = $this->Empresa_model->get_todos();
+            $this->sedesEmp = $this->sedesEmp[0];
+            //Aquí hacemos que devuelva un array de array para que coincida con lo que se devuelve si idEmpresa existe
+            $aux = array($this->sedesEmp);
+            $this->sedesEmp = $aux;
+        }
+
         //Función que devuelve todos los datos de la tabla Empresa
         $this->load->model('Empresa_model', 'Empresa_model', true);
         $this->empresa = $this->Empresa_model->get_todos();

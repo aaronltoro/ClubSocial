@@ -4,6 +4,8 @@
     <?php $empresa = $this->empresa; ?>
     <?php $empleado = $this->empleado; ?>
     <?php $tutor = $this->tutor; ?>
+    <?php $sedesEmp = $this->sedesEmp; ?>
+
     <div class="row d-flex align-content-center justify-content-end">
         <div class="col-sm-1">
             <button class="btn btn-danger btn_exit" type="button" onclick="ir_practicas_view()"><i class="fa-solid fa-xmark"></i></button>
@@ -38,7 +40,7 @@
                         <option value="N/A">NO HAY EMPRESAS! PULSA PARA AÑADIR!</option>
                     <?php } else { ?>
                         <?php foreach ($empresa as $emp) { ?>
-                            <option value="<?php echo $emp['id'] ?>"><?php echo $emp['nombre'] ?></option>
+                            <option value="<?php echo $emp['id'] ?>" <?php echo ($emp['id'] == $sedesEmp[0]['id']) ? 'selected' : '' ?>><?php echo $emp['nombre'] ?></option>
                     <?php }
                     } ?>
                 </select>
@@ -52,25 +54,20 @@
             <div class="col-sm-7 mt-3">
                 <select class="form-control" name="sede" id="sede">
                     <?php
-                    foreach ($empresa as $key => $emp) {
-                        //Separo el string direcciones en cada & y lo añado a un array de strings
-                        $res_direcciones[$key] = explode('&', $emp['direcciones']);
-                    }
+                    //Separo el string direcciones en cada & y lo añado a un array de strings
+                    $res_direcciones = explode('&', $sedesEmp[0]['direcciones']);
 
                     //Vuelvo a separar cada valor del array por cada = y así obtener su valor original y meto cada uno en el array $array_direcciones (quito los vacíos)
                     $count = 1;
                     $array_direcciones = array();
                     foreach ($res_direcciones as $key => $rd) {
                         if ($rd != '') {
-                            foreach ($rd as $key => $sede) {
-                                if ($key != 0) {
-                                    $index = strval($count);
-                                    $valor = explode('=', $sede);
-                                    $count++;
-                                }
-                                foreach ($valor as $val) {
-                                    $array_direcciones['d' . $index] = $valor[1];
-                                }
+                            $index = strval($count);
+                            $valor = explode('=', $rd);
+                            $count++;
+
+                            foreach ($valor as $val) {
+                                $array_direcciones['d' . $index] = $valor[1];
                             }
                         }
                     }
@@ -167,4 +164,19 @@
     $('#tut_vacio').click(function() {
         ir_tutor_centro_view();
     });
+
+    //Cada vez que el usuario cambie el select de empresa se actualiza la página con las sedes de la empresa seleccionada
+    $('#idEmpresa').change(function() {
+        datas = $('#insert_practica').serialize();
+
+        //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "Practicas_controller/load_insert",
+            data: datas,
+            success: function(data) {
+                $("#resultado").html(data);
+            },
+        });
+    })
 </script>
