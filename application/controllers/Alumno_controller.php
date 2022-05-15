@@ -98,7 +98,6 @@ class Alumno_controller extends CI_Controller
 			case 'ci':
 				//Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo cif que pasó el usuario significa que existe
 				if ($res['filtro'] != '') {
-
 					//Solo intercambia los id por nombre cuando exista al menos 1 alumno
 					if (sizeof($compare) > 0) {
 						foreach ($compare as $key => $alumno) {

@@ -20,7 +20,7 @@
 				<select class="form-control" name="filter_by">
 					<option value="-1">- Filtrar por -</option>
 					<option value="n">Nombre</option>
-					<option value="ci">Ciclo</option>
+					<option value="ci">Ciclo (Corto)</option>
 					<option value="cu">Curso</option>
 				</select>
 			</div>
