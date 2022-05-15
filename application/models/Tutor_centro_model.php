@@ -27,13 +27,25 @@ class Tutor_centro_model extends CI_Model
     }
   }
 
+  public function get_todos_dev($ret_type = false)
+  {
+    //Ordeno por nombre ascendente
+    $this->db->order_by('nombre', 'ASC');
+
+    //Retorna todas las tutores de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
+    $query = $this->db->get('tutor_centro');
+
+    if ($ret_type) {
+      return $query->result();
+    } else {
+      return $query->result_array();
+    }
+  }
+
   public function get_id($id)
   {
     //Filtro
     $this->db->where('id', $id);
-
-    //Filtro para traer solo los campos que tengan eliminado a 0
-    $this->db->where('eliminado', 0);
 
     //Retorna el tutor de la base de datos que tenga ese id
     $query = $this->db->get('tutor_centro');

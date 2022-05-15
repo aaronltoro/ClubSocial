@@ -1,6 +1,5 @@
 <table class="table table-striped">
     <thead class="thead-dark">
-        <th>Id</th>
         <th>Nombre</th>
         <th>DNI</th>
         <th>Teléfono</th>

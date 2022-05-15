@@ -24,13 +24,62 @@ class Practicas_Model extends CI_Model
         }
     }
 
+    public function get_alumno($nombre)
+    {
+        $this->db->select('practicas.id,id_alumno,id_empresa,sede,id_empleado,id_tutor_centro,seneca,fecha_incorporacion,practicas.eliminado')
+            ->from('practicas')
+            ->join('alumno', 'practicas.id_alumno = alumno.id')
+            ->like('alumno.nombre', $nombre, 'both')
+            ->where('practicas.eliminado', 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_empleado($nombre)
+    {
+        $this->db->select('practicas.id,id_alumno,practicas.id_empresa,sede,id_empleado,id_tutor_centro,seneca,fecha_incorporacion,practicas.eliminado')
+            ->from('practicas')
+            ->join('empleado', 'practicas.id_empleado = empleado.id')
+            ->like('empleado.nombre', $nombre, 'both')
+            ->where('practicas.eliminado', 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_empresa($nombre)
+    {
+        $this->db->select('practicas.id,id_alumno,id_empresa,sede,id_empleado,id_tutor_centro,seneca,fecha_incorporacion,practicas.eliminado')
+            ->from('practicas')
+            ->join('empresa', 'practicas.id_empresa = empresa.id')
+            ->like('empresa.nombre', $nombre, 'both')
+            ->where('practicas.eliminado', 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_tutor($nombre)
+    {
+        $this->db->select('practicas.id,id_alumno,id_empresa,sede,id_empleado,id_tutor_centro,seneca,fecha_incorporacion,practicas.eliminado')
+            ->from('practicas')
+            ->join('tutor_centro', 'practicas.id_tutor_centro = tutor_centro.id')
+            ->like('tutor_centro.nombre', $nombre, 'both')
+            ->where('practicas.eliminado', 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function get_id($id)
     {
         //Filtro
         $this->db->where('id', $id);
-
-        //Filtro para traer solo los campos que tengan eliminado a 0
-        $this->db->where('eliminado', 0);
 
         //Retorna la practica de la base de datos que tenga ese id
         $query = $this->db->get('practicas');

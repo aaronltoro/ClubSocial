@@ -1,13 +1,21 @@
-Practicas -> Hacer los filtros | primero escoger a que curso escolar pertenece
+Practicas -> primero escoger a que curso escolar pertenece
 
-dar utilidad al botón de exportar a excel - Alumnos
+Alumnos -> EXPORTAR/IMPORTAR EXCEL
 
-CREAR BOTÓN IMPORTAR EXCEL PARA ALUMNOS
+Empleados -> EXPORTAR EXCEL
 
-ocultar id's de todas las tablas
+Empresa -> EXPORTAR EXCEL
+
+Practicas -> EXPORTAR EXCEL
+
+Tutor Centro -> EXPORTAR EXCEL
 
 ----------- Secundario ------------
 
 Tutores Centro -> Filtrar por activos
+
+Practicas -> Filtrar por séneca
+
+Empleados -> Filtrar por empresa y por tipo
 
 Empleados -> Al crear un empleado que tambien se pueda añadir una nueva empresa desde el insert

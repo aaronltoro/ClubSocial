@@ -21,7 +21,7 @@
 					<option value="a">Alumno</option>
 					<option value="e">Empresa</option>
                     <option value="empl">Empleado</option>
-					<option value="t">Tutor</option>
+					<option value="t">Tutor Centro</option>
 				</select>
 			</div>
 			<div class="col-sm-3 mt-3">

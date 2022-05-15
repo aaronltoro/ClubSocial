@@ -1,6 +1,5 @@
 <table class="table table-striped">
     <thead class="thead-dark">
-        <th>Id</th>
         <th>Alumno</th>
         <th>Empresa</th>
         <th>Sede</th>

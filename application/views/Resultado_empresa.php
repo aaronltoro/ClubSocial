@@ -1,17 +1,17 @@
 <table class="table table-striped">
     <thead class="thead-dark">
-        <th>Id</th>
         <th>Nombre</th>
         <th>CIF</th>
         <th>Sedes</th>
         <th>Sede Principal</th>
-        <th><div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div></th>
+        <th>
+            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
+        </th>
     </thead>
     <tbody>
         <?php
         foreach ($this->emp as $emp) { ?>
             <tr>
-                <td><?php echo $emp['id'] ?></td>
                 <td><?php echo $emp['nombre'] ?></td>
                 <td><?php echo $emp['cif'] ?></td>
                 <td><?php

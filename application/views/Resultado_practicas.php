@@ -1,6 +1,5 @@
 <table class="table table-striped">
     <thead class="thead-dark">
-        <th>Id</th>
         <th>Alumno</th>
         <th>Empresa</th>
         <th>Sede</th>
@@ -8,19 +7,20 @@
         <th>Tutor Centro</th>
         <th>Séneca</th>
         <th>Fecha Incorporación</th>
-        <th><div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div></th>
+        <th>
+            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
+        </th>
     </thead>
     <tbody>
         <?php
         foreach ($this->prac as $prac) { ?>
             <tr>
-                <td><?php echo $prac['id'] ?></td>
                 <td><?php echo $prac['id_alumno'] ?></td>
                 <td><?php echo $prac['id_empresa'] ?></td>
                 <td><?php echo $prac['sede'] ?></td>
                 <td><?php echo $prac['id_empleado'] ?></td>
                 <td><?php echo $prac['id_tutor_centro'] ?></td>
-                <td><?php echo ($prac['seneca']==1) ? 'Sí' : 'No' ?></td>
+                <td><?php echo ($prac['seneca'] == 1) ? 'Sí' : 'No' ?></td>
                 <td><?php echo $prac['fecha_incorporacion'] ?></td>
 
                 <td class="d-flex justify-content-end tools_res">
