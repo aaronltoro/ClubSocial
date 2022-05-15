@@ -1,10 +1,11 @@
 <div>
-    <!-- Nos traemos los datos de alumno, empresa, empleado, tutor_centro-->
+    <!-- Nos traemos los datos de alumno, empresa, empleado, tutor_centro, las sedes de la empresa marcada por el select y todos los valores actuales de cada input-->
     <?php $alumno = $this->alumno; ?>
     <?php $empresa = $this->empresa; ?>
     <?php $empleado = $this->empleado; ?>
     <?php $tutor = $this->tutor; ?>
     <?php $sedesEmp = $this->sedesEmp; ?>
+    <?php $valoresActuales = $this->valoresActuales; ?>
 
     <div class="row d-flex align-content-center justify-content-end">
         <div class="col-sm-1">
@@ -23,7 +24,7 @@
                         <option value="N/A">NO HAY ALUMNOS! PULSA PARA AÑADIR!</option>
                     <?php } else { ?>
                         <?php foreach ($alumno as $al) { ?>
-                            <option value="<?php echo $al['id'] ?>"><?php echo $al['nombre'] ?></option>
+                            <option value="<?php echo $al['id'] ?>" <?php echo ($valoresActuales['idAlumno'] == $al['id']) ? 'selected' : '' ?>><?php echo $al['nombre'] ?></option>
                     <?php }
                     } ?>
                 </select>
@@ -99,7 +100,7 @@
                         <option value="N/A">NO HAY EMPLEADOS! PULSA PARA AÑADIR!</option>
                     <?php } else { ?>
                         <?php foreach ($empleado as $empl) { ?>
-                            <option value="<?php echo $empl['id'] ?>"><?php echo $empl['nombre'] ?></option>
+                            <option value="<?php echo $empl['id'] ?>" <?php echo ($valoresActuales['idEmpleado'] == $empl['id']) ? 'selected' : '' ?>><?php echo $empl['nombre'] ?></option>
                     <?php }
                     } ?>
                 </select>
@@ -116,7 +117,7 @@
                         <option value="N/A">NO HAY TUTORES! PULSA PARA AÑADIR!</option>
                     <?php } else { ?>
                         <?php foreach ($tutor as $tut) { ?>
-                            <option value="<?php echo $tut['id'] ?>"><?php echo $tut['nombre'] ?></option>
+                            <option value="<?php echo $tut['id'] ?>" <?php echo ($valoresActuales['idTutor'] == $tut['id']) ? 'selected' : '' ?>><?php echo $tut['nombre'] ?></option>
                     <?php }
                     } ?>
                 </select>
@@ -125,7 +126,7 @@
 
         <div class="row d-flex align-items-center">
             <div class="col-sm-2 d-flex align-items-center offset-3 mt-3 check_label">
-                <input class="check_practica" id="check_activo" type="checkbox">
+                <input class="check_practica" id="check_activo" type="checkbox" <?php echo ($valoresActuales['activo'] == 1) ? 'checked' : '' ?>>
                 <label for="activo" style="margin:0">¿Alta en Séneca?</label>
             </div>
         </div>
@@ -135,7 +136,7 @@
                 <label for="fecha_incorporacion" style="font-size: 14px">Fecha Incorporación:</label>
             </div>
             <div class="col-sm-2 mt-3">
-                <input type="date" class="form-control" name="fecha_incorporacion" />
+                <input type="date" class="form-control" name="fecha_incorporacion" value='<?php echo ($valoresActuales['fecha_incorporacion'] != null) ? $valoresActuales['fecha_incorporacion'] : '' ?>' />
             </div>
         </div>
 
@@ -168,6 +169,13 @@
     //Cada vez que el usuario cambie el select de empresa se actualiza la página con las sedes de la empresa seleccionada
     $('#idEmpresa').change(function() {
         datas = $('#insert_practica').serialize();
+
+        //Si el checkbox está marcado activo vale 1 y si no vale 0
+        if (document.getElementById("check_activo").checked) {
+            datas += '&activo=1';
+        } else {
+            datas += '&activo=0';
+        }
 
         //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
         $.ajax({

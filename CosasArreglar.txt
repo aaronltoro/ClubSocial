@@ -1,4 +1,4 @@
-Practicas -> Cuando se actualize el select de empresa deben guardarse los valores actuales de los demás campos antes de hacer el refresh (Esos datos están en el serialize que se envía al controlador despues del change del select empresa) | Hacer los filtros | hacer update de sedes | primero escoger a que curso escolar pertenece
+Practicas -> Hacer los filtros | primero escoger a que curso escolar pertenece | ordenar los select de Alumno, Empresa, Empleado y Tutor por orden alfabetico al hacer insert/update
 
 dar utilidad al botón de exportar a excel - Alumnos
 

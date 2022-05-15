@@ -223,6 +223,37 @@ class Practicas_controller extends CI_Controller
 
     public function load_insert()
     {
+        //Recojo los valores actuales del insert para que el usuario no los pierda al cambiar el select de empresa
+        if ($this->input->post('idAlumno') != null) {
+            $this->valoresActuales['idAlumno'] = $this->input->post('idAlumno');
+        } else {
+            $this->valoresActuales['idAlumno'] = null;
+        }
+
+        if ($this->input->post('idEmpleado') != null) {
+            $this->valoresActuales['idEmpleado'] = $this->input->post('idEmpleado');
+        } else {
+            $this->valoresActuales['idEmpleado'] = null;
+        }
+
+        if ($this->input->post('idTutor') != null) {
+            $this->valoresActuales['idTutor'] = $this->input->post('idTutor');
+        } else {
+            $this->valoresActuales['idTutor'] = null;
+        }
+
+        if ($this->input->post('activo') != null) {
+            $this->valoresActuales['activo'] = $this->input->post('activo');
+        } else {
+            $this->valoresActuales['activo'] = null;
+        }
+
+        if ($this->input->post('fecha_incorporacion') != null) {
+            $this->valoresActuales['fecha_incorporacion'] = $this->input->post('fecha_incorporacion');
+        } else {
+            $this->valoresActuales['fecha_incorporacion'] = null;
+        }
+
         //Si idEmpresa existe es que lo hemos llamado desde el ajaz para updatear las sedes
         if ($this->input->post('idEmpresa') != null) {
             //Si idEmpresa no vale 'Sin Sedes' es que hay sedes
@@ -258,6 +289,67 @@ class Practicas_controller extends CI_Controller
 
     public function load_modify()
     {
+        //Recojo el valor actual de empresa en el update para que se actualice al cambiar el select de empresa
+        if ($this->input->post('idEmpresa') != null) {
+            $this->valoresActuales['idEmpresa'] = $this->input->post('idEmpresa');
+        } else {
+            $this->valoresActuales['idEmpresa'] = null;
+        }
+
+        //Recojo los valores actuales del insert para que el usuario no los pierda al cambiar el select de empresa
+        if ($this->input->post('idAlumno') != null) {
+            $this->valoresActuales['idAlumno'] = $this->input->post('idAlumno');
+        } else {
+            $this->valoresActuales['idAlumno'] = null;
+        }
+
+        if ($this->input->post('idEmpleado') != null) {
+            $this->valoresActuales['idEmpleado'] = $this->input->post('idEmpleado');
+        } else {
+            $this->valoresActuales['idEmpleado'] = null;
+        }
+
+        if ($this->input->post('idTutor') != null) {
+            $this->valoresActuales['idTutor'] = $this->input->post('idTutor');
+        } else {
+            $this->valoresActuales['idTutor'] = null;
+        }
+
+        if ($this->input->post('activo') != null) {
+            $this->valoresActuales['activo'] = $this->input->post('activo');
+        } else {
+            $this->valoresActuales['activo'] = null;
+        }
+
+        if ($this->input->post('fecha_incorporacion') != null) {
+            $this->valoresActuales['fecha_incorporacion'] = $this->input->post('fecha_incorporacion');
+        } else {
+            $this->valoresActuales['fecha_incorporacion'] = null;
+        }
+
+        //Función que carga la practica con el id que tiene la fila que ha pulsado el usuario
+        $this->load->model('Practicas_model', 'Practicas_model', true);
+
+        //Traigo la practica que se está modificando dependiendo de si es al modificar el select de empresa o si es la primera vez que le pulso
+        if ($this->input->post('idPracticaModificada') != null) {
+            $this->prac = $this->Practicas_model->get_id($this->input->post('idPracticaModificada'));
+        } else {
+            $this->prac = $this->Practicas_model->get_id($this->input->post('id'));
+        }
+
+        //Si idEmpresa existe es que lo hemos llamado desde el ajaz para updatear las sedes
+        if ($this->input->post('idEmpresa') != null) {
+            //Si idEmpresa no vale 'Sin Sedes' es que hay sedes
+            if ($this->input->post('idEmpresa') != 'Sin Sedes') {
+                $this->load->model('Empresa_model', 'Empresa_model', true);
+                $this->sedesEmp = $this->Empresa_model->get_id($this->input->post('idEmpresa'));
+            }
+        } else {
+            //Función que devuelve todos los datos de la tabla Empresa y luego solo se queda con la primera empresa no eliminada
+            $this->load->model('Empresa_model', 'Empresa_model', true);
+            $this->sedesEmp = $this->Empresa_model->get_id($this->prac[0]['id_empresa']);
+        }
+
         //Función que devuelve todos los datos de la tabla Empresa
         $this->load->model('Empresa_model', 'Empresa_model', true);
         $this->empresa = $this->Empresa_model->get_todos();
@@ -270,10 +362,6 @@ class Practicas_controller extends CI_Controller
         //Función que devuelve todos los datos de la tabla Tutor_centro
         $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
         $this->tutor = $this->Tutor_centro_model->get_todos();
-
-        //Función que carga la practica con el id que tiene la fila que ha pulsado el usuario
-        $this->load->model('Practicas_model', 'Practicas_model', true);
-        $this->prac = $this->Practicas_model->get_id($this->input->post('id'));
 
         $this->load->view('Update_practicas');
     }
