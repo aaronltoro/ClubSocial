@@ -29,7 +29,7 @@
             <div class="col-sm-4 offset-2 mt-3">
                 <select class="form-control" name="ciclo" id="ciclo">
                     <?php foreach ($ciclos as $c) : ?>
-                        <option value="<?php echo $c['id'] ?>" title="<?php echo $c['nombre_largo'] ?>"><?php echo $c['nombre_corto'] ?></option>
+                        <option value="<?php echo $c['id'] ?>" title="<?php echo $c['nombre_corto'] ?>"><?php echo $c['nombre_largo'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

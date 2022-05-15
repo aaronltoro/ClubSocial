@@ -14,6 +14,9 @@ class Alumno_Model extends CI_Model
         //Filtro para traer solo los campos que tengan eliminado a 0
         $this->db->where('eliminado', 0);
 
+        //Ordeno por nombre ascendente
+        $this->db->order_by('nombre', 'ASC');
+
         //Retorna todas las alumnos de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('alumno');
 

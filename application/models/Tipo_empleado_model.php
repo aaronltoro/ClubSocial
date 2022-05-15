@@ -5,6 +5,9 @@ class Tipo_empleado_Model extends CI_Model
 
     public function get_todos($ret_type = false)
     {
+        //Ordeno por nombre ascendente
+        $this->db->order_by('nombre', 'ASC');
+        
         //Retorna todas las tipo_empleados de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('tipo_empleado');
 

@@ -362,7 +362,7 @@ class Practicas_controller extends CI_Controller
         //Función que devuelve todos los datos de la tabla Tutor_centro
         $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
         $this->tutor = $this->Tutor_centro_model->get_todos();
-
+        
         $this->load->view('Update_practicas');
     }
 }

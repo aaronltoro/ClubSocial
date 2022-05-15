@@ -1,4 +1,4 @@
-Practicas -> Hacer los filtros | primero escoger a que curso escolar pertenece | ordenar los select de Alumno, Empresa, Empleado y Tutor por orden alfabetico al hacer insert/update
+Practicas -> Hacer los filtros | primero escoger a que curso escolar pertenece
 
 dar utilidad al botón de exportar a excel - Alumnos
 
