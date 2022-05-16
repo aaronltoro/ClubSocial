@@ -57,7 +57,7 @@ CREATE TABLE `ciclos` (
   `nombre_corto` text NOT NULL,
   `nombre_largo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `ciclos` (
 
 LOCK TABLES `ciclos` WRITE;
 /*!40000 ALTER TABLE `ciclos` DISABLE KEYS */;
+INSERT INTO `ciclos` VALUES (1,'DAW','Desarrollo de Aplicaciones Web');
 /*!40000 ALTER TABLE `ciclos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `practicas` (
   `sede` text NOT NULL,
   `id_empleado` int(11) NOT NULL,
   `id_tutor_centro` int(11) NOT NULL,
-  `seneca` text NOT NULL,
+  `seneca` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_incorporacion` date NOT NULL,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
@@ -227,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-24 14:15:47
+-- Dump completed on 2022-05-13 18:56:16

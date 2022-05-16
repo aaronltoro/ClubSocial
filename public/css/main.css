@@ -33,7 +33,7 @@
     gap: 10px;
 }
 
-.check_tutor{
+.check_tutor, .check_practica{
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -41,6 +41,10 @@
 
 .btn_exit{
     padding: 2px 10px;
+}
+
+.btn_export{
+    padding: 2px 8px;
 }
 
 /* CSS botones Inicio */

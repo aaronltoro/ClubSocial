@@ -1,18 +1,17 @@
 <table class="table table-striped">
     <thead class="thead-dark">
-        <th>Id</th>
         <th>Nombre</th>
         <th>Teléfono</th>
         <th>E-Mail</th>
         <th>Ciclo</th>
         <th>Curso Escolar</th>
-        <th></th>
+        <th>
+        <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="exportar_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>        </th>
     </thead>
     <tbody>
         <?php
         foreach ($this->alumno as $alumno) { ?>
             <tr>
-                <td><?php echo $alumno['id'] ?></td>
                 <td><?php echo $alumno['nombre'] ?></td>
                 <td><?php echo $alumno['telefono'] ?></td>
                 <td><?php echo $alumno['correo'] ?></td>

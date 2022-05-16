@@ -14,6 +14,24 @@ class Empresa_Model extends CI_Model
         //Filtro para traer solo los campos que tengan eliminado a 0
         $this->db->where('eliminado', 0);
 
+        //Ordeno por nombre ascendente
+        $this->db->order_by('nombre', 'ASC');
+
+        //Retorna todas las empresas de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
+        $query = $this->db->get('empresa');
+
+        if ($ret_type) {
+            return $query->result();
+        } else {
+            return $query->result_array();
+        }
+    }
+
+    public function get_todos_dev($ret_type = false)
+    {
+        //Ordeno por nombre ascendente
+        $this->db->order_by('nombre', 'ASC');
+
         //Retorna todas las empresas de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('empresa');
 
@@ -28,9 +46,6 @@ class Empresa_Model extends CI_Model
     {
         //Filtro
         $this->db->where('id', $id);
-
-        //Filtro para traer solo los campos que tengan eliminado a 0
-        $this->db->where('eliminado', 0);
 
         //Retorna la empresa de la base de datos que tenga ese id
         $query = $this->db->get('empresa');

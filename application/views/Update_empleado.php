@@ -40,14 +40,18 @@
                 <label for="idEmpresa">Empresa: </label>
             </div>
             <div class="col-sm-7  mt-3">
-                <!-- Recorreremos todas las empresas para poneras en el select, y la empresa que coincida con la del empleado estara seleccionada-->
-                <select class="form-control" name="idEmpresa" id="idEmpresa">
-                    <?php foreach ($empresa as $empl) { ?>
-                        <option value="<?php echo $empl['id'] ?>" <?php if ($emp[0]['id_empresa'] == $empl['id']) {
-                                                                        echo 'selected';
-                                                                    } ?>><?php echo $empl['nombre'] ?></option>
-                        <!--Cierre foreach-->
-                    <?php } ?>
+                <select class="form-control" name="idEmpresa" <?php echo count($empresa) == 0 ? 'id="emp_vacia"' : 'id="idEmpresa"' ?>>
+                    <?php if (count($empresa) == 0) { ?>
+                        <option value="N/A">NO HAY EMPRESAS! PULSA PARA AÑADIR!</option>
+                    <?php } else { ?>
+                        <!-- Recorreremos todas las empresas para poneras en el select, y la empresa que coincida con la del empleado estara seleccionada-->
+                        <?php foreach ($empresa as $empl) { ?>
+                            <option value="<?php echo $empl['id'] ?>" <?php if ($emp[0]['id_empresa'] == $empl['id']) {
+                                                                            echo 'selected';
+                                                                        } ?>><?php echo $empl['nombre'] ?></option>
+                            <!--Cierre foreach-->
+                    <?php }
+                    } ?>
                 </select>
             </div>
         </div>
@@ -80,6 +84,11 @@
 </script>
 
 <script>
+    //Evento que redirige a la página de empresas al pulsar
+    $('#emp_vacia').click(function() {
+        ir_empresa_view();
+    });
+    
     //Script para los label de los inputs
     $(document).ready(function() {
         $('input').each(function() {

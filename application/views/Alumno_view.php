@@ -20,13 +20,13 @@
 				<select class="form-control" name="filter_by">
 					<option value="-1">- Filtrar por -</option>
 					<option value="n">Nombre</option>
-					<option value="ci">Ciclo</option>
+					<option value="ci">Ciclo (Corto)</option>
 					<option value="cu">Curso</option>
 				</select>
 			</div>
 			<div class="col-sm-3 mt-3">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="- Filtro -" name="filter">
+					<input type="text" class="form-control" id="srch_alu" placeholder="- Filtro -" name="filter">
 					<div class="input-group-append">
 						<button class="btn btn-outline-primary" type="button" onclick="carga_filtros_alumno()"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</div>
@@ -41,3 +41,12 @@
 
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		//Evento que filtra cada vez que se cambie el input
+		$('#srch_alu').keyup(function() {
+			carga_filtros_alumno();
+		});
+	});
+</script>

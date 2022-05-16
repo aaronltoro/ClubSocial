@@ -11,7 +11,8 @@ class Ciclo_Model extends CI_Model
 
     public function get_todos($ret_type = false)
     {
-  
+        //Ordeno por nombre ascendente
+        $this->db->order_by('nombre_largo', 'ASC');
 
         //Retorna todas las alumnos de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('ciclos');
@@ -28,24 +29,10 @@ class Ciclo_Model extends CI_Model
         //Filtro
         $this->db->where('id', $id);
 
-
         //Retorna la alumno de la base de datos que tenga ese id
         $query = $this->db->get('ciclos');
 
         return $query->result_array();
     }
 
-/*
-    function updatear($id, $data)
-    {
-        $this->db->where('id', $id);
-
-        $this->db->set('nombre', $data['nombre']);
-        $this->db->set('telefono', $data['telefono']);
-        $this->db->set('correo', $data['correo']);
-        $this->db->set('id_ciclo', $data['ciclo']);
-        $this->db->set('curso_escolar', $data['curso_escolar']);
-
-        return $this->db->update('alumno');
-    }*/
 }

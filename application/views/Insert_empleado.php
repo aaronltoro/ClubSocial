@@ -37,10 +37,14 @@
                 <label for="idEmpresa">Empresa: </label>
             </div>
             <div class="col-sm-7  mt-3">
-                <select class="form-control" name="idEmpresa" id="idEmpresa">
-                    <?php foreach ($empresa as $emp) { ?>
-                        <option value="<?php echo $emp['id'] ?>"><?php echo $emp['nombre'] ?></option>
-                    <?php } ?>
+                <select class="form-control" name="idEmpresa" <?php echo count($empresa) == 0 ? 'id="emp_vacia"' : 'id="idEmpresa"' ?>>
+                    <?php if (count($empresa) == 0) { ?>
+                        <option value="N/A">NO HAY EMPRESAS! PULSA PARA AÑADIR!</option>
+                    <?php } else { ?>
+                        <?php foreach ($empresa as $emp) { ?>
+                            <option value="<?php echo $emp['id'] ?>"><?php echo $emp['nombre'] ?></option>
+                    <?php }
+                    } ?>
                 </select>
             </div>
         </div>
@@ -69,6 +73,11 @@
     // console.log($("#insert_empleado").serialize());
 </script>
 <script>
+    //Evento que redirige a la página de empresas al pulsar
+    $('#emp_vacia').click(function() {
+        ir_empresa_view();
+    });
+
     //Script para los label de los inputs
     $(document).ready(function() {
         $('input').each(function() {

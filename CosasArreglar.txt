@@ -1,5 +1,21 @@
-empleado - add empresa actual
+Practicas -> primero escoger a que curso escolar pertenece
 
-alumno - botón nuevo ciclo (Nombre corto/largo)
+Alumnos -> EXPORTAR/IMPORTAR EXCEL
 
-practicas - primero escoger a que curso escolar pertenece
+Empleados -> EXPORTAR EXCEL
+
+Empresa -> EXPORTAR EXCEL
+
+Practicas -> EXPORTAR EXCEL
+
+Tutor Centro -> EXPORTAR EXCEL
+
+----------- Secundario ------------
+
+Tutores Centro -> Filtrar por activos
+
+Practicas -> Filtrar por séneca
+
+Empleados -> Filtrar por empresa y por tipo
+
+Empleados -> Al crear un empleado que tambien se pueda añadir una nueva empresa desde el insert
