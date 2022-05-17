@@ -798,3 +798,15 @@ function add_principal(id, id_empresa) {
 		},
 	});
 }
+
+//Funcion para exportar los alumnos 
+function exportar_alumnos() {
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Alumno_controller/exportar_alumnos",
+		data: null,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}

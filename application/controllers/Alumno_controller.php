@@ -139,7 +139,7 @@ class Alumno_controller extends CI_Controller
 					$ciclo = $this->Alumno_model->get_ciclo($res['filtro']);
 
 					//Devuelve todos los alumnos que tengan los id del array anterior de $ciclo
-					foreach($ciclo as $cl){
+					foreach ($ciclo as $cl) {
 						$this->alumno = $this->Alumno_model->get_ciclo_alu($cl['id']);
 					}
 
@@ -333,5 +333,22 @@ class Alumno_controller extends CI_Controller
 		}
 
 		$this->load->view('Update_alumno');
+	}
+
+	public function exportar_alumnos()
+	{
+
+		$this->load->model('Alumno_model', 'Alumno_model', true);
+		$this->alumno = $this->Alumno_model->get_todos();
+		if (sizeof($this->alumno) > 0) {
+			foreach ($this->alumno as $key => $alumno) {
+				//Función que intercambia el id_ciclo por su nombre
+				$this->load->model('Ciclo_model', 'Ciclo_model', true);
+				$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
+				$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+			}
+		}
+		$this->Alumno_model->exportar_alumnos($this->alumno);
+		$this->load->view('Resultado_alumno');
 	}
 }
