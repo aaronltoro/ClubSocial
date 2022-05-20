@@ -6,7 +6,7 @@
         <th>Ciclo</th>
         <th>Curso Escolar</th>
         <th>
-        <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="exportar_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>        </th>
+        <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="export_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>        </th>
     </thead>
     <tbody>
         <?php

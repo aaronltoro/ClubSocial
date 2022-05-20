@@ -1,6 +1,6 @@
-Practicas -> primero escoger a que curso escolar pertenece
+Practicas -> primero escoger a que curso escolar pertenece (Añadir en BD una columna de curso escolar que se inserte al crear una practica con el curso escolar que tenga el alumno seleccionado)
 
-Alumnos -> EXPORTAR/IMPORTAR EXCEL
+Alumnos -> IMPORTAR EXCEL
 
 Empleados -> EXPORTAR EXCEL
 

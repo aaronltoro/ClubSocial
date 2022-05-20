@@ -3,7 +3,7 @@
 require 'application/libraries/phpspreadsheet/vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 
 class Alumno_Model extends CI_Model
@@ -136,42 +136,46 @@ class Alumno_Model extends CI_Model
         return $this->db->update('alumno');
     }
 
-    function exportar_alumnos($data)
+    public function create_spreadsheet($data, $start_row)
     {
+        $current_row = $start_row;
 
+        //Declaro nuevo spreadsheet
         $spreadsheet = new Spreadsheet();
-        $spreadsheet->setActiveSheetIndex(0);
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Nombre Completo');
-        $sheet->setCellValue('B1', 'Telefono');
-        $sheet->setCellValue('C1', 'Correo');
-        $sheet->setCellValue('D1', 'Ciclo');
-        $sheet->setCellValue('E1', 'Curso Escolar');
 
-        $i = 2; // La primera fila está ocupada por el encabezado
+        //Header
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('B2', 'Nombre Completo')
+            ->setCellValue('C2', 'Telefono')
+            ->setCellValue('D2', 'Correo')
+            ->setCellValue('E2', 'Ciclo')
+            ->setCellValue('F2', 'Curso Escolar');
 
-        foreach ($data as $usu) {
-            // Establecer el valor de la celda
-            $sheet = $spreadsheet->getActiveSheet()->setCellValue('A' . $i, $usu['nombre']);
-            $sheet = $spreadsheet->getActiveSheet()->setCellValue('B' . $i, $usu['telefono']);
-            $sheet = $spreadsheet->getActiveSheet()->setCellValue('C' . $i, $usu['correo']);
-            $sheet = $spreadsheet->getActiveSheet()->setCellValue('D' . $i, $usu['id_ciclo']);
-            $sheet = $spreadsheet->getActiveSheet()->setCellValue('E' . $i, $usu['curso_escolar']);
-            $i++;
-        } // Establecer la fuente y el tamaño de fuente en su conjunto
-        $spreadsheet->getDefaultStyle()->getFont()->setName('Arial'); // Establecer la fuente como un todo
-        $spreadsheet->getDefaultStyle()->getFont()->setSize(10); // Establecer el tamaño de fuente como un todo
+        //Datos
+        foreach ($data as $dt) {
+            $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
 
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B' . $current_row, $dt['nombre'])
+                ->setCellValue('C' . $current_row, $dt['telefono'].' ')
+                ->setCellValue('D' . $current_row, $dt['correo'])
+                ->setCellValue('E' . $current_row, $dt['id_ciclo'])
+                ->setCellValue('F' . $current_row, $dt['curso_escolar']);
 
-        // $spreadsheet-> getActiveSheet () -> getColumnDimension ('B') -> setAutoSize (true); // Ancho de celda adaptable
-        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true); // Establecer el ancho de la columna
+            $current_row++;
+        }
+
+        //Styles
+        $spreadsheet->getActiveSheet()->getStyle('B2:F2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getStyle('B2:F2')->getFont()->getColor()->setARGB('000000'); // Color de letra
+        $spreadsheet->getActiveSheet()->getStyle('B2:F2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('EA4335'); // Color de fondo de celda
+
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer el ancho de la columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de la columna
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
-        $spreadsheet->getActiveSheet()->getStyle('B3')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true); // Establecer ancho de columna
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('exportaciones/exportacionAlumnos.xlsx');
+        return $spreadsheet;
     }
 }

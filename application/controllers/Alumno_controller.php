@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use \PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\SpreadSheet;
+
 class Alumno_controller extends CI_Controller
 {
 
@@ -335,20 +338,33 @@ class Alumno_controller extends CI_Controller
 		$this->load->view('Update_alumno');
 	}
 
-	public function exportar_alumnos()
+	public function export_excel()
 	{
-
 		$this->load->model('Alumno_model', 'Alumno_model', true);
-		$this->alumno = $this->Alumno_model->get_todos();
-		if (sizeof($this->alumno) > 0) {
-			foreach ($this->alumno as $key => $alumno) {
-				//Función que intercambia el id_ciclo por su nombre
+		//Llamada a modelo que devuelve todos los datos de la tabla
+		$data = $this->Alumno_model->get_todos();
+
+		//Función que intercambia el id_ciclo por su nombre
+		if (sizeof($data) > 0) {
+			foreach ($data as $key => $alumno) {
 				$this->load->model('Ciclo_model', 'Ciclo_model', true);
 				$n_ciclo = $this->Ciclo_model->get_id($alumno['id_ciclo']);
-				$this->alumno[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+				$data[$key]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
 			}
 		}
-		$this->Alumno_model->exportar_alumnos($this->alumno);
-		$this->load->view('Resultado_alumno');
+
+		//Nombre del archivo que se va a descargar
+		$nombre = 'Excel_Alumnos.xlsx';
+
+		//Funcion del modelo que crea el excel
+		$spreadsheet = $this->Alumno_model->create_spreadsheet($data, 3);
+
+		$writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+		header('Content-Disposition: attachment;filename="' . $nombre . '"'); //tell browser what's the file name
+		header('Cache-Control: max-age=0'); //no cache*/
+
+		$writer->save('php://output');
 	}
 }
