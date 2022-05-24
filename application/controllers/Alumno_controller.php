@@ -367,4 +367,38 @@ class Alumno_controller extends CI_Controller
 
 		$writer->save('php://output');
 	}
+
+	public function import_excel()
+	{
+		// Cargar clases instaladas por Composer
+		require 'application\libraries\phpspreadsheet\vendor\autoload.php';
+
+		// Ruta del archivo a importar
+		$rutaArchivo = $this->input->post('ruta');
+		$documento = IOFactory::load($rutaArchivo);
+
+		// Accedo a la primera hoja del excel
+		$hojaDeProductos = $documento->getSheet(0);
+
+		// Calcular el numero de filas del excel
+		$numeroMayorDeFila = $hojaDeProductos->getHighestRow(); //Numérico
+
+		//Inicializo el array data
+		$data = array();
+
+		// Recorremos filas; comenzamos en la fila 3 porque omitimos el encabezado
+		for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
+			//Las columnas están en este orden
+			$nombre = $hojaDeProductos->getCell('B' . $indiceFila);
+			$telefono = $hojaDeProductos->getCell('C' . $indiceFila);
+			$correo = $hojaDeProductos->getCell('D' . $indiceFila);
+			$ciclo = $hojaDeProductos->getCell('E' . $indiceFila);
+			$curso_escolar = $hojaDeProductos->getCell('F' . $indiceFila);
+			array_push($data, [$nombre->getValue(), $telefono->getValue(), $correo->getValue(), $ciclo->getValue(), $curso_escolar->getValue()]);
+		}
+
+		//Inserto los datos a la bd
+		
+				
+	}
 }

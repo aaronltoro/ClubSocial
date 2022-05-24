@@ -806,3 +806,13 @@ function export_alumnos()
 {
     window.open('Alumno_controller/export_excel');
 }
+
+function import_alumnos(ruta)
+{
+    //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Alumno_controller/import_excel",
+		data: {ruta: ruta}
+	});
+}

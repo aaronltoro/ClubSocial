@@ -7,7 +7,7 @@
         <th>Curso Escolar</th>
         <th>
             <div class="d-flex justify-content-end align-items-end" style="gap: 10px">
-                <button class="btn btn-success btn_import" type="button" onclick="" title="Importar desde Excel"><i class="fa-solid fa-file-import"></i></button>
+                <button class="btn btn-success btn_import" type="button" onclick="mostrar_modal()" title="Importar desde Excel"><i class="fa-solid fa-file-import"></i></button>
                 <button class="btn btn-success btn_export" type="button" onclick="export_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button>
             </div>
         </th>
@@ -29,3 +29,19 @@
         <?php } ?>
     </tbody>
 </table>
+
+<div id="modal" style="display:none; position:absolute">
+    <input id="fileSelect" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" onchange="importar()">
+</div>
+
+<script>
+    //Funcion que muestra y oculta el modal
+    function mostrar_modal() {
+        $('#modal').slideToggle();
+    }
+
+    //Funcion que llama a importar_alumnos pasandole la ruta del archivo por parámetro
+    function importar() {
+        import_alumnos($('#fileSelect').val());
+    }
+</script>
