@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use \PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Practicas_controller extends CI_Controller
 {
 
@@ -561,7 +563,7 @@ class Practicas_controller extends CI_Controller
             $this->prac = $this->Practicas_model->get_id($this->input->post('id'));
         }
 
-        //Si idEmpresa existe es que lo hemos llamado desde el ajaz para updatear las sedes
+        //Si idEmpresa existe es que lo hemos llamado desde ajax para updatear las sedes
         if ($this->input->post('idEmpresa') != null) {
             //Si idEmpresa no vale 'Sin Sedes' es que hay sedes
             if ($this->input->post('idEmpresa') != 'Sin Sedes') {
@@ -588,5 +590,56 @@ class Practicas_controller extends CI_Controller
         $this->tutor = $this->Tutor_centro_model->get_todos();
 
         $this->load->view('Update_practicas');
+    }
+
+    public function export_excel()
+    {
+        $this->load->model('Practicas_model', 'Practicas_model', true);
+        //Llamada a modelo que devuelve todos los datos de la tabla
+        $data = $this->Practicas_model->get_todos();
+
+        //Solo intercambia los id por nombre cuando exista al menos 1 Practica
+        if (sizeof($data) > 0) {
+            foreach ($data as $key => $prac) {
+                //Función que intercambia el id_alumno por su nombre
+                $this->load->model('Alumno_model', 'Alumno_model', true);
+                $n_alumno = $this->Alumno_model->get_id($prac['id_alumno']);
+                $data[$key]['id_alumno'] = $n_alumno[0]['nombre'];
+
+                //Función que intercambia el id_empresa por su nombre
+                $this->load->model('Empresa_model', 'Empresa_model', true);
+                $n_empresa = $this->Empresa_model->get_id($prac['id_empresa']);
+                $data[$key]['id_empresa'] = $n_empresa[0]['nombre'];
+
+                //Función que intercambia el id_empleado por su nombre
+                $this->load->model('Empleado_model', 'Empleado_model', true);
+                $n_empleado = $this->Empleado_model->get_id($prac['id_empleado']);
+                $data[$key]['id_empleado'] = $n_empleado[0]['nombre'];
+
+                //Función que intercambia el id_tutor_centro por su nombre
+                $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
+                $n_tutor_centro = $this->Tutor_centro_model->get_id($prac['id_tutor_centro']);
+                $data[$key]['id_tutor_centro'] = $n_tutor_centro[0]['nombre'];
+            }
+        }
+
+        //Función que intercambia el 0 o 1 de la columna séneca por sí o no
+        foreach ($data as $key => $dt) {
+            $data[$key]['seneca'] = ($dt['seneca'] == 1) ? 'Sí' : 'No';
+        }
+
+        //Nombre del archivo que se va a descargar
+        $nombre = 'Excel_Practicas.xlsx';
+
+        //Funcion del modelo que crea el excel
+        $spreadsheet = $this->Practicas_model->create_spreadsheet($data, 3);
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+        header('Content-Disposition: attachment;filename="' . $nombre . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache*/
+
+        $writer->save('php://output');
     }
 }

@@ -2,13 +2,7 @@ Practicas -> primero escoger a que curso escolar pertenece (Añadir en BD una co
 
 Alumnos -> IMPORTAR EXCEL
 
-Empleados -> EXPORTAR EXCEL
-
-Empresa -> EXPORTAR EXCEL
-
-Practicas -> EXPORTAR EXCEL
-
-Tutor Centro -> EXPORTAR EXCEL
+Practicas -> EXPORTACIÓN -> Añadir la columna curso escolar | Solo exportar los que pertenezcan al curso escolar seleccionado
 
 ----------- Secundario ------------
 

@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use \PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Empleado_controller extends CI_Controller
 {
 
@@ -274,5 +276,41 @@ class Empleado_controller extends CI_Controller
 		$this->emp = $this->Empleado_model->get_id($this->input->post('id'));
 
 		$this->load->view('Update_empleado');
+	}
+
+	public function export_excel()
+	{
+		$this->load->model('Empleado_model', 'Empleado_model', true);
+		//Llamada a modelo que devuelve todos los datos de la tabla
+		$data = $this->Empleado_model->get_todos();
+
+		//Solo intercambia los id por nombre cuando exista al menos 1 empleado
+		if (sizeof($data) > 0) {
+			foreach ($data as $key => $emp) {
+				//Función que intercambia el id_empresa por su nombre
+				$this->load->model('Empresa_model', 'Empresa_model', true);
+				$n_empresa = $this->Empresa_model->get_id($emp['id_empresa']);
+				$data[$key]['id_empresa'] = $n_empresa[0]['nombre'];
+
+				//Función que intercambia el id_tipo por su nombre
+				$this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
+				$n_tipo = $this->Tipo_empleado_model->get_id($emp['id_tipo']);
+				$data[$key]['id_tipo'] = $n_tipo[0]['nombre'];
+			}
+		}
+
+		//Nombre del archivo que se va a descargar
+		$nombre = 'Excel_Empleados.xlsx';
+
+		//Funcion del modelo que crea el excel
+		$spreadsheet = $this->Empleado_model->create_spreadsheet($data, 3);
+
+		$writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+		header('Content-Disposition: attachment;filename="' . $nombre . '"'); //tell browser what's the file name
+		header('Cache-Control: max-age=0'); //no cache*/
+
+		$writer->save('php://output');
 	}
 }

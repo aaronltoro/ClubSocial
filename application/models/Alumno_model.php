@@ -1,10 +1,7 @@
 <?php
 
 require 'application/libraries/phpspreadsheet/vendor/autoload.php';
-
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-
 
 class Alumno_Model extends CI_Model
 {

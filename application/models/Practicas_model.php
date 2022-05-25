@@ -1,5 +1,8 @@
 <?php
 
+require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Practicas_Model extends CI_Model
 {
 
@@ -110,5 +113,54 @@ class Practicas_Model extends CI_Model
         $this->db->set('fecha_incorporacion', $data['fecha_incorporacion']);
 
         return $this->db->update('practicas');
+    }
+
+    public function create_spreadsheet($data, $start_row)
+    {
+        $current_row = $start_row;
+
+        //Declaro nuevo spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        //Header
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('B2', 'Alumno')
+            ->setCellValue('C2', 'Empresa')
+            ->setCellValue('D2', 'Sede')
+            ->setCellValue('E2', 'Empleado')
+            ->setCellValue('F2', 'Tutor Centro')
+            ->setCellValue('G2', 'Séneca')
+            ->setCellValue('H2', 'Fecha Incorporación');
+
+        //Datos
+        foreach ($data as $dt) {
+            $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
+
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B' . $current_row, $dt['id_alumno'])
+                ->setCellValue('C' . $current_row, $dt['id_empresa'])
+                ->setCellValue('D' . $current_row, $dt['sede'])
+                ->setCellValue('E' . $current_row, $dt['id_empleado'])
+                ->setCellValue('F' . $current_row, $dt['id_tutor_centro'])
+                ->setCellValue('G' . $current_row, $dt['seneca'])
+                ->setCellValue('H' . $current_row, $dt['fecha_incorporacion']);
+
+            $current_row++;
+        }
+
+        //Styles
+        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFont()->getColor()->setARGB('FFFFFF'); // Color de letra
+        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('000000'); // Color de fondo de celda
+
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setAutoSize(true); // Establecer ancho de columna
+
+        return $spreadsheet;
     }
 }

@@ -8,7 +8,7 @@
         <th>Séneca</th>
         <th>Fecha Incorporación</th>
         <th>
-            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
+            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="export_practicas()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
         </th>
     </thead>
     <tbody>

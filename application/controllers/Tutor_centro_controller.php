@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use \PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Tutor_centro_controller extends CI_Controller
 {
 
@@ -132,5 +134,31 @@ class Tutor_centro_controller extends CI_Controller
     $this->tutor_centro = $this->Tutor_centro_model->get_id($this->input->post('id'));
 
     $this->load->view('Update_tutor_centro');
+  }
+
+  public function export_excel()
+  {
+    $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
+    //Llamada a modelo que devuelve todos los datos de la tabla
+    $data = $this->Tutor_centro_model->get_todos();
+
+    //CAMBIO EL VALOR DE 0 O 1 DE LA COLUMNA ACTIVO POR SÍ O NO
+    foreach ($data as $key => $dt) {
+      $data[$key]['activo'] = ($dt['activo'] == 1) ? 'Sí' : 'No';
+    }
+
+    //Nombre del archivo que se va a descargar
+    $nombre = 'Excel_Tutores.xlsx';
+
+    //Funcion del modelo que crea el excel
+    $spreadsheet = $this->Tutor_centro_model->create_spreadsheet($data, 3);
+
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+    header('Content-Disposition: attachment;filename="' . $nombre . '"'); //tell browser what's the file name
+    header('Cache-Control: max-age=0'); //no cache*/
+
+    $writer->save('php://output');
   }
 }
