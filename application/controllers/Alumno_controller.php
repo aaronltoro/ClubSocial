@@ -369,35 +369,16 @@ class Alumno_controller extends CI_Controller
 
 	public function import_excel()
 	{
-		// Cargar clases instaladas por Composer
-		require 'application\libraries\phpspreadsheet\vendor\autoload.php';
+		//Valor de la ruta que ha puesto el usuario
+		$data = $this->input->post('ruta');
 
-		// Ruta del archivo a importar
-		$rutaArchivo = $this->input->post('ruta');
-		$documento = IOFactory::load($rutaArchivo);
+		//Traigo todos los alumnos de la bd
+		$this->load->model('Alumno_model', 'Alumno_model', true);
+		$todos = $this->Alumno_model->get_todos();
 
-		// Accedo a la primera hoja del excel
-		$hojaDeProductos = $documento->getSheet(0);
+		$this->Alumno_model->create_import_excel($data, $todos);
 
-		// Calcular el numero de filas del excel
-		$numeroMayorDeFila = $hojaDeProductos->getHighestRow(); //Numérico
-
-		//Inicializo el array data
-		$data = array();
-
-		// Recorremos filas; comenzamos en la fila 3 porque omitimos el encabezado
-		for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
-			//Las columnas están en este orden
-			$nombre = $hojaDeProductos->getCell('B' . $indiceFila);
-			$telefono = $hojaDeProductos->getCell('C' . $indiceFila);
-			$correo = $hojaDeProductos->getCell('D' . $indiceFila);
-			$ciclo = $hojaDeProductos->getCell('E' . $indiceFila);
-			$curso_escolar = $hojaDeProductos->getCell('F' . $indiceFila);
-			array_push($data, [$nombre->getValue(), $telefono->getValue(), $correo->getValue(), $ciclo->getValue(), $curso_escolar->getValue()]);
-		}
-
-		//Inserto los datos a la bd
-		
-				
+		//Después de completar la importación vuelvo a cargar la tabla
+		$this->tabla_ini();
 	}
 }

@@ -29,10 +29,20 @@ class Ciclo_Model extends CI_Model
         //Filtro
         $this->db->where('id', $id);
 
-        //Retorna la alumno de la base de datos que tenga ese id
+        //Retorna el alumno de la base de datos que tenga ese id
         $query = $this->db->get('ciclos');
 
         return $query->result_array();
     }
 
+    public function get_id_ciclo($nombreCorto)
+    {
+        //Filtro
+        $this->db->like('nombre_corto', $nombreCorto, 'both');
+
+        //Retorna el alumno de la base de datos que tenga ese id
+        $query = $this->db->get('ciclos');
+
+        return $query->result_array();
+    }
 }

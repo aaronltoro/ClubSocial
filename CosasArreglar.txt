@@ -1,7 +1,5 @@
 Practicas -> primero escoger a que curso escolar pertenece (Añadir en BD una columna de curso escolar que se inserte al crear una practica con el curso escolar que tenga el alumno seleccionado)
 
-Alumnos -> IMPORTAR EXCEL
-
 Practicas -> EXPORTACIÓN -> Añadir la columna curso escolar | Solo exportar los que pertenezcan al curso escolar seleccionado
 
 ----------- Secundario ------------
@@ -13,3 +11,5 @@ Practicas -> Filtrar por séneca
 Empleados -> Filtrar por empresa y por tipo
 
 Empleados -> Al crear un empleado que tambien se pueda añadir una nueva empresa desde el insert
+
+Alumnos -> Cuando se importa desde excel y no existe el ciclo hacer que se cree como un ciclo nuevo en la bd (Porque ahora si pasa esto el programa peta bien duro)

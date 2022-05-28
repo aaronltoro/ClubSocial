@@ -802,33 +802,33 @@ function add_principal(id, id_empresa) {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 //Funcion para exportar los alumnos 
-function export_alumnos()
-{
-    window.open('Alumno_controller/export_excel');
+function export_alumnos() {
+	window.open('Alumno_controller/export_excel');
 }
 
-function export_empleados(){
+function export_empleados() {
 	window.open('Empleado_controller/export_excel');
 }
 
-function export_empresas(){
+function export_empresas() {
 	window.open('Empresa_controller/export_excel');
 }
 
-function export_tutores(){
+function export_tutores() {
 	window.open('Tutor_centro_controller/export_excel');
 }
 
-function export_practicas(){
+function export_practicas() {
 	window.open('Practicas_controller/export_excel');
 }
 
-function import_alumnos(ruta)
-{
-    //Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
+function import_alumnos(datos) {
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Alumno_controller/import_excel",
-		data: {ruta: ruta}
+		data: { ruta: datos },
+		success: function (data) {
+			$("#resultado").html(data);
+		},
 	});
 }

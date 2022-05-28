@@ -1,7 +1,9 @@
 <?php
 
 require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use \PhpOffice\PhpSpreadsheet\IOFactory;
 
 class Alumno_Model extends CI_Model
 {
@@ -154,7 +156,7 @@ class Alumno_Model extends CI_Model
 
             $spreadsheet->getActiveSheet()
                 ->setCellValue('B' . $current_row, $dt['nombre'])
-                ->setCellValue('C' . $current_row, $dt['telefono'].' ')
+                ->setCellValue('C' . $current_row, $dt['telefono'] . ' ')
                 ->setCellValue('D' . $current_row, $dt['correo'])
                 ->setCellValue('E' . $current_row, $dt['id_ciclo'])
                 ->setCellValue('F' . $current_row, $dt['curso_escolar']);
@@ -174,5 +176,50 @@ class Alumno_Model extends CI_Model
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true); // Establecer ancho de columna
 
         return $spreadsheet;
+    }
+
+    public function create_import_excel($data)
+    {
+        // Ruta del archivo a importar
+        $documento = IOFactory::load($data);
+
+        // Accedo a la primera hoja del excel
+        $hojaDeProductos = $documento->getSheet(0);
+
+        // Calcular el numero de filas del excel
+        $numeroMayorDeFila = $hojaDeProductos->getHighestRow(); //Numérico
+
+        //Inicializo el array data
+        $data = array();
+
+        // Recorremos filas; comenzamos en la fila 3 porque omitimos el encabezado
+        for ($indiceFila = 3; $indiceFila <= $numeroMayorDeFila; $indiceFila++) {
+            //Las columnas están en este orden
+            $nombre = $hojaDeProductos->getCell('B' . $indiceFila);
+            $telefono = $hojaDeProductos->getCell('C' . $indiceFila);
+            $correo = $hojaDeProductos->getCell('D' . $indiceFila);
+            $ciclo = $hojaDeProductos->getCell('E' . $indiceFila);
+            $curso_escolar = $hojaDeProductos->getCell('F' . $indiceFila);
+
+            //Cambio el nombre corto del ciclo por su id
+            $this->load->model('Ciclo_model', 'Ciclo_model', true);
+            $cicloId = $this->Ciclo_model->get_id_ciclo($ciclo->getValue());
+
+            //Introduzco todos los valores en el array data
+            array_push($data, [$nombre->getValue(), $telefono->getValue(), $correo->getValue(), $cicloId[0]['id'], $curso_escolar->getValue()]);
+        }
+
+        foreach ($data as $dt) {
+            $res = array(
+                'nombre' => $dt[0],
+                'telefono' => $dt[1],
+                'correo' =>  $dt[2],
+                'id_ciclo' =>  $dt[3],
+                'curso_escolar' =>  $dt[4]
+            );
+
+            //Inserto todos los valores en la base de datos
+            $this->insertar($res);
+        }
     }
 }
