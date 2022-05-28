@@ -1,5 +1,8 @@
 <?php
 
+require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Empresa_Model extends CI_Model
 {
 
@@ -110,5 +113,45 @@ class Empresa_Model extends CI_Model
         $this->db->set('principal', $data);
 
         return $this->db->update('empresa');
+    }
+
+    public function create_spreadsheet($data, $start_row)
+    {
+        $current_row = $start_row;
+
+        //Declaro nuevo spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        //Header
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('B2', 'Nombre')
+            ->setCellValue('C2', 'CIF')
+            ->setCellValue('D2', 'Direcciones')
+            ->setCellValue('E2', 'Dir.Principal');
+
+        //Datos
+        foreach ($data as $dt) {
+            $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
+
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B' . $current_row, $dt['nombre'])
+                ->setCellValue('C' . $current_row, $dt['cif'].' ')
+                ->setCellValue('D' . $current_row, $dt['direcciones'])
+                ->setCellValue('E' . $current_row, $dt['principal']);
+
+            $current_row++;
+        }
+
+        //Styles
+        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->getColor()->setARGB('000000'); // Color de letra
+        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('4285F4'); // Color de fondo de celda
+
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
+
+        return $spreadsheet;
     }
 }

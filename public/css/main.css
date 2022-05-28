@@ -47,6 +47,10 @@
     padding: 2px 8px;
 }
 
+.btn_import{
+    padding: 2px 8px 2px 4px;
+}
+
 /* CSS botones Inicio */
 .main_cont button {
     width: 250px;

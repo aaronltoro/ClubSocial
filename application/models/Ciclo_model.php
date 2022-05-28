@@ -35,4 +35,15 @@ class Ciclo_Model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_id_ciclo($nombreCorto)
+    {
+        //Filtro
+        $this->db->like('nombre_corto', $nombreCorto, 'both');
+
+        //Retorna la alumno de la base de datos que tenga ese id
+        $query = $this->db->get('ciclos');
+
+        return $query->result_array();
+    }
+
 }

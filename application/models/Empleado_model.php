@@ -1,5 +1,8 @@
 <?php
 
+require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Empleado_Model extends CI_Model
 {
 
@@ -103,5 +106,51 @@ class Empleado_Model extends CI_Model
         $this->db->set('telefono', $data['telefono']);
 
         return $this->db->update('empleado');
+    }
+
+    public function create_spreadsheet($data, $start_row)
+    {
+        $current_row = $start_row;
+
+        //Declaro nuevo spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        //Header
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('B2', 'Nombre Completo')
+            ->setCellValue('C2', 'DNI')
+            ->setCellValue('D2', 'Telefono')
+            ->setCellValue('E2', 'Correo')
+            ->setCellValue('F2', 'Empresa')
+            ->setCellValue('G2', 'Tipo');
+
+        //Datos
+        foreach ($data as $dt) {
+            $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
+
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B' . $current_row, $dt['nombre'])
+                ->setCellValue('C' . $current_row, $dt['dni'].' ')
+                ->setCellValue('D' . $current_row, $dt['telefono'])
+                ->setCellValue('E' . $current_row, $dt['correo'])
+                ->setCellValue('F' . $current_row, $dt['id_empresa'])
+                ->setCellValue('G' . $current_row, $dt['id_tipo']);
+
+            $current_row++;
+        }
+
+        //Styles
+        $spreadsheet->getActiveSheet()->getStyle('B2:G2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getStyle('B2:G2')->getFont()->getColor()->setARGB('000000'); // Color de letra
+        $spreadsheet->getActiveSheet()->getStyle('B2:G2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('34A853'); // Color de fondo de celda
+
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true); // Establecer ancho de columna
+
+        return $spreadsheet;
     }
 }

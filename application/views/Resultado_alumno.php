@@ -6,7 +6,11 @@
         <th>Ciclo</th>
         <th>Curso Escolar</th>
         <th>
-        <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="exportar_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>        </th>
+            <div class="d-flex justify-content-end align-items-end" style="gap: 10px">
+                <button class="btn btn-success btn_import" type="button" onclick="importacion()" title="Importar desde Excel"><i class="fa-solid fa-file-import"></i></button>
+                <button class="btn btn-success btn_export" type="button" onclick="export_alumnos()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button>
+            </div>
+        </th>
     </thead>
     <tbody>
         <?php
@@ -25,3 +29,19 @@
         <?php } ?>
     </tbody>
 </table>
+
+<input type="text" name="ruta" id="ruta" style="display: none;">
+
+
+<script>
+ 
+    function importacion() {;
+        do{
+            var ruta= prompt("Introduzca la ruta donde se encuentra su archivo");
+        }while(!ruta.includes(".xlsx"));
+       
+        document.getElementById("ruta").value=ruta;
+    
+        import_alumnos($('#ruta').val());
+    }
+</script>

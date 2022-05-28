@@ -718,6 +718,7 @@ function delete_practica(id) {
 	}
 }
 
+
 function eliminar_sede(id, id_empresa, id_principal) {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#modify_empresa").serializeArray();
@@ -799,14 +800,40 @@ function add_principal(id, id_empresa) {
 	});
 }
 
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 //Funcion para exportar los alumnos 
-function exportar_alumnos() {
+function export_alumnos()
+{
+    window.open('Alumno_controller/export_excel');
+}
+
+function export_empleados(){
+	window.open('Empleado_controller/export_excel');
+}
+
+function export_empresas(){
+	window.open('Empresa_controller/export_excel');
+}
+
+function export_tutores(){
+	window.open('Tutor_centro_controller/export_excel');
+}
+
+function export_practicas(){
+	window.open('Practicas_controller/export_excel');
+}
+
+function import_alumnos(datos)
+{
 	$.ajax({
 		type: "POST",
-		url: BASE_URL + "Alumno_controller/exportar_alumnos",
-		data: null,
+		url: BASE_URL + "Alumno_controller/import_excel",
+		data: {ruta: datos },
 		success: function (data) {
 			$("#resultado").html(data);
 		},
 	});
+
+	
 }

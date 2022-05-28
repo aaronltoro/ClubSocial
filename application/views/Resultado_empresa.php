@@ -5,7 +5,7 @@
         <th>Sedes</th>
         <th>Sede Principal</th>
         <th>
-            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
+            <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="export_empresas()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
         </th>
     </thead>
     <tbody>
@@ -61,7 +61,6 @@
                     } else {
                         echo 'No hay Sede Principal';
                     }
-
 
                     ?></td>
                 <td class="d-flex justify-content-end tools_res">
