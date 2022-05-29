@@ -1,6 +1,7 @@
 <?php
 
 require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class Tutor_centro_model extends CI_Model
@@ -108,42 +109,42 @@ class Tutor_centro_model extends CI_Model
   }
 
   public function create_spreadsheet($data, $start_row)
-    {
-        $current_row = $start_row;
+  {
+    $current_row = $start_row;
 
-        //Declaro nuevo spreadsheet
-        $spreadsheet = new Spreadsheet();
+    //Declaro nuevo spreadsheet
+    $spreadsheet = new Spreadsheet();
 
-        //Header
-        $spreadsheet->getActiveSheet()
-            ->setCellValue('B2', 'Nombre Completo')
-            ->setCellValue('C2', 'Telefono')
-            ->setCellValue('D2', 'Correo')
-            ->setCellValue('E2', 'Activo');
+    //Header
+    $spreadsheet->getActiveSheet()
+      ->setCellValue('B2', 'Nombre Completo')
+      ->setCellValue('C2', 'Telefono')
+      ->setCellValue('D2', 'Correo')
+      ->setCellValue('E2', 'Activo');
 
-        //Datos
-        foreach ($data as $dt) {
-            $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
+    //Datos
+    foreach ($data as $dt) {
+      $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
 
-            $spreadsheet->getActiveSheet()
-                ->setCellValue('B' . $current_row, $dt['nombre'])
-                ->setCellValue('C' . $current_row, $dt['telefono'].' ')
-                ->setCellValue('D' . $current_row, $dt['correo'])
-                ->setCellValue('E' . $current_row, $dt['activo']);
+      $spreadsheet->getActiveSheet()
+        ->setCellValue('B' . $current_row, $dt['nombre'])
+        ->setCellValue('C' . $current_row, $dt['telefono'] . ' ')
+        ->setCellValue('D' . $current_row, $dt['correo'])
+        ->setCellValue('E' . $current_row, $dt['activo']);
 
-            $current_row++;
-        }
-
-        //Styles
-        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
-        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->getColor()->setARGB('000000'); // Color de letra
-        $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FBBC05'); // Color de fondo de celda
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
-        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
-        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
-
-        return $spreadsheet;
+      $current_row++;
     }
+
+    //Styles
+    $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+    $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFont()->getColor()->setARGB('000000'); // Color de letra
+    $spreadsheet->getActiveSheet()->getStyle('B2:E2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FBBC05'); // Color de fondo de celda
+
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true); // Establecer ancho de columna
+
+    return $spreadsheet;
+  }
 }

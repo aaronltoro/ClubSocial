@@ -64,18 +64,16 @@ class Tutor_centro_controller extends CI_Controller
           $this->load->view('Error_tutor_Centro');
         }
         break;
-        case 'a':
-         //Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo nombre que pasó el usuario significa que existe
+      case 'a':
+        //Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo nombre que pasó el usuario significa que existe
         if ($res['filtro'] != '') {
 
           //Cambiamos el valor del filtro Strings a los valores de la BBDD Integer para poder realizar la comparacion con el compare
-          if(str_contains($res['filtro'],"S")){
-            $res['filtro']=1;
-          }else if(str_contains($res['filtro'],"N")){
-            $res['filtro']=0;
+          if (str_contains($res['filtro'], "S") || str_contains($res['filtro'], "s")) {
+            $res['filtro'] = 1;
+          } else if (str_contains($res['filtro'], "N") || str_contains($res['filtro'], "n")) {
+            $res['filtro'] = 0;
           }
-
-
 
           foreach ($compare as $comp) {
             if (str_contains($comp['activo'], $res['filtro'])) {
@@ -101,9 +99,7 @@ class Tutor_centro_controller extends CI_Controller
           $this->err = 'El filtro solicitado no existe';
           $this->load->view('Error_tutor_Centro');
         }
-           
-          
-          break;
+        break;
     }
   }
 

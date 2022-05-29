@@ -1,6 +1,7 @@
 <?php
 
 require 'application/libraries/phpspreadsheet/vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class Practicas_Model extends CI_Model
@@ -90,23 +91,23 @@ class Practicas_Model extends CI_Model
         return $query->result_array();
     }
 
-    
-  public function get_seneca($seneca)
-  {
-    //Filtro
-    $this->db->where('seneca', $seneca);
 
+    public function get_seneca($seneca)
+    {
+        //Filtro
+        $this->db->where('seneca', $seneca);
 
-    //Retorna la practica de la base de datos que tenga ese id
-    $query = $this->db->get('practicas');
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
 
-    return $query->result_array();
-  }
+        //Retorna la practica de la base de datos que tenga ese id
+        $query = $this->db->get('practicas');
+
+        return $query->result_array();
+    }
 
     public function deletear($id)
     {
-        // $this->db->delete('empleado', array('id' => $id));
-
         $this->db->where('id', $id);
 
         $this->db->set('eliminado', 1);

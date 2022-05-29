@@ -20,7 +20,7 @@
 					<option value="-1">- Filtrar por -</option>
 					<option value="a">Alumno</option>
 					<option value="e">Empresa</option>
-                    <option value="empl">Empleado</option>
+					<option value="empl">Empleado</option>
 					<option value="t">Tutor Centro</option>
 					<option value="s">Séneca</option>
 				</select>

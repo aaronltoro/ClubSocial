@@ -20,7 +20,7 @@
 				<select class="form-control" name="filter_by" id="filter_by">
 					<option value="-1">- Filtrar por -</option>
 					<option value="n">Nombre</option>
-					<option value="a">Activos</option>
+					<option value="a">Activo</option>
 				</select>
 			</div>
 			<div class="col-sm-3 mt-3">
@@ -47,6 +47,6 @@
 		$('#srch_tut').keyup(function() {
 			carga_filtros_tutor_centro();
 		});
-		
+
 	});
 </script>
