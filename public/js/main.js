@@ -78,6 +78,18 @@ function ir_practicas_view() {
 	carga_practicas();
 }
 
+function ir_modal_practicas_view() {
+	//Envío una función ajax para ir al archivo Empresa_view.php
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Principal_controller/ir_modal_practicas_view",
+		data: null,
+		success: function (data) {
+			$("#res_principal").html(data);
+		},
+	});
+}
+
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 function carga_empresa() {

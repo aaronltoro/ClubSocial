@@ -33,4 +33,9 @@ class Principal_controller extends CI_Controller
     {
         $this->load->view('Practicas_view.php');
     }
+
+    public function ir_modal_practicas_view()
+    {
+        $this->load->view('Modal_practicas_view.php');
+    }
 }

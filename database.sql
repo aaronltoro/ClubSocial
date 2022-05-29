@@ -146,6 +146,7 @@ CREATE TABLE `practicas` (
   `id_tutor_centro` int(11) NOT NULL,
   `seneca` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_incorporacion` date NOT NULL,
+  `curso_escolar` text NOT NULL,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_id_alumno_prac` (`id_alumno`),
@@ -228,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-13 18:56:16
+-- Dump completed on 2022-05-29 20:59:39
