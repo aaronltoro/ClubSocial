@@ -4,10 +4,6 @@ Practicas -> EXPORTACIÓN -> Añadir la columna curso escolar | Solo exportar lo
 
 ----------- Secundario ------------
 
-Tutores Centro -> Filtrar por activos Hecho
-
-Practicas -> Filtrar por séneca
-
 Empleados -> Filtrar por empresa y por tipo
 
 Empleados -> Al crear un empleado que tambien se pueda añadir una nueva empresa desde el insert
