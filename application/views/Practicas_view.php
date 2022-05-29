@@ -22,6 +22,7 @@
 					<option value="e">Empresa</option>
                     <option value="empl">Empleado</option>
 					<option value="t">Tutor Centro</option>
+					<option value="s">Séneca</option>
 				</select>
 			</div>
 			<div class="col-sm-3 mt-3">

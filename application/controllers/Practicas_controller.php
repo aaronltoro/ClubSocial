@@ -355,7 +355,91 @@ class Practicas_controller extends CI_Controller
                     $this->load->view('Error_practicas');
                 }
                 break;
-        }
+                case 's':
+                    if ($res['filtro'] != '') {
+
+                        //Cambiamos el valor del filtro Strings a los valores de la BBDD Integer para poder realizar la comparacion con el compare
+                        if(str_contains($res['filtro'],"S")||str_contains($res['filtro'],"s")){
+                          $res['filtro']=1;
+                        }else if(str_contains($res['filtro'],"N")||str_contains($res['filtro'],"n")){
+                          $res['filtro']=0;
+                        }
+              
+              
+              
+                        foreach ($compare as $comp) {
+                          if (str_contains($comp['seneca'], $res['filtro'])) {
+                            $is_err = false;
+                          }
+                        }
+                      } else {
+                         //Si el campo filtro está vacío $is_err valdrá false y los traerá todos de la base de datos, luego detiene la ejecución
+                    $is_err = false;
+                    $this->load->model('Practicas_model', 'Practicas_model', true);
+                    $this->prac = $this->Practicas_model->get_todos();
+
+                    //Solo intercambia los id por nombre cuando exista al menos 1 practica
+                    if (sizeof($this->prac) > 0) {
+                        foreach ($this->prac as $key => $prac) {
+                            //Función que intercambia el id_alumno por su nombre
+                            $n_alumno = $this->Alumno_model->get_id($prac['id_alumno']);
+                            $this->prac[$key]['id_alumno'] = $n_alumno[0]['nombre'];
+
+                            //Función que intercambia el id_empresa por su nombre
+                            $n_empresa = $this->Empresa_model->get_id($prac['id_empresa']);
+                            $this->prac[$key]['id_empresa'] = $n_empresa[0]['nombre'];
+
+                            //Función que intercambia el id_empleado por su nombre
+                            $n_empleado = $this->Empleado_model->get_id($prac['id_empleado']);
+                            $this->prac[$key]['id_empleado'] = $n_empleado[0]['nombre'];
+
+                            //Función que intercambia el id_tutor_centro por su nombre
+                            $n_tutor_centro = $this->Tutor_centro_model->get_id($prac['id_tutor_centro']);
+                            $this->prac[$key]['id_tutor_centro'] = $n_tutor_centro[0]['nombre'];
+                        }
+                    }
+
+                    $this->load->view('Resultado_practicas');
+                    break;
+                      }
+              
+                      //Si la variable de errores es false significa que no hay errores y por lo tanto llamo al modelo y lo que me devuelve lo seteo en la variable $this->tutor_centro que se enviará a la view resultado
+                      if (!$is_err) {
+                        $this->load->model('Practicas_model', 'Practicas_model', true);
+                        $this->prac = $this->Practicas_model->get_seneca($res['filtro']);
+    
+                        //Solo intercambia los id por nombre cuando exista al menos 1 practica
+                        if (sizeof($this->prac) > 0) {
+                            foreach ($this->prac as $key => $prac) {
+                                //Función que intercambia el id_alumno por su nombre
+                                $n_alumno = $this->Alumno_model->get_id($prac['id_alumno']);
+                                $this->prac[$key]['id_alumno'] = $n_alumno[0]['nombre'];
+    
+                                //Función que intercambia el id_empresa por su nombre
+                                $n_empresa = $this->Empresa_model->get_id($prac['id_empresa']);
+                                $this->prac[$key]['id_empresa'] = $n_empresa[0]['nombre'];
+    
+                                //Función que intercambia el id_empleado por su nombre
+                                $n_empleado = $this->Empleado_model->get_id($prac['id_empleado']);
+                                $this->prac[$key]['id_empleado'] = $n_empleado[0]['nombre'];
+    
+                                //Función que intercambia el id_tutor_centro por su nombre
+                                $n_tutor_centro = $this->Tutor_centro_model->get_id($prac['id_tutor_centro']);
+                                $this->prac[$key]['id_tutor_centro'] = $n_tutor_centro[0]['nombre'];
+                            }
+                        }
+    
+                        $this->load->view('Resultado_practicas');
+              
+                      } else {
+                        //Importante! Doy valor a la variable $this->err que se va a pasar a la view en caso de error
+                        $this->err = 'El filtro solicitado no existe';
+                        $this->load->view('Error_practicas');
+                      }
+                         
+                        
+                        break;
+                }
     }
 
     public function add_practicas()

@@ -64,6 +64,46 @@ class Tutor_centro_controller extends CI_Controller
           $this->load->view('Error_tutor_Centro');
         }
         break;
+        case 'a':
+         //Si el campo filtro no está vacío recorro todos los datos de la tabla y si encuentra alguno con el mismo nombre que pasó el usuario significa que existe
+        if ($res['filtro'] != '') {
+
+          //Cambiamos el valor del filtro Strings a los valores de la BBDD Integer para poder realizar la comparacion con el compare
+          if(str_contains($res['filtro'],"S")){
+            $res['filtro']=1;
+          }else if(str_contains($res['filtro'],"N")){
+            $res['filtro']=0;
+          }
+
+
+
+          foreach ($compare as $comp) {
+            if (str_contains($comp['activo'], $res['filtro'])) {
+              $is_err = false;
+            }
+          }
+        } else {
+          //Si el campo filtro está vacío $is_err valdrá false y los traerá todos de la base de datos, luego detiene la ejecución
+          $is_err = false;
+          $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
+          $this->tutor_centro = $this->Tutor_centro_model->get_todos();
+          $this->load->view('Resultado_tutor_centro');
+          break;
+        }
+
+        //Si la variable de errores es false significa que no hay errores y por lo tanto llamo al modelo y lo que me devuelve lo seteo en la variable $this->tutor_centro que se enviará a la view resultado
+        if (!$is_err) {
+          $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
+          $this->tutor_centro = $this->Tutor_centro_model->get_activo($res['filtro']);
+          $this->load->view('Resultado_tutor_centro');
+        } else {
+          //Importante! Doy valor a la variable $this->err que se va a pasar a la view en caso de error
+          $this->err = 'El filtro solicitado no existe';
+          $this->load->view('Error_tutor_Centro');
+        }
+           
+          
+          break;
     }
   }
 

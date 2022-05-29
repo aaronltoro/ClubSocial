@@ -4,7 +4,7 @@ Practicas -> EXPORTACIÓN -> Añadir la columna curso escolar | Solo exportar lo
 
 ----------- Secundario ------------
 
-Tutores Centro -> Filtrar por activos
+Tutores Centro -> Filtrar por activos Hecho
 
 Practicas -> Filtrar por séneca
 

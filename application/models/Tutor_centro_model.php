@@ -45,6 +45,20 @@ class Tutor_centro_model extends CI_Model
     }
   }
 
+  public function get_activo($activo)
+  {
+    //Filtro
+    $this->db->where('activo', $activo);
+
+    //Filtro para traer solo los campos que tengan eliminado a 0
+    $this->db->where('eliminado', 0);
+
+    //Retorna el tutor de la base de datos que tenga ese id
+    $query = $this->db->get('tutor_centro');
+
+    return $query->result_array();
+  }
+
   public function get_id($id)
   {
     //Filtro

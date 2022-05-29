@@ -90,6 +90,19 @@ class Practicas_Model extends CI_Model
         return $query->result_array();
     }
 
+    
+  public function get_seneca($seneca)
+  {
+    //Filtro
+    $this->db->where('seneca', $seneca);
+
+
+    //Retorna la practica de la base de datos que tenga ese id
+    $query = $this->db->get('practicas');
+
+    return $query->result_array();
+  }
+
     public function deletear($id)
     {
         // $this->db->delete('empleado', array('id' => $id));
