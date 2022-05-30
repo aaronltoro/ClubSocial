@@ -13,7 +13,7 @@
 				<h1>Prácticas</h1>
 			</div>
 			<div class="col-sm-2 mt-3 d-flex">
-				<button class="btn btn-success ml-auto" type="button" onclick="carga_insert_practicas()"><i class="fa-solid fa-plus"></i> Añadir</button>
+				<button class="btn btn-success ml-auto" type="button" onclick="carga_insert_practicas('<?php echo $this->filtro_modal ?>')"><i class="fa-solid fa-plus"></i> Añadir</button>
 			</div>
 			<div class="col-sm-2 mt-3">
 				<select class="form-control" name="filter_by">
@@ -29,7 +29,7 @@
 				<div class="input-group">
 					<input type="text" class="form-control" id="srch_emp" placeholder="- Filtro -" name="filter">
 					<div class="input-group-append">
-						<button class="btn btn-outline-primary" type="button" onclick="carga_filtros_practicas()"><i class="fa-solid fa-magnifying-glass"></i></button>
+						<button class="btn btn-outline-primary" type="button" onclick="carga_filtros_practicas(<?php echo $this->filtro_modal ?>)"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</div>
 				</div>
 			</div>

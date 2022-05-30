@@ -63,19 +63,24 @@ function ir_alumno_view() {
 	carga_alumnos();
 }
 
-function ir_practicas_view(data) {
+function ir_practicas_view(filt_mod) {
+
+	console.log(filt_mod);
+
+	filt_mod = 'filtro_modal=' + filt_mod;
+
 	//Envío una función ajax para ir al archivo Empresa_view.php
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Principal_controller/ir_practicas_view",
-		data: data,
+		data: filt_mod,
 		success: function (data) {
 			$("#res_principal").html(data);
 		},
 	});
 
 	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
-	carga_practicas(data);
+	carga_practicas(filt_mod);
 }
 
 function ir_modal_practicas_view() {
@@ -88,7 +93,6 @@ function ir_modal_practicas_view() {
 			$("#res_principal").html(data);
 		},
 	});
-	carga_practicas_modal();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -140,25 +144,14 @@ function carga_tutor_centro() {
 	});
 }
 
-function carga_practicas(data) {
-	console.log(data);
+function carga_practicas() {
+	filt_mod = $('#resultadoModal').serialize();
+
 	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Practicas_controller/tabla_ini",
-		data: data,
-		success: function (data) {
-			$("#resultado").html(data);
-		},
-	});
-}
-
-function carga_practicas_modal() {
-	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
-	$.ajax({
-		type: "POST",
-		url: BASE_URL + "Practicas_controller/tabla_ini_modal",
-		data: null,
+		data: filt_mod,
 		success: function (data) {
 			$("#resultado").html(data);
 		},
@@ -227,7 +220,7 @@ function carga_filtros_tutor_centro() {
 	});
 }
 
-function carga_filtros_practicas() {
+function carga_filtros_practicas(filt_mod) {
 	// Traigo todos los filtros seleccionados en cada input
 	filters = $("#filtros_practicas").serialize();
 
@@ -292,13 +285,15 @@ function carga_insert_tutor_centro() {
 	});
 }
 
-function carga_insert_practicas(curso) {
-	console.log(curso);
+function carga_insert_practicas(filt_mod) {
+
+	filt_mod = 'filtro_modal=' + filt_mod;
+
 	//Envío una función ajax al controlador para pintar el formulario de insert
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Practicas_controller/load_insert",
-		data: null,
+		data: filt_mod,
 		success: function (data) {
 			$("#resultado").html(data);
 		},
@@ -506,7 +501,7 @@ function carga_modify_tutor_centro(id) {
 	});
 }
 
-function carga_modify_practicas(id) {
+function carga_modify_practicas(id, data) {
 	//Envío una función ajax al controlador para pintar el formulario de modify además del id de la fila
 	$.ajax({
 		type: "POST",

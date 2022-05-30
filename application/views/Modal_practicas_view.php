@@ -12,7 +12,11 @@
             <div class="col-sm-5 mt-3">
                 <h1>Selecciona Curso</h1>
 
-                <select name="filtro_curso" id="resultado">
+                <select name="filtro_modal" id="filtro_modal">
+                    <?php
+                    foreach ($this->alumno as $alumno) { ?>
+                        <option value="<?php echo $alumno['curso_escolar'] ?>"><?php echo $alumno['curso_escolar'] ?></option>
+                    <?php } ?>
                 </select>
 
             </div>
@@ -22,10 +26,7 @@
 </div>
 
 <script>
-    var btn = document.getElementById("btnModal");
-    btn.addEventListener("click", function() {
-
-        var curso = $('#resultadoModal').serialize();
-        ir_practicas_view(curso);
+    $("#btnModal").click(function() {
+        ir_practicas_view($('#filtro_modal').val());
     })
 </script>

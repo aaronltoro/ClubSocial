@@ -26,7 +26,7 @@
                 <td><?php echo $prac['curso_escolar'] ?></td>
 
                 <td class="d-flex justify-content-end tools_res">
-                    <button class="btn btn-warning" type="button" title="Modificar" onclick="carga_modify_practicas(<?php echo $prac['id'] ?>)"><i class="fa-solid fa-note-sticky"></i></button>
+                    <button class="btn btn-warning" type="button" title="Modificar" onclick="carga_modify_practicas(<?php echo $prac['id'] ?>,'<?php echo $this->filtro_modal ?>')"><i class="fa-solid fa-note-sticky"></i></button>
                     <button class="btn btn-danger" type="button" title="Eliminar" onclick="delete_practica(<?php echo $prac['id'] ?>)"><i class="fa-solid fa-eraser"></i></button>
                 </td>
             </tr>

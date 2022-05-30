@@ -9,7 +9,7 @@
 
     <div class="row d-flex align-content-center justify-content-end">
         <div class="col-sm-1">
-            <button class="btn btn-danger btn_exit" type="button" onclick="ir_practicas_view()"><i class="fa-solid fa-xmark"></i></button>
+            <button class="btn btn-danger btn_exit" type="button" onclick="ir_practicas_view('<?php echo $this->filtro_modal ?>')"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
     <form id="insert_practica">

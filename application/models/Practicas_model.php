@@ -12,12 +12,13 @@ class Practicas_Model extends CI_Model
         //Inserta una practica en la base de datos con los valores del array
         $this->db->insert('practicas', $data);
     }
-    
-    public function get_todos($cursoEscolar,$ret_type = false)
+
+    public function get_todos($cursoEscolar, $ret_type = false)
     {
-        $this->db->where('curso_escolar', $cursoEscolar);
+        $this->db->like('curso_escolar', strval($cursoEscolar));
+
         //Filtro para traer solo los campos que tengan eliminado a 0
-  
+        $this->db->where('eliminado', 0);
 
         //Retorna todas las practicas de la base de datos si la variable ret_type está a true devuelve un objeto sino un array
         $query = $this->db->get('practicas');
@@ -27,11 +28,8 @@ class Practicas_Model extends CI_Model
         } else {
             return $query->result_array();
         }
-        
     }
 
-
- 
     public function get_alumno($nombre)
     {
         $this->db->select('practicas.id,id_alumno,id_empresa,sede,id_empleado,id_tutor_centro,seneca,fecha_incorporacion,practicas.eliminado')

@@ -490,7 +490,7 @@ class Practicas_controller extends CI_Controller
     {
         //Función que carga la tabla completa al iniciar la página
         $this->load->model('Practicas_model', 'Practicas_model', true);
-        $this->prac = $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
+        $this->prac = $this->Practicas_model->get_todos($this->input->post('filtro_modal'));
 
         //Solo intercambia los id por nombre cuando exista al menos 1 Practica
         if (sizeof($this->prac) > 0) {
@@ -518,17 +518,10 @@ class Practicas_controller extends CI_Controller
             }
         }
 
-        $this->load->view('Resultado_practicas');
+        $this->filtro_modal = $this->input->post('filtro_modal');
+
+        $this->load->view('Resultado_practicas.php');
     }
-
-    public function tabla_ini_modal()
-    {
-
-        $this->load->model('Alumno_model', 'Alumno_model', true);
-        $this->alumno =  $this->Alumno_model->get_all_cursoEscolar();
-        $this->load->view('Resultado_practicas_modal');
-    }
-
 
     private function compare()
     {
@@ -592,13 +585,16 @@ class Practicas_controller extends CI_Controller
         $this->empresa = $this->Empresa_model->get_todos();
         //Función que devuelve todos los datos de la tabla Alumno
         $this->load->model('Alumno_model', 'Alumno_model', true);
-        $this->alumno = $this->Alumno_model->get_todos();
+        $this->alumno = $this->Alumno_model->get_curso($this->input->post('filtro_modal'));
         //Función que devuelve todos los datos de la tabla Empleado
         $this->load->model('Empleado_model', 'Empleado_model', true);
         $this->empleado = $this->Empleado_model->get_todos();
         //Función que devuelve todos los datos de la tabla Tutor_centro
         $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
         $this->tutor = $this->Tutor_centro_model->get_todos();
+
+        $this->filtro_modal = $this->input->post('filtro_modal');
+        var_dump($this->filtro_modal);
 
         $this->load->view('Insert_practicas');
     }

@@ -34,11 +34,15 @@ class Principal_controller extends CI_Controller
         $this->load->model('Practicas_model', 'Practicas_model', true);
         $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
 
+        $this->filtro_modal = $this->input->post('filtro_curso');
+
         $this->load->view('Practicas_view.php');
     }
 
     public function ir_modal_practicas_view()
     {
+        $this->load->model('Alumno_model', 'Alumno_model', true);
+        $this->alumno = $this->Alumno_model->get_all_cursoEscolar();
         $this->load->view('Modal_practicas_view.php');
     }
 }
