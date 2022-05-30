@@ -23,7 +23,7 @@ class Principal_controller extends CI_Controller
     {
         $this->load->view('Alumno_view.php');
     }
-    
+
     public function ir_tutor_centro_view()
     {
         $this->load->view('Tutor_centro_view.php');
@@ -33,7 +33,7 @@ class Principal_controller extends CI_Controller
     {
         $this->load->model('Practicas_model', 'Practicas_model', true);
         $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
-        
+
         $this->load->view('Practicas_view.php');
     }
 

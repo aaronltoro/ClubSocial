@@ -488,7 +488,6 @@ class Practicas_controller extends CI_Controller
 
     public function tabla_ini()
     {
-        var_dump($this->input->post('filtro_curso'));
         //Función que carga la tabla completa al iniciar la página
         $this->load->model('Practicas_model', 'Practicas_model', true);
         $this->prac = $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
@@ -525,9 +524,9 @@ class Practicas_controller extends CI_Controller
     public function tabla_ini_modal()
     {
 
-                $this->load->model('Alumno_model', 'Alumno_model', true);
-                $this->alumno =  $this->Alumno_model->get_all_cursoEscolar();      
-                 $this->load->view('Resultado_practicas_modal');
+        $this->load->model('Alumno_model', 'Alumno_model', true);
+        $this->alumno =  $this->Alumno_model->get_all_cursoEscolar();
+        $this->load->view('Resultado_practicas_modal');
     }
 
 

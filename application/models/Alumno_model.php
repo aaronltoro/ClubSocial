@@ -120,6 +120,8 @@ class Alumno_Model extends CI_Model
         $this->db->where('eliminado', 0);
 
         $this->db->order_by('curso_escolar', 'ASC');
+
+        $this->db->distinct();
         //Retorna la alumno de la base de datos que tenga ese cif
         $query = $this->db->get('alumno');
 
