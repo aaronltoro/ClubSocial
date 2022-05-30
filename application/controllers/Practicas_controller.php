@@ -438,6 +438,8 @@ class Practicas_controller extends CI_Controller
 
     public function add_practicas()
     {
+        $this->load->model('Alumno_model', 'Alumno_model', true);
+        $n_alumno = $this->Alumno_model->get_id($this->input->post('idAlumno'));
         //Recojo los parametros enviados por ajax y los meto en un array
         $res = array(
             'id_alumno' => $this->input->post('idAlumno'),
@@ -446,7 +448,8 @@ class Practicas_controller extends CI_Controller
             'id_empleado' => $this->input->post('idEmpleado'),
             'id_tutor_centro' => $this->input->post('idTutor'),
             'seneca' => $this->input->post('activo'),
-            'fecha_incorporacion' => $this->input->post('fecha_incorporacion')
+            'fecha_incorporacion' => $this->input->post('fecha_incorporacion'),
+            'curso_escolar' => $n_alumno[0]['curso_escolar']
         );
 
         //Llamo al modelo y añado la nueva Practica, después vuelvo a cargar la tabla con todos los campos
@@ -485,9 +488,10 @@ class Practicas_controller extends CI_Controller
 
     public function tabla_ini()
     {
+        var_dump($this->input->post('filtro_curso'));
         //Función que carga la tabla completa al iniciar la página
         $this->load->model('Practicas_model', 'Practicas_model', true);
-        $this->prac = $this->Practicas_model->get_todos();
+        $this->prac = $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
 
         //Solo intercambia los id por nombre cuando exista al menos 1 Practica
         if (sizeof($this->prac) > 0) {
@@ -517,6 +521,15 @@ class Practicas_controller extends CI_Controller
 
         $this->load->view('Resultado_practicas');
     }
+
+    public function tabla_ini_modal()
+    {
+
+                $this->load->model('Alumno_model', 'Alumno_model', true);
+                $this->alumno =  $this->Alumno_model->get_all_cursoEscolar();      
+                 $this->load->view('Resultado_practicas_modal');
+    }
+
 
     private function compare()
     {

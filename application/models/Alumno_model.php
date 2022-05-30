@@ -111,6 +111,21 @@ class Alumno_Model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_cursoEscolar()
+    {
+        //traer la columna curso Escolar
+        $this->db->select('curso_escolar');
+
+        //Filtro para traer solo los campos que tengan eliminado a 0
+        $this->db->where('eliminado', 0);
+
+        $this->db->order_by('curso_escolar', 'ASC');
+        //Retorna la alumno de la base de datos que tenga ese cif
+        $query = $this->db->get('alumno');
+
+        return $query->result_array();
+    }
+
     public function deletear($id)
     {
         // $this->db->delete('alumno', array('id' => $id));

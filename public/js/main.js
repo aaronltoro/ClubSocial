@@ -62,7 +62,7 @@ function ir_alumno_view() {
 	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
 	carga_alumnos();
 }
-
+/*
 function ir_practicas_view() {
 	//Envío una función ajax para ir al archivo Empresa_view.php
 	$.ajax({
@@ -74,9 +74,27 @@ function ir_practicas_view() {
 		},
 	});
 
-	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
+		//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
 	carga_practicas();
 }
+
+	*/
+function ir_practicas_view(data) {
+	//Envío una función ajax para ir al archivo Empresa_view.php
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Principal_controller/ir_practicas_view",
+		data: data,
+		success: function (data) {
+			$("#res_principal").html(data);
+		},
+	});
+
+	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
+	carga_practicas(data);
+}
+
+
 
 function ir_modal_practicas_view() {
 	//Envío una función ajax para ir al archivo Empresa_view.php
@@ -88,6 +106,7 @@ function ir_modal_practicas_view() {
 			$("#res_principal").html(data);
 		},
 	});
+	carga_practicas_modal();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -139,11 +158,23 @@ function carga_tutor_centro() {
 	});
 }
 
-function carga_practicas() {
+function carga_practicas(data) {
 	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Practicas_controller/tabla_ini",
+		data: data,
+		success: function (data) {
+			$("#resultado").html(data);
+		},
+	});
+}
+
+function carga_practicas_modal() {
+	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
+	$.ajax({
+		type: "POST",
+		url: BASE_URL + "Practicas_controller/tabla_ini_modal",
 		data: null,
 		success: function (data) {
 			$("#resultado").html(data);

@@ -1,4 +1,5 @@
 <div class="container" id="principal">
+<form id="resultadoModal">
     <div class="row filtering d-flex justify-content-between align-items-start">
         <div class="col-sm-1 mt-2">
             <img src="public/img/CEU.png" alt="Logo CEU" width="300px" height="160px">
@@ -10,13 +11,19 @@
     <div class="row filtering">
         <div class="col-sm-5 mt-3">
             <h1>Selecciona Curso</h1>
+           
+            <select name="filtro_curso"id="resultado">
+            </select>
+           
         </div>
     </div>
-
-    <form id="filtro_curso_practicas" method="post">
-        <select name="filtro_curso" id="filtro_curso">
-
-        </select>
-        <button class="btn btn-primary" type="button" onclick="ir_practicas_view()">Buscar</button>
-    </form>
+        <button class="btn btn-primary" type="button" id="btnModal">Buscar</button>
+        </form>
 </div>
+
+<script>
+    var btn=document.getElementById("btnModal");
+    btn.addEventListener("click",function(){
+        ir_practicas_view($('#resultadoModal').serialize());
+    })
+</script>

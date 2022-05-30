@@ -31,6 +31,9 @@ class Principal_controller extends CI_Controller
 
     public function ir_practicas_view()
     {
+        $this->load->model('Practicas_model', 'Practicas_model', true);
+        $this->Practicas_model->get_todos($this->input->post('filtro_curso'));
+        
         $this->load->view('Practicas_view.php');
     }
 

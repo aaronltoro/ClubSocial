@@ -7,6 +7,7 @@
         <th>Tutor Centro</th>
         <th>Séneca</th>
         <th>Fecha Incorporación</th>
+        <th>Curso Escolar</th>
         <th>
             <div class="d-flex justify-content-end align-items-end"><button class="btn btn-success btn_export" type="button" onclick="export_practicas()" title="Exportar a Excel"><i class="fa-solid fa-file-excel"></i></button></div>
         </th>
@@ -22,6 +23,7 @@
                 <td><?php echo $prac['id_tutor_centro'] ?></td>
                 <td><?php echo ($prac['seneca'] == 1) ? 'Sí' : 'No' ?></td>
                 <td><?php echo $prac['fecha_incorporacion'] ?></td>
+                <td><?php echo $prac['curso_escolar'] ?></td>
 
                 <td class="d-flex justify-content-end tools_res">
                     <button class="btn btn-warning" type="button" title="Modificar" onclick="carga_modify_practicas(<?php echo $prac['id'] ?>)"><i class="fa-solid fa-note-sticky"></i></button>
