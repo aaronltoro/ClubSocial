@@ -33,7 +33,7 @@ CREATE TABLE `alumno` (
   PRIMARY KEY (`id`),
   KEY `fk_ciclo` (`id_ciclo`),
   CONSTRAINT `fk_ciclo` FOREIGN KEY (`id_ciclo`) REFERENCES `ciclos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
+INSERT INTO `alumno` VALUES (1,'Test','000 000 000','Testmail@gmail.com',1,'2000 - 2002',0);
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +92,7 @@ CREATE TABLE `empleado` (
   KEY `FK_id_tipo_emp` (`id_tipo`),
   CONSTRAINT `FK_id_empresa_emp` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`),
   CONSTRAINT `FK_id_tipo_emp` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_empleado` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,6 +101,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,1,'tl','Test','00000000A','Testmail@gmail.com','000 000 000',0);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +120,7 @@ CREATE TABLE `empresa` (
   `principal` tinyint(1) NOT NULL DEFAULT 1,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +129,7 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
+INSERT INTO `empresa` VALUES (1,'Test','A-00000000','&direccion1=C/Test01&direccion2=C/Test02',2,0);
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,6 +149,7 @@ CREATE TABLE `practicas` (
   `id_tutor_centro` int(11) NOT NULL,
   `seneca` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_incorporacion` date NOT NULL,
+  `curso_escolar` text NOT NULL,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_id_alumno_prac` (`id_alumno`),
@@ -207,7 +211,7 @@ CREATE TABLE `tutor_centro` (
   `activo` tinyint(1) NOT NULL DEFAULT 1,
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,6 +220,7 @@ CREATE TABLE `tutor_centro` (
 
 LOCK TABLES `tutor_centro` WRITE;
 /*!40000 ALTER TABLE `tutor_centro` DISABLE KEYS */;
+INSERT INTO `tutor_centro` VALUES (1,'Test','000 000 000','Testmail@gmail.com',0,0);
 /*!40000 ALTER TABLE `tutor_centro` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -228,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-13 18:56:16
+-- Dump completed on 2022-05-31 20:01:00

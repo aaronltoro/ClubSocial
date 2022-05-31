@@ -341,3 +341,11 @@
     left: 15px;
     text-align: center;
 }
+
+/*-----------------------------------------------------------------------*/
+
+.version{
+    font-size: 10px;
+    color: #898d92;
+    cursor: default;
+}

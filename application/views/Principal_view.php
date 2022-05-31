@@ -12,6 +12,7 @@
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/main.js"></script>
     <title>CEU</title>
+    <link rel="icon" type="image/ico" href="public/img/CEU.ico"/>
 </head>
 
 <body id="res_principal">
@@ -41,6 +42,11 @@
             </div>
             <div class="col-sm-2 d-flex justify-content-center">
                 <button class="btn_inicio4" onclick="ir_empleado_view()">Empleados</button>
+            </div>
+        </div>
+        <div class='row d-flex justify-content-end mt-5 mb-1'>
+            <div class="col-sm-2 d-flex align-items-center justify-content-end">
+                <p class="version">v1.0.0 @EU76119</p>
             </div>
         </div>
     </div>
