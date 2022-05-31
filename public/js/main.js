@@ -63,36 +63,19 @@ function ir_alumno_view() {
 	carga_alumnos();
 }
 
-function ir_practicas_view(filt_mod) {
-
-	console.log(filt_mod);
-
-	filt_mod = 'filtro_modal=' + filt_mod;
-
+function ir_practicas_view() {
 	//Envío una función ajax para ir al archivo Empresa_view.php
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Principal_controller/ir_practicas_view",
-		data: filt_mod,
+		data: null,
 		success: function (data) {
 			$("#res_principal").html(data);
 		},
 	});
 
 	//Cargo la tabla con todos los registros de la base de datos al cargar la página Empresa_view.php
-	carga_practicas(filt_mod);
-}
-
-function ir_modal_practicas_view() {
-	//Envío una función ajax para ir al archivo Empresa_view.php
-	$.ajax({
-		type: "POST",
-		url: BASE_URL + "Principal_controller/ir_modal_practicas_view",
-		data: null,
-		success: function (data) {
-			$("#res_principal").html(data);
-		},
-	});
+	carga_practicas();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -145,13 +128,11 @@ function carga_tutor_centro() {
 }
 
 function carga_practicas() {
-	filt_mod = $('#resultadoModal').serialize();
-
 	//Envío una función ajax al cargar la página para que me pinte la tabla con todos sus campos
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Practicas_controller/tabla_ini",
-		data: filt_mod,
+		data: null,
 		success: function (data) {
 			$("#resultado").html(data);
 		},
@@ -220,7 +201,7 @@ function carga_filtros_tutor_centro() {
 	});
 }
 
-function carga_filtros_practicas(filt_mod) {
+function carga_filtros_practicas() {
 	// Traigo todos los filtros seleccionados en cada input
 	filters = $("#filtros_practicas").serialize();
 
@@ -285,15 +266,12 @@ function carga_insert_tutor_centro() {
 	});
 }
 
-function carga_insert_practicas(filt_mod) {
-
-	filt_mod = 'filtro_modal=' + filt_mod;
-
+function carga_insert_practicas() {
 	//Envío una función ajax al controlador para pintar el formulario de insert
 	$.ajax({
 		type: "POST",
 		url: BASE_URL + "Practicas_controller/load_insert",
-		data: filt_mod,
+		data: null,
 		success: function (data) {
 			$("#resultado").html(data);
 		},
@@ -359,6 +337,7 @@ function add_alumno() {
 	});
 }
 
+
 function add_ciclo() {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#insert_alumno").serialize();
@@ -407,15 +386,16 @@ function add_empleado() {
 	});
 }
 
+
 function add_tutor_centro() {
 	// Traigo todos los datos seleccionados en cada input
 	datas = $("#insert_tutor_centro").serialize();
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
 	if (document.getElementById("check_activo").checked) {
-		datas += "&activo=1";
+		datas += '&activo=1';
 	} else {
-		datas += "&activo=0";
+		datas += '&activo=0';
 	}
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
@@ -435,9 +415,9 @@ function add_practica() {
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
 	if (document.getElementById("check_activo").checked) {
-		datas += "&activo=1";
+		datas += '&activo=1';
 	} else {
-		datas += "&activo=0";
+		datas += '&activo=0';
 	}
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
@@ -501,7 +481,7 @@ function carga_modify_tutor_centro(id) {
 	});
 }
 
-function carga_modify_practicas(id, data) {
+function carga_modify_practicas(id) {
 	//Envío una función ajax al controlador para pintar el formulario de modify además del id de la fila
 	$.ajax({
 		type: "POST",
@@ -560,9 +540,9 @@ function modify_tutor_centro(id) {
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
 	if (document.getElementById("check_activo").checked) {
-		datas += "&activo=1";
+		datas += '&activo=1';
 	} else {
-		datas += "&activo=0";
+		datas += '&activo=0';
 	}
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
@@ -585,9 +565,9 @@ function modify_practica(id) {
 
 	//Si el checkbox está marcado activo vale 1 y si no vale 0
 	if (document.getElementById("check_activo").checked) {
-		datas += "&activo=1";
+		datas += '&activo=1';
 	} else {
-		datas += "&activo=0";
+		datas += '&activo=0';
 	}
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
@@ -721,7 +701,9 @@ function delete_tutor_centro(id) {
 }
 
 function delete_practica(id) {
-	$borra = confirm("¿Estás seguro de que deseas borrar el campo seleccionado?");
+	$borra = confirm(
+		"¿Estás seguro de que deseas borrar el campo seleccionado?"
+	);
 	//Si el usuario pulsa en aceptar...
 	if ($borra) {
 		//Envío una función ajax al controlador con el id de la fila seleccionada
@@ -804,7 +786,7 @@ function add_principal(id, id_empresa) {
 	datas += "&id=" + id_empresa;
 
 	//Añado la variable que contiene el numero de la sede principal
-	datas += "&principal=" + id;
+	datas += '&principal=' + id;
 
 	//Envío una función ajax al controlador con los valores del formulario y pinta la respuesta en el div #resultado
 	$.ajax({
@@ -819,25 +801,25 @@ function add_principal(id, id_empresa) {
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-//Funcion para exportar los alumnos
+//Funcion para exportar los alumnos 
 function export_alumnos() {
-	window.open("Alumno_controller/export_excel");
+	window.open('Alumno_controller/export_excel');
 }
 
 function export_empleados() {
-	window.open("Empleado_controller/export_excel");
+	window.open('Empleado_controller/export_excel');
 }
 
 function export_empresas() {
-	window.open("Empresa_controller/export_excel");
+	window.open('Empresa_controller/export_excel');
 }
 
 function export_tutores() {
-	window.open("Tutor_centro_controller/export_excel");
+	window.open('Tutor_centro_controller/export_excel');
 }
 
 function export_practicas() {
-	window.open("Practicas_controller/export_excel");
+	window.open('Practicas_controller/export_excel');
 }
 
 function import_alumnos(datos) {

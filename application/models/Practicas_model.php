@@ -13,10 +13,8 @@ class Practicas_Model extends CI_Model
         $this->db->insert('practicas', $data);
     }
 
-    public function get_todos($cursoEscolar, $ret_type = false)
+    public function get_todos($ret_type = false)
     {
-        $this->db->like('curso_escolar', strval($cursoEscolar));
-
         //Filtro para traer solo los campos que tengan eliminado a 0
         $this->db->where('eliminado', 0);
 

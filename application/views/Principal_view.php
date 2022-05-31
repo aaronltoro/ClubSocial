@@ -32,7 +32,7 @@
         </div>
         <div class="row d-flex justify-content-center mt-5 mb-3">
             <div class="col-sm-2 d-flex justify-content-center">
-                <button class="btn_inicio5" onclick="ir_modal_practicas_view()">Prácticas</button>
+                <button class="btn_inicio5" onclick="ir_practicas_view()">Prácticas</button>
             </div>
         </div>
         <div class="row d-flex justify-content-around mt-5 mb-3">

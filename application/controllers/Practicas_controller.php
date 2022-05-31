@@ -438,8 +438,6 @@ class Practicas_controller extends CI_Controller
 
     public function add_practicas()
     {
-        $this->load->model('Alumno_model', 'Alumno_model', true);
-        $n_alumno = $this->Alumno_model->get_id($this->input->post('idAlumno'));
         //Recojo los parametros enviados por ajax y los meto en un array
         $res = array(
             'id_alumno' => $this->input->post('idAlumno'),
@@ -448,8 +446,7 @@ class Practicas_controller extends CI_Controller
             'id_empleado' => $this->input->post('idEmpleado'),
             'id_tutor_centro' => $this->input->post('idTutor'),
             'seneca' => $this->input->post('activo'),
-            'fecha_incorporacion' => $this->input->post('fecha_incorporacion'),
-            'curso_escolar' => $n_alumno[0]['curso_escolar']
+            'fecha_incorporacion' => $this->input->post('fecha_incorporacion')
         );
 
         //Llamo al modelo y añado la nueva Practica, después vuelvo a cargar la tabla con todos los campos
@@ -490,7 +487,7 @@ class Practicas_controller extends CI_Controller
     {
         //Función que carga la tabla completa al iniciar la página
         $this->load->model('Practicas_model', 'Practicas_model', true);
-        $this->prac = $this->Practicas_model->get_todos($this->input->post('filtro_modal'));
+        $this->prac = $this->Practicas_model->get_todos();
 
         //Solo intercambia los id por nombre cuando exista al menos 1 Practica
         if (sizeof($this->prac) > 0) {
@@ -518,9 +515,7 @@ class Practicas_controller extends CI_Controller
             }
         }
 
-        $this->filtro_modal = $this->input->post('filtro_modal');
-
-        $this->load->view('Resultado_practicas.php');
+        $this->load->view('Resultado_practicas');
     }
 
     private function compare()
@@ -585,16 +580,13 @@ class Practicas_controller extends CI_Controller
         $this->empresa = $this->Empresa_model->get_todos();
         //Función que devuelve todos los datos de la tabla Alumno
         $this->load->model('Alumno_model', 'Alumno_model', true);
-        $this->alumno = $this->Alumno_model->get_curso($this->input->post('filtro_modal'));
+        $this->alumno = $this->Alumno_model->get_todos();
         //Función que devuelve todos los datos de la tabla Empleado
         $this->load->model('Empleado_model', 'Empleado_model', true);
         $this->empleado = $this->Empleado_model->get_todos();
         //Función que devuelve todos los datos de la tabla Tutor_centro
         $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
         $this->tutor = $this->Tutor_centro_model->get_todos();
-
-        $this->filtro_modal = $this->input->post('filtro_modal');
-        var_dump($this->filtro_modal);
 
         $this->load->view('Insert_practicas');
     }
