@@ -1,3 +1,10 @@
+/*
+@AUTORES:
+    JESÚS PÉREZ RODRÍGUEZ
+    AARÓN LÓPEZ TORO
+    JAVIER SORIANO BAENA
+*/
+
 function ir_principal_view() {
 	//Vuelve a la página principal
 	window.history.back();

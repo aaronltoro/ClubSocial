@@ -138,35 +138,84 @@ class Practicas_Model extends CI_Model
 
         //Header
         $spreadsheet->getActiveSheet()
-            ->setCellValue('B2', 'Alumno')
-            ->setCellValue('C2', 'Empresa')
-            ->setCellValue('D2', 'Sede')
-            ->setCellValue('E2', 'Empleado')
-            ->setCellValue('F2', 'Tutor Centro')
-            ->setCellValue('G2', 'Séneca')
-            ->setCellValue('H2', 'Fecha Incorporación');
+            ->setCellValue('A1', 'Séneca')
+            ->setCellValue('B1', 'Observaciones')
+            ->setCellValue('C1', 'Curso Escolar')
+            ->setCellValue('D1', 'Ciclo')
+            ->setCellValue('E1', 'Fecha Incorporación')
+            ->setCellValue('F1', 'Alumnado Nombre Completo')
+            ->setCellValue('G1', 'Teléfono Alumno')
+            ->setCellValue('H1', 'Correo Alumno')
+            ->setCellValue('I1', 'Empresa')
+            ->setCellValue('J1', 'Empresa CIF(DNI si es autónomo)')
+            ->setCellValue('K1', 'Dirección Empresa')
+            ->setCellValue('L1', 'Persona Contacto Nombre Completo')
+            ->setCellValue('M1', 'Correo/Teléfono Persona Contacto')
+            ->setCellValue('N1', 'Representante Legal Nombre Completo')
+            ->setCellValue('O1', 'Representante Legal DNI')
+            ->setCellValue('P1', 'Tutor Laboral Nombre Completo')
+            ->setCellValue('Q1', 'Tutor Laboral DNI')
+            ->setCellValue('R1', 'Correo/Teléfono Tutor Laboral')
+            ->setCellValue('S1', 'Tutor Docente Nombre Completo')
+            ->setCellValue('T1', 'Correo/Teléfono Tutor Docente')
+            ->setCellValue('U1', 'Dirección realización prácticas');
 
         //Datos
         foreach ($data as $dt) {
             $spreadsheet->getActiveSheet()->insertNewRowBefore($current_row + 1, 1);
 
+            $nombre_tutor_laboral = '';
+            $dni_tutor_laboral = '';
+            $correotlf_tutor_laboral = '';
+            $nombre_representante_legal = '';
+            $dni_representante_legal = '';
+            $nombre_persona_contacto = '';
+            $correotlf_persona_contacto = '';
+
+            if($dt['empleado'][0]['id_tipo'] == 'Tutor Laboral'){
+                $nombre_tutor_laboral = $dt['empleado'][0]['nombre'];
+                $dni_tutor_laboral = $dt['empleado'][0]['dni'];
+                $correotlf_tutor_laboral = $dt['empleado'][0]['correo'].' / '.$dt['empleado'][0]['telefono'];
+            } elseif ($dt['empleado'][0]['id_tipo'] == 'Representante Empresa'){
+                $nombre_representante_legal = $dt['empleado'][0]['nombre'];
+                $dni_representante_legal = $dt['empleado'][0]['dni'];
+            } elseif ($dt['empleado'][0]['id_tipo'] == 'Persona Contacto'){
+                $nombre_persona_contacto = $dt['empleado'][0]['nombre'];
+                $correotlf_persona_contacto = $dt['empleado'][0]['correo'].' / '.$dt['empleado'][0]['telefono'];
+            }
+
             $spreadsheet->getActiveSheet()
-                ->setCellValue('B' . $current_row, $dt['id_alumno'])
-                ->setCellValue('C' . $current_row, $dt['id_empresa'])
-                ->setCellValue('D' . $current_row, $dt['sede'])
-                ->setCellValue('E' . $current_row, $dt['id_empleado'])
-                ->setCellValue('F' . $current_row, $dt['id_tutor_centro'])
-                ->setCellValue('G' . $current_row, $dt['seneca'])
-                ->setCellValue('H' . $current_row, $dt['fecha_incorporacion']);
+                ->setCellValue('A' . $current_row, $dt['practica']['seneca'])
+                ->setCellValue('B' . $current_row, '')
+                ->setCellValue('C' . $current_row, $dt['alumno'][0]['curso_escolar'])
+                ->setCellValue('D' . $current_row, $dt['alumno'][0]['id_ciclo'])
+                ->setCellValue('E' . $current_row, $dt['practica']['fecha_incorporacion'])
+                ->setCellValue('F' . $current_row, $dt['alumno'][0]['nombre'])
+                ->setCellValue('G' . $current_row, $dt['alumno'][0]['telefono'])
+                ->setCellValue('H' . $current_row, $dt['alumno'][0]['correo'])
+                ->setCellValue('I' . $current_row, $dt['empresa'][0]['nombre'])
+                ->setCellValue('J' . $current_row, $dt['empresa'][0]['cif'])
+                ->setCellValue('K' . $current_row, $dt['empresa'][0]['principal'])
+                ->setCellValue('L' . $current_row, $nombre_persona_contacto)
+                ->setCellValue('M' . $current_row, $correotlf_persona_contacto)
+                ->setCellValue('N' . $current_row, $nombre_representante_legal)
+                ->setCellValue('O' . $current_row, $dni_representante_legal)
+                ->setCellValue('P' . $current_row, $nombre_tutor_laboral)
+                ->setCellValue('Q' . $current_row, $dni_tutor_laboral)
+                ->setCellValue('R' . $current_row, $correotlf_tutor_laboral)
+                ->setCellValue('S' . $current_row, $dt['tutor'][0]['nombre'])
+                ->setCellValue('T' . $current_row, $dt['tutor'][0]['correo'].' / '.$dt['tutor'][0]['telefono'])
+                ->setCellValue('U' . $current_row, $dt['practica']['sede']);
 
             $current_row++;
         }
 
         //Styles
-        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
-        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFont()->getColor()->setARGB('FFFFFF'); // Color de letra
-        $spreadsheet->getActiveSheet()->getStyle('B2:H2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('000000'); // Color de fondo de celda
+        $spreadsheet->getActiveSheet()->getStyle('A1:U1')->getFont()->setBold(true); // Establecer la fuente de la celda en negrita
+        $spreadsheet->getActiveSheet()->getStyle('A1:U1')->getFont()->getColor()->setARGB('FFFFFF'); // Color de letra
+        $spreadsheet->getActiveSheet()->getStyle('A1:U1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('000000'); // Color de fondo de celda
 
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true); // Establecer ancho de columna
@@ -174,6 +223,19 @@ class Practicas_Model extends CI_Model
         $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true); // Establecer ancho de columna
         $spreadsheet->getActiveSheet()->getColumnDimension('H')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('K')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('L')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('M')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('N')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('O')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('P')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('Q')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('R')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('S')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('T')->setAutoSize(true); // Establecer ancho de columna
+        $spreadsheet->getActiveSheet()->getColumnDimension('U')->setAutoSize(true); // Establecer ancho de columna
 
         return $spreadsheet;
     }

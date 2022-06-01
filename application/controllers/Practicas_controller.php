@@ -672,45 +672,113 @@ class Practicas_controller extends CI_Controller
 
     public function export_excel()
     {
+        $this->load->model('Empresa_model', 'Empresa_model', true);
+        $this->load->model('Alumno_model', 'Alumno_model', true);
+        $this->load->model('Empleado_model', 'Empleado_model', true);
+        $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
+
+        //Inicializo Array que contendrá todos los datos del programa
+        $data = array();
+
+        //Traemos los datos de todas las practicas
         $this->load->model('Practicas_model', 'Practicas_model', true);
         //Llamada a modelo que devuelve todos los datos de la tabla
-        $data = $this->Practicas_model->get_todos();
+        $data_practicas = $this->Practicas_model->get_todos();
 
-        //Solo intercambia los id por nombre cuando exista al menos 1 Practica
-        if (sizeof($data) > 0) {
-            foreach ($data as $key => $prac) {
-                //Función que intercambia el id_alumno por su nombre
-                $this->load->model('Alumno_model', 'Alumno_model', true);
-                $n_alumno = $this->Alumno_model->get_id($prac['id_alumno']);
-                $data[$key]['id_alumno'] = $n_alumno[0]['nombre'];
+        //Por cada practica coje todos sus datos adyacentes y los mete en un array
+        foreach ($data_practicas as $practica) {
+            //Función que devuelve todos los datos de la tabla Empresa
+            $data_empresa = $this->Empresa_model->get_id($practica['id_empresa']);
 
-                //Función que intercambia el id_empresa por su nombre
-                $this->load->model('Empresa_model', 'Empresa_model', true);
-                $n_empresa = $this->Empresa_model->get_id($prac['id_empresa']);
-                $data[$key]['id_empresa'] = $n_empresa[0]['nombre'];
+            // CAMBIO EL ID DE LA SEDE PRINCIPAL POR SU NOMBRE EN CADA UNA DE LAS EMPRESAS
+            //Separo el string direcciones en cada & y lo añado a un array de strings
+            $res_direcciones = explode('&', $data_empresa[0]['direcciones']);
 
-                //Función que intercambia el id_empleado por su nombre
-                $this->load->model('Empleado_model', 'Empleado_model', true);
-                $n_empleado = $this->Empleado_model->get_id($prac['id_empleado']);
-                $data[$key]['id_empleado'] = $n_empleado[0]['nombre'];
-
-                //Función que intercambia el id_tutor_centro por su nombre
-                $this->load->model('Tutor_centro_model', 'Tutor_centro_model', true);
-                $n_tutor_centro = $this->Tutor_centro_model->get_id($prac['id_tutor_centro']);
-                $data[$key]['id_tutor_centro'] = $n_tutor_centro[0]['nombre'];
+            //Vuelvo a separar cada valor del array por cada = y así obtener su valor original y meto cada uno en el array $array_direcciones (quito los vacíos)
+            $count = 1;
+            $array_direcciones = array();
+            foreach ($res_direcciones as $rd) {
+                if ($rd != '') {
+                    $index = strval($count);
+                    $valor = explode('=', $rd);
+                    $array_direcciones['d' . $index] = $valor[1];
+                    $count++;
+                }
             }
-        }
 
-        //Función que intercambia el 0 o 1 de la columna séneca por sí o no
-        foreach ($data as $key => $dt) {
-            $data[$key]['seneca'] = ($dt['seneca'] == 1) ? 'Sí' : 'No';
+            //Pinto el valor que coincida con el numero de la variable principal
+            if (isset($array_direcciones['d' . $data_empresa[0]['principal']])) {
+                $data_empresa[0]['principal'] = $array_direcciones['d' . $data_empresa[0]['principal']];
+            } else {
+                $data_empresa[0]['principal'] = 'No hay Sede Principal';
+            }
+
+            // CAMBIO EL ID DE CADA SEDE POR SU NOMBRE EN CADA UNA DE LAS EMPRESAS
+            //Separo el string direcciones en cada & y lo añado a un array de strings
+            $res_direcciones = explode('&', $data_empresa[0]['direcciones']);
+
+            //Vuelvo a separar cada valor del array por cada = y así obtener su valor original y meto cada uno en el array $array_direcciones (quito los vacíos)
+            $count = 1;
+            $array_direcciones = array();
+            foreach ($res_direcciones as $rd) {
+                if ($rd != '') {
+                    $index = strval($count);
+                    $valor = explode('=', $rd);
+                    $array_direcciones['d' . $index] = $valor[1];
+                    $count++;
+                }
+            }
+
+            $data_empresa[0]['direcciones'] = '';
+
+            //Pinto los valores
+            if (count($array_direcciones) > 0) {
+                foreach ($array_direcciones as $dir) {
+                    $data_empresa[0]['direcciones'] .= $dir . '  |  ';
+                }
+            } else {
+                $data_empresa[0]['direcciones'] = 'No hay Sedes';
+            }
+
+            //Función que devuelve todos los datos de la tabla Alumno
+            $data_alumno = $this->Alumno_model->get_id($practica['id_alumno']);
+
+            //Función que intercambia el id_ciclo por su nombre
+            $this->load->model('Ciclo_model', 'Ciclo_model', true);
+            $n_ciclo = $this->Ciclo_model->get_id($data_alumno[0]['id_ciclo']);
+            $data_alumno[0]['id_ciclo'] = $n_ciclo[0]['nombre_corto'];
+
+            //Función que devuelve todos los datos de la tabla Empleado
+            $data_empleado = $this->Empleado_model->get_id($practica['id_empleado']);
+
+            //Función que intercambia el id_empresa por su nombre
+            $this->load->model('Empresa_model', 'Empresa_model', true);
+            $n_empresa = $this->Empresa_model->get_id($data_empleado[0]['id_empresa']);
+            $data_empleado[0]['id_empresa'] = $n_empresa[0]['nombre'];
+
+            //Función que intercambia el id_tipo por su nombre
+            $this->load->model('Tipo_empleado_model', 'Tipo_empleado_model', true);
+            $n_tipo = $this->Tipo_empleado_model->get_id($data_empleado[0]['id_tipo']);
+            $data_empleado[0]['id_tipo'] = $n_tipo[0]['nombre'];
+
+            //Función que devuelve todos los datos de la tabla Tutor_centro
+            $data_tutor = $this->Tutor_centro_model->get_id($practica['id_tutor_centro']);
+
+            //CAMBIO EL VALOR DE 0 O 1 DE LA COLUMNA ACTIVO POR SÍ O NO
+            $data_tutor[0]['activo'] = ($data_tutor[0]['activo'] == 1) ? 'Sí' : 'No';
+
+            //CAMBIO EL VALOR DE 0 O 1 DE LA COLUMNA SÉNECA POR SÍ O NO
+            $practica['seneca'] = ($practica['seneca'] == 1) ? 'Sí' : 'No';
+
+            //Introduzco la fila con sus datos correspondientes
+            array_push($data, array('empresa' => $data_empresa, 'alumno' => $data_alumno, 'empleado' => $data_empleado, 'tutor' => $data_tutor, 'practica' => array('sede' => $practica['sede'], 'seneca' => $practica['seneca'], 'fecha_incorporacion' => $practica['fecha_incorporacion'])));
         }
 
         //Nombre del archivo que se va a descargar
         $nombre = 'Excel_Practicas.xlsx';
 
         //Funcion del modelo que crea el excel
-        $spreadsheet = $this->Practicas_model->create_spreadsheet($data, 3);
+        $spreadsheet = $this->Practicas_model->create_spreadsheet($data, 2);
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 

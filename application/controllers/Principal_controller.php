@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+/*
+@AUTORES:
+    JESÚS PÉREZ RODRÍGUEZ
+    AARÓN LÓPEZ TORO
+    JAVIER SORIANO BAENA
+*/
+
 class Principal_controller extends CI_Controller
 {
 

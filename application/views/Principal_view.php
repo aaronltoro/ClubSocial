@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--
+@AUTORES:
+    JESÚS PÉREZ RODRÍGUEZ
+    AARÓN LÓPEZ TORO
+    JAVIER SORIANO BAENA
+-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +51,7 @@
         </div>
         <div class='row d-flex justify-content-end mt-5 mb-1'>
             <div class="col-sm-2 d-flex align-items-center justify-content-end">
-                <p class="version">v1.0.0 @EU76119</p>
+                <p class="version">v1.1.0 @EU76119</p>
             </div>
         </div>
     </div>
